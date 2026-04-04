@@ -319,28 +319,13 @@ button { font-family:inherit; }
 /* ═══ PRODUCT CARD ═══ */
 .product-scroll {
   max-width:var(--max-w); margin:0 auto;
-  padding:0 0 8px;
+  padding:0 24px 8px;
   overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;
-  mask-image:none;
   scroll-snap-type: x proximity;
   position:relative;
 }
 .product-scroll::-webkit-scrollbar { display:none; }
-/* Scroll nav arrows */
-.scroll-nav {
-  position:absolute; top:50%; transform:translateY(-60%);
-  width:32px; height:32px; border-radius:50%;
-  background:rgba(240,224,232,.12); border:1px solid rgba(240,224,232,.1);
-  backdrop-filter:blur(8px);
-  cursor:pointer; display:flex; align-items:center; justify-content:center;
-  font-size:16px; color:var(--text); opacity:.6;
-  transition:opacity .25s, background .25s; z-index:5;
-}
-.scroll-nav:hover { opacity:1; background:rgba(240,224,232,.2); }
-.scroll-nav--prev { left:28px; }
-.scroll-nav--next { right:4px; }
-.scroll-nav.hidden { opacity:0; pointer-events:none; }
-.product-row { display:flex; gap:14px; min-width:min-content; padding:0 24px; }
+.product-row { display:flex; gap:14px; min-width:min-content; }
 
 .product-grid {
   max-width:var(--max-w); margin:0 auto;
@@ -592,8 +577,7 @@ button { font-family:inherit; }
   .collection-banners { grid-template-columns:1fr; gap:10px; padding:0 16px 4px; }
   .collection-banner { aspect-ratio:16/7; }
 
-  .product-scroll { padding:0 0 8px; }
-  .product-row { padding:0 16px; }
+  .product-scroll { padding:0 16px 8px; }
   .p-card { width:150px; }
   .p-card--featured { width:190px; }
   .p-card--featured .p-card__img { aspect-ratio:3/4; }
@@ -705,9 +689,7 @@ button { font-family:inherit; }
     </div>
     <a href="#" class="sec-head__viewall">VIEW ALL &rarr;</a>
   </div>
-  <div class="product-scroll" id="newArrivalScroll">
-    <button class="scroll-nav scroll-nav--prev hidden" onclick="scrollRow('newArrivalScroll',-1)">&lsaquo;</button>
-    <button class="scroll-nav scroll-nav--next" onclick="scrollRow('newArrivalScroll',1)">&rsaquo;</button>
+  <div class="product-scroll">
     <div class="product-row">
       <div class="p-card p-card--featured" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#3a2850 0%,#302040 40%,#281838 100%)"></div><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Original Sweatshirt</div><div class="p-card__variant">3 colors / 4 sizes</div><div class="p-card__price">&yen;6,800 <span class="p-card__tax">税込</span></div></div></div>
       <div class="p-card" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#1a3848 0%,#1a3040 40%,#142838 100%)"></div><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Logo Tote Bag</div><div class="p-card__variant">5 colors</div><div class="p-card__price">&yen;3,200 <span class="p-card__tax">税込</span></div></div></div>
@@ -954,27 +936,6 @@ document.querySelectorAll('.pd-add-btn').forEach(btn => {
   });
 });
 
-// Scroll row with arrow buttons
-function scrollRow(id, dir) {
-  const el = document.getElementById(id);
-  const cardW = el.querySelector('.p-card').offsetWidth + 14;
-  el.scrollBy({ left: dir * cardW * 2, behavior: 'smooth' });
-}
-
-// Update arrow visibility on scroll
-function updateScrollNav(el) {
-  const prev = el.querySelector('.scroll-nav--prev');
-  const next = el.querySelector('.scroll-nav--next');
-  if (prev) prev.classList.toggle('hidden', el.scrollLeft < 10);
-  if (next) next.classList.toggle('hidden', el.scrollLeft >= el.scrollWidth - el.clientWidth - 10);
-}
-
-document.querySelectorAll('.product-scroll').forEach(el => {
-  el.addEventListener('scroll', function() {
-    updateScrollNav(this);
-  }, {passive:true});
-  updateScrollNav(el);
-});
 
 // Intersection Observer for card fade-in
 const cardObserver = new IntersectionObserver((entries) => {
