@@ -290,23 +290,90 @@ button { font-family:inherit; }
   padding:0 24px 8px;
   overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;
   mask-image:linear-gradient(to right, transparent 0, black 20px, black calc(100% - 40px), transparent 100%);
+  scroll-snap-type: x proximity;
+  position:relative;
 }
 .product-scroll::-webkit-scrollbar { display:none; }
+.product-scroll::after {
+  content:'›'; position:absolute; right:8px; top:50%; transform:translateY(-70%);
+  font-size:28px; color:var(--text); opacity:.18;
+  animation: scrollHint 2s ease-in-out infinite;
+  pointer-events:none; z-index:2;
+}
+.product-scroll.scrolled::after { opacity:0 !important; animation:none; }
+@keyframes scrollHint {
+  0%,100% { opacity:.18; transform:translateY(-70%) translateX(0); }
+  50% { opacity:.35; transform:translateY(-70%) translateX(5px); }
+}
 .product-row { display:flex; gap:14px; min-width:min-content; }
 
 .product-grid {
   max-width:var(--max-w); margin:0 auto;
   padding:0 24px 12px;
-  display:grid; grid-template-columns:repeat(auto-fill, minmax(180px,1fr)); gap:14px;
+  display:grid; grid-template-columns:repeat(4, 1fr); gap:14px;
+}
+.product-grid .p-card:nth-child(1),
+.product-grid .p-card:nth-child(2) {
+  grid-column: span 2;
 }
 
 .p-card {
   width:190px; flex-shrink:0; cursor:pointer;
   text-decoration:none; color:var(--text);
-  transition:transform .35s var(--ease-out);
+  opacity:0; transform:translateY(16px);
+  scroll-snap-align: start;
 }
-.p-card:hover { transform:translateY(-3px); }
+.p-card.visible {
+  opacity:1; transform:translateY(0);
+  transition:opacity .5s var(--ease-out), transform .5s var(--ease-out);
+}
+.p-card--soldout.visible { opacity:.65; }
+.p-card.visible:hover { transform:translateY(-3px); }
 .product-grid .p-card { width:auto; }
+
+/* Featured card (first in New Arrival) */
+.p-card--featured { width:245px; }
+.p-card--featured .p-card__img { aspect-ratio:2.8/4; }
+
+/* SOLD OUT card */
+.p-card--soldout { }
+
+/* VIEW quick overlay */
+.p-card__quick {
+  position:absolute; inset:0; z-index:2;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(58,32,48,.08); opacity:0;
+  transition:opacity .3s var(--ease-out);
+  border-radius:8px;
+}
+.p-card.visible:hover .p-card__quick { opacity:1; }
+.p-card__quick span {
+  font-family:'Cormorant Garamond',serif;
+  font-size:11px; font-weight:600; letter-spacing:.2em;
+  color:var(--text); background:rgba(255,255,255,.85);
+  padding:8px 22px; border-radius:20px;
+  backdrop-filter:blur(4px);
+  transform:translateY(6px); transition:transform .3s var(--ease-spring);
+}
+.p-card.visible:hover .p-card__quick span { transform:translateY(0); }
+
+/* NOTIFY ME overlay */
+.p-card__notify {
+  position:absolute; inset:0; z-index:3;
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; transition:opacity .3s;
+  border-radius:8px;
+}
+.p-card--soldout.visible:hover .p-card__notify { opacity:1; }
+.p-card__notify span {
+  font-family:'Cormorant Garamond',serif;
+  font-size:10px; font-weight:600; letter-spacing:.18em;
+  color:#fff; background:rgba(184,48,74,.75);
+  padding:8px 18px; border-radius:20px;
+  backdrop-filter:blur(4px);
+  transform:translateY(6px); transition:transform .3s var(--ease-spring);
+}
+.p-card--soldout.visible:hover .p-card__notify span { transform:translateY(0); }
 
 .p-card__img {
   width:100%; aspect-ratio:3/4;
@@ -471,7 +538,11 @@ button { font-family:inherit; }
 
   .product-scroll { padding:0 16px 8px; }
   .p-card { width:150px; }
+  .p-card--featured { width:190px; }
+  .p-card--featured .p-card__img { aspect-ratio:3/4; }
   .product-grid { padding:0 16px 10px; grid-template-columns:repeat(2,1fr); gap:10px; }
+  .product-grid .p-card:nth-child(1),
+  .product-grid .p-card:nth-child(2) { grid-column: span 1; }
 
   .pd-grid { grid-template-columns:1fr; gap:22px; padding:14px 16px 28px; }
   .pd-breadcrumb { padding:10px 16px 0; }
@@ -579,12 +650,12 @@ button { font-family:inherit; }
   </div>
   <div class="product-scroll">
     <div class="product-row">
-      <div class="p-card" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#e8ccc6 0%,#dbb4b0 40%,#c9a09e 100%)"></div><span class="p-card__badge p-card__badge--new">NEW</span></div><div class="p-card__body"><div class="p-card__name">Original Sweatshirt</div><div class="p-card__variant">3 colors / 4 sizes</div><div class="p-card__price">&yen;6,800 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#c6d4d8 0%,#b0c4ca 40%,#98b0b8 100%)"></div><span class="p-card__badge p-card__badge--new">NEW</span></div><div class="p-card__body"><div class="p-card__name">Logo Tote Bag</div><div class="p-card__variant">5 colors</div><div class="p-card__price">&yen;3,200 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#e8d4c6 0%,#dcc0aa 40%,#c8a890 100%)"></div><span class="p-card__badge p-card__badge--limited">LIMITED</span></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#d4c6d8 0%,#c4b0ca 40%,#ae98b2 100%)"></div></div><div class="p-card__body"><div class="p-card__name">Mini Pouch</div><div class="p-card__variant">3 colors</div><div class="p-card__price">&yen;2,400 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#d8e0c6 0%,#c4d0aa 40%,#a8b890 100%)"></div></div><div class="p-card__body"><div class="p-card__name">Sticker Pack</div><div class="p-card__price">&yen;800 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#e0d4c6 0%,#d0c0aa 40%,#b8a890 100%)"></div></div><div class="p-card__body"><div class="p-card__name">Charm Keychain</div><div class="p-card__price">&yen;1,500 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card p-card--featured" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#e8ccc6 0%,#dbb4b0 40%,#c9a09e 100%)"></div><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Original Sweatshirt</div><div class="p-card__variant">3 colors / 4 sizes</div><div class="p-card__price">&yen;6,800 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#c6d4d8 0%,#b0c4ca 40%,#98b0b8 100%)"></div><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Logo Tote Bag</div><div class="p-card__variant">5 colors</div><div class="p-card__price">&yen;3,200 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#e8d4c6 0%,#dcc0aa 40%,#c8a890 100%)"></div><span class="p-card__badge p-card__badge--limited">LIMITED</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#d4c6d8 0%,#c4b0ca 40%,#ae98b2 100%)"></div><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Mini Pouch</div><div class="p-card__variant">3 colors</div><div class="p-card__price">&yen;2,400 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#d8e0c6 0%,#c4d0aa 40%,#a8b890 100%)"></div><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Sticker Pack</div><div class="p-card__price">&yen;800 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#e0d4c6 0%,#d0c0aa 40%,#b8a890 100%)"></div><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Charm Keychain</div><div class="p-card__price">&yen;1,500 <span class="p-card__tax">税込</span></div></div></div>
     </div>
   </div>
 
@@ -597,14 +668,14 @@ button { font-family:inherit; }
     <a href="#" class="sec-head__viewall">VIEW ALL &rarr;</a>
   </div>
   <div class="product-grid">
-    <div class="p-card" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#e8ccc6 0%,#dbb4b0 40%,#c9a09e 100%)"></div><span class="p-card__badge p-card__badge--new">NEW</span></div><div class="p-card__body"><div class="p-card__name">Original Sweatshirt</div><div class="p-card__variant">3 colors / 4 sizes</div><div class="p-card__price">&yen;6,800 <span class="p-card__tax">税込</span></div></div></div>
-    <div class="p-card" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#c6d4d8 0%,#b0c4ca 40%,#98b0b8 100%)"></div></div><div class="p-card__body"><div class="p-card__name">Logo Tote Bag</div><div class="p-card__variant">5 colors</div><div class="p-card__price">&yen;3,200 <span class="p-card__tax">税込</span></div></div></div>
-    <div class="p-card"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#e8d4c6 0%,#dcc0aa 40%,#c8a890 100%)"></div><span class="p-card__badge p-card__badge--limited">LIMITED</span></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
-    <div class="p-card"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#d4c6d8 0%,#c4b0ca 40%,#ae98b2 100%)"></div></div><div class="p-card__body"><div class="p-card__name">Mini Pouch</div><div class="p-card__variant">3 colors</div><div class="p-card__price">&yen;2,400 <span class="p-card__tax">税込</span></div></div></div>
-    <div class="p-card"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#d8e0c6 0%,#c4d0aa 40%,#a8b890 100%)"></div></div><div class="p-card__body"><div class="p-card__name">Sticker Pack</div><div class="p-card__price">&yen;800 <span class="p-card__tax">税込</span></div></div></div>
-    <div class="p-card"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#d8c6c6 0%,#c4aaaa 40%,#b09898 100%)"></div><span class="p-card__badge p-card__badge--soldout">SOLD OUT</span></div><div class="p-card__body"><div class="p-card__name">Pop-up Exclusive Tee</div><div class="p-card__price" style="opacity:.45; text-decoration:line-through;">&yen;4,500 <span class="p-card__tax">税込</span></div></div></div>
-    <div class="p-card"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#e0c6d4 0%,#d0aac0 40%,#b898a8 100%)"></div><span class="p-card__badge p-card__badge--soldout">SOLD OUT</span></div><div class="p-card__body"><div class="p-card__name">Heart Mirror</div><div class="p-card__price" style="opacity:.45; text-decoration:line-through;">&yen;1,200 <span class="p-card__tax">税込</span></div></div></div>
-    <div class="p-card"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#e0d4c6 0%,#d0c0aa 40%,#b8a890 100%)"></div></div><div class="p-card__body"><div class="p-card__name">Charm Keychain</div><div class="p-card__price">&yen;1,500 <span class="p-card__tax">税込</span></div></div></div>
+    <div class="p-card" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#e8ccc6 0%,#dbb4b0 40%,#c9a09e 100%)"></div><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Original Sweatshirt</div><div class="p-card__variant">3 colors / 4 sizes</div><div class="p-card__price">&yen;6,800 <span class="p-card__tax">税込</span></div></div></div>
+    <div class="p-card" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#c6d4d8 0%,#b0c4ca 40%,#98b0b8 100%)"></div><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Logo Tote Bag</div><div class="p-card__variant">5 colors</div><div class="p-card__price">&yen;3,200 <span class="p-card__tax">税込</span></div></div></div>
+    <div class="p-card"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#e8d4c6 0%,#dcc0aa 40%,#c8a890 100%)"></div><span class="p-card__badge p-card__badge--limited">LIMITED</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
+    <div class="p-card"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#d4c6d8 0%,#c4b0ca 40%,#ae98b2 100%)"></div><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Mini Pouch</div><div class="p-card__variant">3 colors</div><div class="p-card__price">&yen;2,400 <span class="p-card__tax">税込</span></div></div></div>
+    <div class="p-card"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#d8e0c6 0%,#c4d0aa 40%,#a8b890 100%)"></div><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Sticker Pack</div><div class="p-card__price">&yen;800 <span class="p-card__tax">税込</span></div></div></div>
+    <div class="p-card"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#e0d4c6 0%,#d0c0aa 40%,#b8a890 100%)"></div><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Charm Keychain</div><div class="p-card__price">&yen;1,500 <span class="p-card__tax">税込</span></div></div></div>
+    <div class="p-card p-card--soldout"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#d8c6c6 0%,#c4aaaa 40%,#b09898 100%)"></div><span class="p-card__badge p-card__badge--soldout">SOLD OUT</span><div class="p-card__notify"><span>NOTIFY ME</span></div></div><div class="p-card__body"><div class="p-card__name">Pop-up Exclusive Tee</div><div class="p-card__price" style="opacity:.45; text-decoration:line-through;">&yen;4,500 <span class="p-card__tax">税込</span></div></div></div>
+    <div class="p-card p-card--soldout"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#e0c6d4 0%,#d0aac0 40%,#b898a8 100%)"></div><span class="p-card__badge p-card__badge--soldout">SOLD OUT</span><div class="p-card__notify"><span>NOTIFY ME</span></div></div><div class="p-card__body"><div class="p-card__name">Heart Mirror</div><div class="p-card__price" style="opacity:.45; text-decoration:line-through;">&yen;1,200 <span class="p-card__tax">税込</span></div></div></div>
   </div>
 
   <footer class="site-footer">
@@ -823,6 +894,29 @@ document.querySelectorAll('.pd-add-btn').forEach(btn => {
     setTimeout(() => { this.textContent = orig; this.style.background = ''; }, 1200);
   });
 });
+
+// Scroll hint: add .scrolled when user scrolls the product scroll area
+document.querySelectorAll('.product-scroll').forEach(el => {
+  el.addEventListener('scroll', function() {
+    if (this.scrollLeft > 30) this.classList.add('scrolled');
+    else this.classList.remove('scrolled');
+  }, {passive:true});
+});
+
+// Intersection Observer for card fade-in
+const cardObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const card = entry.target;
+      const parent = card.parentElement;
+      const siblings = [...parent.children].filter(c => c.classList.contains('p-card'));
+      const idx = siblings.indexOf(card);
+      setTimeout(() => card.classList.add('visible'), idx * 80);
+      cardObserver.unobserve(card);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.p-card').forEach(c => cardObserver.observe(c));
 </script>
 </body>
 </html>
