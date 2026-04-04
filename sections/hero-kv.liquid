@@ -1,0 +1,39 @@
+{%- if section.settings.image != blank -%}
+  <div class="hero-kv">
+    <img
+      class="hero-kv__img"
+      src="{{ section.settings.image | image_url: width: 1920 }}"
+      alt="{{ section.settings.image.alt | default: shop.name }}"
+      width="{{ section.settings.image.width }}"
+      height="{{ section.settings.image.height }}"
+      loading="eager"
+    >
+  </div>
+{%- else -%}
+  <div class="hero-kv">
+    <img
+      class="hero-kv__img"
+      src="{{ 'hero-kv.jpg' | asset_url }}"
+      alt="{{ shop.name }}"
+      loading="eager"
+    >
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Hero KV",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero image (KV)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero KV"
+    }
+  ]
+}
+{% endschema %}

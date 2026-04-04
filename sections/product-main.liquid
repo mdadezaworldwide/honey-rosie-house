@@ -1,0 +1,172 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<div class="pd-breadcrumb">
+  <a href="/">HOME</a>&ensp;/&ensp;
+  <a href="/collections/all">ITEMS</a>&ensp;/&ensp;
+  {{ product.title }}
+</div>
+
+<div class="pd-grid">
+  <!-- Left: Images -->
+  <div class="pd-images">
+    <div class="pd-main-img" id="pd-main-img">
+      {%- if product.featured_image -%}
+        <img
+          src="{{ product.featured_image | image_url: width: 800 }}"
+          alt="{{ product.featured_image.alt | default: product.title }}"
+          id="pd-main-img-el"
+        >
+      {%- endif -%}
+    </div>
+    {%- if product.images.size > 1 -%}
+      <div class="pd-thumbs">
+        {%- for image in product.images limit: 4 -%}
+          <div class="pd-thumb {% if forloop.first %}active{% endif %}" data-img="{{ image | image_url: width: 800 }}">
+            <img src="{{ image | image_url: width: 120 }}" alt="{{ image.alt | default: product.title }}">
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <!-- Right: Info -->
+  <div class="pd-info">
+    <h1 class="pd-info__name">{{ product.title }}</h1>
+    <div class="pd-info__price" id="pd-price">{{ current_variant.price | money_without_trailing_zeros }}</div>
+    <div class="pd-info__tax">税込</div>
+
+    {%- form 'product', product -%}
+      <input type="hidden" name="id" id="pd-variant-id" value="{{ current_variant.id }}">
+      <input type="hidden" name="quantity" value="1">
+
+      {%- if product.options.size > 0 -%}
+        {%- for option in product.options_with_values -%}
+          {%- assign option_name_lower = option.name | downcase -%}
+
+          {%- if option_name_lower == 'color' or option_name_lower == 'colour' or option_name_lower == 'カラー' or option_name_lower == '色' -%}
+            <div class="pd-info__label">COLOR</div>
+            <div class="pd-colors" data-option-index="{{ forloop.index0 }}">
+              {%- for value in option.values -%}
+                {%- assign color_slug = value | handleize -%}
+                <div
+                  class="pd-color-swatch {% if option.selected_value == value %}active{% endif %}"
+                  data-value="{{ value }}"
+                  style="background: {{ color_slug }};"
+                  title="{{ value }}"
+                ></div>
+              {%- endfor -%}
+            </div>
+
+          {%- elsif option_name_lower == 'size' or option_name_lower == 'サイズ' -%}
+            <div class="pd-info__label">SIZE</div>
+            <div class="pd-sizes" data-option-index="{{ forloop.index0 }}">
+              {%- for value in option.values -%}
+                <button
+                  type="button"
+                  class="pd-size-pill {% if option.selected_value == value %}active{% endif %}"
+                  data-value="{{ value }}"
+                >{{ value }}</button>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+
+      {%- if current_variant.inventory_management == 'shopify' and current_variant.inventory_quantity <= 5 and current_variant.inventory_quantity > 0 -%}
+        <div class="pd-stock">残りわずか — お早めにどうぞ</div>
+      {%- endif -%}
+
+      <button
+        type="submit"
+        class="pd-add-btn"
+        {% unless current_variant.available %}disabled{% endunless %}
+      >
+        {%- if current_variant.available -%}
+          ADD TO CART
+        {%- else -%}
+          SOLD OUT
+        {%- endif -%}
+      </button>
+    {%- endform -%}
+
+    {%- if product.description != blank -%}
+      <div class="pd-detail-label">DETAILS</div>
+      <div class="pd-detail-text">{{ product.description }}</div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var product = {{ product | json }};
+  var variantIdInput = document.getElementById('pd-variant-id');
+  var priceEl = document.getElementById('pd-price');
+  var addBtn = document.querySelector('.pd-add-btn');
+  var mainImg = document.getElementById('pd-main-img-el');
+  var selectedOptions = {};
+
+  // Init selected options
+  product.options.forEach(function(opt, i) {
+    selectedOptions[i] = product.selected_or_first_available_variant.options[i];
+  });
+
+  // Thumbnail click
+  document.querySelectorAll('.pd-thumb').forEach(function(thumb) {
+    thumb.addEventListener('click', function() {
+      document.querySelectorAll('.pd-thumb').forEach(function(t) { t.classList.remove('active'); });
+      this.classList.add('active');
+      if (mainImg) mainImg.src = this.dataset.img;
+    });
+  });
+
+  // Color swatch click
+  document.querySelectorAll('.pd-color-swatch').forEach(function(swatch) {
+    swatch.addEventListener('click', function() {
+      var idx = parseInt(this.parentElement.dataset.optionIndex);
+      this.parentElement.querySelectorAll('.pd-color-swatch').forEach(function(s) { s.classList.remove('active'); });
+      this.classList.add('active');
+      selectedOptions[idx] = this.dataset.value;
+      updateVariant();
+    });
+  });
+
+  // Size pill click
+  document.querySelectorAll('.pd-size-pill').forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      var idx = parseInt(this.parentElement.dataset.optionIndex);
+      this.parentElement.querySelectorAll('.pd-size-pill').forEach(function(p) { p.classList.remove('active'); });
+      this.classList.add('active');
+      selectedOptions[idx] = this.dataset.value;
+      updateVariant();
+    });
+  });
+
+  function updateVariant() {
+    var optionValues = product.options.map(function(_, i) { return selectedOptions[i]; });
+    var matched = product.variants.find(function(v) {
+      return v.options.every(function(opt, i) { return opt === optionValues[i]; });
+    });
+    if (matched) {
+      variantIdInput.value = matched.id;
+      priceEl.textContent = Shopify.formatMoney ? Shopify.formatMoney(matched.price) : ('¥' + (matched.price / 100).toLocaleString());
+      if (matched.available) {
+        addBtn.disabled = false;
+        addBtn.textContent = 'ADD TO CART';
+      } else {
+        addBtn.disabled = true;
+        addBtn.textContent = 'SOLD OUT';
+      }
+      if (matched.featured_image && mainImg) {
+        mainImg.src = matched.featured_image.src;
+      }
+    }
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Product Main",
+  "tag": "section"
+}
+{% endschema %}

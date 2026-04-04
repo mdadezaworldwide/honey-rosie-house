@@ -1,0 +1,35 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-kv",
+      "settings": {}
+    },
+    "collection_info": {
+      "type": "collection-info",
+      "settings": {
+        "show": true,
+        "title": "Spring 2026 Collection",
+        "date": "2026.04.01 — 04.14",
+        "badge_text": "NOW OPEN"
+      }
+    },
+    "new_arrival": {
+      "type": "new-arrival",
+      "settings": {
+        "limit": 8
+      }
+    },
+    "in_stock": {
+      "type": "in-stock",
+      "settings": {
+        "limit": 12
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "collection_info",
+    "new_arrival",
+    "in_stock"
+  ]
+}

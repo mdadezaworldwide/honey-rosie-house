@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page_title }} — {{ shop.name }}</title>
+  <meta name="description" content="{{ page_description }}">
+
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  {{ content_for_header }}
+
+  {%- if settings.logo_image -%}
+    <link rel="icon" type="image/png" href="{{ settings.logo_image | image_url: width: 32 }}">
+  {%- endif -%}
+</head>
+<body>
+  {% section 'header' %}
+
+  <main id="main" role="main">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+</body>
+</html>

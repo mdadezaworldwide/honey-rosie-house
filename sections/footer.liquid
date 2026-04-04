@@ -1,0 +1,26 @@
+<footer class="site-footer">
+  <div class="site-footer__links">
+    {%- for link in section.settings.menu.links -%}
+      <a href="{{ link.url }}">{{ link.title }}</a>
+    {%- else -%}
+      <a href="/policies/legal-notice">特定商取引法に基づく表記</a>
+      <a href="/policies/privacy-policy">プライバシーポリシー</a>
+      <a href="/pages/contact">お問い合わせ</a>
+    {%- endfor -%}
+  </div>
+  <div class="site-footer__copy">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Footer menu",
+      "default": "footer"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,36 @@
+{%- comment -%}
+  Usage: {% render 'product-card', product: product, badge: 'new' %}
+  badge: 'new', 'limited', or blank
+{%- endcomment -%}
+
+<a href="{{ product.url }}" class="p-card">
+  <div class="p-card__img">
+    {%- if product.featured_image -%}
+      <img
+        src="{{ product.featured_image | image_url: width: 400 }}"
+        alt="{{ product.featured_image.alt | default: product.title }}"
+        loading="lazy"
+        width="180"
+        height="220"
+      >
+    {%- endif -%}
+
+    {%- if product.available == false -%}
+      <span class="p-card__badge p-card__badge--soldout">SOLD OUT</span>
+    {%- elsif badge == 'new' -%}
+      <span class="p-card__badge p-card__badge--new">NEW</span>
+    {%- elsif badge == 'limited' -%}
+      <span class="p-card__badge p-card__badge--limited">LIMITED</span>
+    {%- endif -%}
+  </div>
+  <div class="p-card__body">
+    <div class="p-card__name">{{ product.title }}</div>
+    {%- if product.variants.size > 1 -%}
+      <div class="p-card__variant">{{ product.variants.size }} variants</div>
+    {%- endif -%}
+    <div class="p-card__price">
+      {{ product.price | money_without_trailing_zeros }}
+      <span class="p-card__tax">税込</span>
+    </div>
+  </div>
+</a>
