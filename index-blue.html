@@ -43,7 +43,7 @@ body {
 /* Heavy grain layer */
 body::before {
   content:''; position:fixed; inset:0; z-index:9000; pointer-events:none;
-  opacity:.14;
+  opacity:.08;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='6' seed='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size:200px;
   mix-blend-mode:multiply;
@@ -56,13 +56,6 @@ body::after {
     radial-gradient(ellipse 35% 30% at 80% 20%, rgba(200,48,80,.08) 0%, transparent 100%),
     radial-gradient(ellipse 30% 40% at 95% 90%, rgba(106,120,176,.07) 0%, transparent 100%),
     radial-gradient(ellipse 120% 120% at 50% 50%, transparent 40%, rgba(10,20,35,.12) 100%);
-}
-/* Scratch overlay */
-.page::before {
-  content:''; position:fixed; inset:0; z-index:8998; pointer-events:none;
-  opacity:.04;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='turbulence' baseFrequency='.02 .4' numOctaves='3' seed='8' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='discrete' tableValues='0 0 0 0 0 1 0 0 0 0 0 1 0 0'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)' fill='%231a2a3a'/%3E%3C/svg%3E");
-  background-size:400px 600px;
 }
 a { color:inherit; text-decoration:none; }
 img { display:block; max-width:100%; }
@@ -300,22 +293,10 @@ button { font-family:inherit; }
   max-width:var(--max-w); margin:0 auto;
   padding:0 24px 8px;
   overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;
-  mask-image:linear-gradient(to right, black 0, black calc(100% - 60px), transparent 100%);
   scroll-snap-type: x proximity;
   position:relative;
 }
 .product-scroll::-webkit-scrollbar { display:none; }
-.product-scroll::after {
-  content:'›'; position:absolute; right:8px; top:50%; transform:translateY(-70%);
-  font-size:28px; color:var(--text); opacity:.18;
-  animation: scrollHint 2s ease-in-out infinite;
-  pointer-events:none; z-index:2;
-}
-.product-scroll.scrolled::after { opacity:0 !important; animation:none; }
-@keyframes scrollHint {
-  0%,100% { opacity:.18; transform:translateY(-70%) translateX(0); }
-  50% { opacity:.35; transform:translateY(-70%) translateX(5px); }
-}
 .product-row { display:flex; gap:14px; min-width:min-content; }
 
 .product-grid {
@@ -914,13 +895,6 @@ document.querySelectorAll('.pd-add-btn').forEach(btn => {
   });
 });
 
-// Scroll hint: add .scrolled when user scrolls the product scroll area
-document.querySelectorAll('.product-scroll').forEach(el => {
-  el.addEventListener('scroll', function() {
-    if (this.scrollLeft > 30) this.classList.add('scrolled');
-    else this.classList.remove('scrolled');
-  }, {passive:true});
-});
 
 // Intersection Observer for card fade-in
 const cardObserver = new IntersectionObserver((entries) => {
