@@ -631,21 +631,21 @@ button { font-family:inherit; }
     <a href="#" class="sec-head__viewall" onclick="showToast();return false">VIEW ALL &rarr;</a>
   </div>
   <div class="collection-banners">
-    <div class="collection-banner" onclick="showToast()">
+    <div class="collection-banner" onclick="goCollection('spring2026')">
       <div class="banner-fill banner-fill--spring"></div>
       <div class="collection-banner__overlay">
         <div class="collection-banner__name">Spring 2026</div>
         <div class="collection-banner__count">3 items</div>
       </div>
     </div>
-    <div class="collection-banner" onclick="showToast()">
+    <div class="collection-banner" onclick="goCollection('summer2025')">
       <div class="banner-fill banner-fill--summer"></div>
       <div class="collection-banner__overlay">
         <div class="collection-banner__name">Summer 2025</div>
         <div class="collection-banner__count">SOLD OUT</div>
       </div>
     </div>
-    <div class="collection-banner" onclick="showToast()">
+    <div class="collection-banner" onclick="goCollection('winter2025')">
       <div class="banner-fill banner-fill--winter"></div>
       <div class="collection-banner__overlay">
         <div class="collection-banner__name">Winter 2025</div>
@@ -690,6 +690,48 @@ button { font-family:inherit; }
     <div class="p-card" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#c0d0d8 0%,#a8c0c8 40%,#90aab0 100%)"></div><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Charm Keychain</div><div class="p-card__price">&yen;1,500 <span class="p-card__tax">税込</span></div></div></div>
     <div class="p-card p-card--soldout"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#d0c0c0 0%,#b8a8a8 40%,#a09090 100%)"></div><span class="p-card__badge p-card__badge--soldout">SOLD OUT</span><div class="p-card__notify"><span>NOTIFY ME</span></div></div><div class="p-card__body"><div class="p-card__name">Pop-up Exclusive Tee</div><div class="p-card__price" style="opacity:.45; text-decoration:line-through;">&yen;4,500 <span class="p-card__tax">税込</span></div></div></div>
     <div class="p-card p-card--soldout"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#d8c0c8 0%,#c8a8b8 40%,#b098a8 100%)"></div><span class="p-card__badge p-card__badge--soldout">SOLD OUT</span><div class="p-card__notify"><span>NOTIFY ME</span></div></div><div class="p-card__body"><div class="p-card__name">Heart Mirror</div><div class="p-card__price" style="opacity:.45; text-decoration:line-through;">&yen;1,200 <span class="p-card__tax">税込</span></div></div></div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer__links">
+      <a href="#" onclick="showToast();return false">特定商取引法に基づく表記</a>
+      <a href="#" onclick="showToast();return false">プライバシーポリシー</a>
+      <a href="#" onclick="showToast();return false">お問い合わせ</a>
+    </div>
+    <div class="site-footer__copy">&copy; 2026 HONEY ROSIE HOUSE</div>
+  </footer>
+</div>
+
+<!-- ═══ PAGE: COLLECTION ═══ -->
+<div class="page" id="p-collection">
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="#" class="site-header__brand" onclick="go('top');return false">
+        <img class="site-header__logo-img" src="assets/logo.jpg" alt="HONEY ROSIE HOUSE">
+        <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
+      </a>
+      <nav class="site-header__nav">
+        <a href="#" onclick="go('top');return false">ITEMS</a>
+        <a href="#">CART<span class="cart-count">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="pd-breadcrumb">
+    <a href="#" onclick="go('top');return false">HOME</a>&ensp;/&ensp;
+    <a href="#" onclick="go('top');return false">COLLECTION</a>&ensp;/&ensp;
+    <span id="collection-breadcrumb">Spring 2026</span>
+  </div>
+
+  <div class="collection-info">
+    <div>
+      <div class="collection-info__title" id="collection-title">Spring 2026</div>
+      <div class="collection-info__date" id="collection-date">3 items</div>
+    </div>
+  </div>
+
+  <div class="product-grid" id="collection-grid">
   </div>
 
   <footer class="site-footer">
@@ -788,6 +830,8 @@ function go(page) {
   if (page === 'top') {
     document.getElementById('p-top').classList.add('active');
     document.querySelector('.dev button:nth-child(1)').classList.add('on');
+  } else if (page === 'collection') {
+    document.getElementById('p-collection').classList.add('active');
   } else {
     document.getElementById('p-detail').classList.add('active');
     document.querySelector('.dev button:nth-child(2)').classList.add('on');
@@ -931,6 +975,80 @@ const cardObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 document.querySelectorAll('.p-card').forEach(c => cardObserver.observe(c));
+
+const collections = {
+  spring2026: {
+    title: 'Spring 2026',
+    count: '3 items',
+    items: [
+      { name:'Original Sweatshirt', variant:'3 colors / 4 sizes', price:'¥6,800', badge:'new' },
+      { name:'Logo Tote Bag', variant:'5 colors', price:'¥3,200', badge:'new' },
+      { name:'Ribbon Hair Clip Set', price:'¥1,980', badge:'limited' }
+    ]
+  },
+  summer2025: {
+    title: 'Summer 2025',
+    count: 'SOLD OUT',
+    items: [
+      { name:'Pop-up Exclusive Tee', price:'¥4,500', badge:'soldout' },
+      { name:'Heart Mirror', price:'¥1,200', badge:'soldout' },
+      { name:'Sticker Pack', price:'¥800', badge:'soldout' }
+    ]
+  },
+  winter2025: {
+    title: 'Winter 2025',
+    count: 'SOLD OUT',
+    items: [
+      { name:'Charm Keychain', price:'¥1,500', badge:'soldout' },
+      { name:'Mini Pouch', variant:'3 colors', price:'¥2,400', badge:'soldout' }
+    ]
+  }
+};
+
+const itemColors = {
+  'Original Sweatshirt': 'linear-gradient(155deg,#c8d4e0 0%,#b0c0d0 40%,#98aabe 100%)',
+  'Logo Tote Bag': 'linear-gradient(155deg,#d8c0c8 0%,#c8a8b4 40%,#b090a0 100%)',
+  'Ribbon Hair Clip Set': 'linear-gradient(155deg,#d0d8c8 0%,#b8c4b0 40%,#a0ae98 100%)',
+  'Mini Pouch': 'linear-gradient(155deg,#c8c8d8 0%,#b0b0c8 40%,#9898b0 100%)',
+  'Sticker Pack': 'linear-gradient(155deg,#d8d0c0 0%,#c8c0a8 40%,#b0a890 100%)',
+  'Charm Keychain': 'linear-gradient(155deg,#c0d0d8 0%,#a8c0c8 40%,#90aab0 100%)',
+  'Pop-up Exclusive Tee': 'linear-gradient(155deg,#d0c0c0 0%,#b8a8a8 40%,#a09090 100%)',
+  'Heart Mirror': 'linear-gradient(155deg,#d8c0c8 0%,#c8a8b8 40%,#b098a8 100%)'
+};
+
+function goCollection(key) {
+  const col = collections[key];
+  if (!col) return;
+  document.getElementById('collection-title').textContent = col.title;
+  document.getElementById('collection-date').textContent = col.count;
+  document.getElementById('collection-breadcrumb').textContent = col.title;
+
+  const grid = document.getElementById('collection-grid');
+  grid.innerHTML = col.items.map(item => {
+    const color = itemColors[item.name] || '';
+    const isSoldout = item.badge === 'soldout';
+    const badgeHtml = item.badge === 'new' ? '<span class="p-card__badge p-card__badge--new">NEW</span>' :
+                      item.badge === 'limited' ? '<span class="p-card__badge p-card__badge--limited">LIMITED</span>' :
+                      item.badge === 'soldout' ? '<span class="p-card__badge p-card__badge--soldout">SOLD OUT</span>' : '';
+    const overlayHtml = isSoldout ? '<div class="p-card__notify"><span>NOTIFY ME</span></div>' : '<div class="p-card__quick"><span>VIEW</span></div>';
+    const clickAttr = isSoldout ? '' : ' onclick="go(\'detail\')"';
+    const soldoutClass = isSoldout ? ' p-card--soldout' : '';
+    const priceStyle = isSoldout ? ' style="opacity:.45; text-decoration:line-through;"' : '';
+    const variantHtml = item.variant ? '<div class="p-card__variant">' + item.variant + '</div>' : '';
+
+    return '<div class="p-card' + soldoutClass + '"' + clickAttr + '>' +
+      '<div class="p-card__img"><div class="p-card-img-fill" style="background:' + color + '"></div>' + badgeHtml + overlayHtml + '</div>' +
+      '<div class="p-card__body"><div class="p-card__name">' + item.name + '</div>' + variantHtml +
+      '<div class="p-card__price"' + priceStyle + '>' + item.price + ' <span class="p-card__tax">税込</span></div></div></div>';
+  }).join('');
+
+  grid.querySelectorAll('.p-card').forEach(c => {
+    c.classList.remove('visible');
+    cardObserver.observe(c);
+  });
+
+  go('collection');
+}
 </script>
 <div class="toast" id="toast">COMING SOON</div>
 </body>
