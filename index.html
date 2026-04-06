@@ -476,6 +476,22 @@ button { font-family:inherit; }
 }
 .pd-detail-text { font-size:12px; line-height:2.2; color:rgba(255,255,255,.6); font-weight:300; }
 
+/* ═══ ITEMS FILTER ═══ */
+.items-filter {
+  max-width:var(--max-w); margin:0 auto;
+  padding:16px 24px 12px;
+  display:flex; gap:8px; flex-wrap:wrap;
+}
+.filter-pill {
+  font-family:'Cormorant Garamond',serif;
+  font-size:11px; font-weight:600; letter-spacing:.15em;
+  padding:8px 20px; border-radius:20px;
+  border:1px solid rgba(255,255,255,.15); background:transparent;
+  color:rgba(255,255,255,.5); cursor:pointer; transition:.25s;
+}
+.filter-pill:hover { border-color:rgba(255,255,255,.3); color:rgba(255,255,255,.7); }
+.filter-pill.active { background:rgba(255,255,255,.15); color:#fff; border-color:rgba(255,255,255,.3); }
+
 /* ═══ FOOTER ═══ */
 .site-footer {
   max-width:var(--max-w); margin:0 auto;
@@ -545,6 +561,7 @@ button { font-family:inherit; }
   .pd-breadcrumb { padding:10px 16px 0; }
   .site-footer { padding:24px 16px 22px; }
   .dev { top:auto; bottom:12px; right:12px; background:rgba(58,32,48,.15); }
+  .items-filter { padding:12px 16px 8px; }
 }
 </style>
 </head>
@@ -565,7 +582,7 @@ button { font-family:inherit; }
         <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
       </a>
       <nav class="site-header__nav">
-        <a href="#">ITEMS</a>
+        <a href="#" onclick="goItems();return false">ITEMS</a>
         <a href="#">CART<span class="cart-count">0</span></a>
       </nav>
     </div>
@@ -642,6 +659,7 @@ button { font-family:inherit; }
   <div class="product-scroll">
     <div class="product-row">
       <div class="p-card p-card--featured" onclick="goDetail('original-sweatshirt')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sweatshirt.jpg" alt="Original Sweatshirt"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Original Sweatshirt</div><div class="p-card__variant">3 colors / 4 sizes</div><div class="p-card__price">&yen;6,800 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="goDetail('wide-pants')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sweatshirt.jpg" alt="Wide Pants"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Wide Pants</div><div class="p-card__variant">3 colors / 3 sizes</div><div class="p-card__price">&yen;7,800 <span class="p-card__tax">税込</span></div></div></div>
       <div class="p-card" onclick="goDetail('logo-tote-bag')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-totebag.jpg" alt="Logo Tote Bag"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Logo Tote Bag</div><div class="p-card__variant">5 colors</div><div class="p-card__price">&yen;3,200 <span class="p-card__tax">税込</span></div></div></div>
       <div class="p-card" onclick="goDetail('ribbon-hair-clip')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-hairclip.jpg" alt="Ribbon Hair Clip Set"><span class="p-card__badge p-card__badge--limited">LIMITED</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
       <div class="p-card" onclick="goDetail('mini-pouch')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-pouch.jpg" alt="Mini Pouch"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Mini Pouch</div><div class="p-card__variant">3 colors</div><div class="p-card__price">&yen;2,400 <span class="p-card__tax">税込</span></div></div></div>
@@ -680,6 +698,48 @@ button { font-family:inherit; }
   </footer>
 </div>
 
+<!-- ═══ PAGE: ITEMS ═══ -->
+<div class="page" id="p-items">
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="#" class="site-header__brand" onclick="go('top');return false">
+        <img class="site-header__logo-img" src="assets/logo.jpg" alt="HONEY ROSIE HOUSE">
+        <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
+      </a>
+      <nav class="site-header__nav">
+        <a href="#" onclick="goItems();return false">ITEMS</a>
+        <a href="#">CART<span class="cart-count">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="pd-breadcrumb">
+    <a href="#" onclick="go('top');return false">HOME</a>&ensp;/&ensp;
+    ITEMS
+  </div>
+
+  <div class="items-filter" id="items-filter">
+    <button class="filter-pill active" onclick="filterItems('all')">ALL</button>
+    <button class="filter-pill" onclick="filterItems('apparel')">APPAREL</button>
+    <button class="filter-pill" onclick="filterItems('bag')">BAG</button>
+    <button class="filter-pill" onclick="filterItems('accessory')">ACCESSORY</button>
+  </div>
+
+  <div class="product-grid" id="items-grid">
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer__links">
+      <a href="#" onclick="showToast();return false">特定商取引法に基づく表記</a>
+      <a href="#" onclick="showToast();return false">プライバシーポリシー</a>
+      <a href="#" onclick="showToast();return false">お問い合わせ</a>
+      <a href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">Instagram</a>
+    </div>
+    <div class="site-footer__copy">&copy; 2026 HONEY ROSIE HOUSE</div>
+  </footer>
+</div>
+
 <!-- ═══ PAGE: COLLECTION ═══ -->
 <div class="page" id="p-collection">
 
@@ -690,7 +750,7 @@ button { font-family:inherit; }
         <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
       </a>
       <nav class="site-header__nav">
-        <a href="#" onclick="go('top');return false">ITEMS</a>
+        <a href="#" onclick="goItems();return false">ITEMS</a>
         <a href="#">CART<span class="cart-count">0</span></a>
       </nav>
     </div>
@@ -733,7 +793,7 @@ button { font-family:inherit; }
         <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
       </a>
       <nav class="site-header__nav">
-        <a href="#" onclick="go('top');return false">ITEMS</a>
+        <a href="#" onclick="goItems();return false">ITEMS</a>
         <a href="#">CART<span class="cart-count">0</span></a>
       </nav>
     </div>
@@ -803,6 +863,7 @@ const products = {
     price: '¥6,800',
     image: 'assets/product-sweatshirt.jpg',
     variant: '3 colors / 4 sizes',
+    category: 'apparel',
     description: 'HONEY ROSIE HOUSEオリジナルのスウェットシャツ。<br>ゆったりとしたシルエットに、背面にブランドロゴをプリント。<br>裏起毛で秋冬の着回しにぴったりの一枚です。<br><br>素材：コットン100%<br>生産国：日本',
     colors: [{color:'#c8a2a8',name:'Pink'},{color:'#4a7c7e',name:'Teal'},{color:'#2a1a2e',name:'Dark'}],
     sizes: ['S','M','L','XL'],
@@ -813,6 +874,7 @@ const products = {
     price: '¥3,200',
     image: 'assets/product-totebag.jpg',
     variant: '5 colors',
+    category: 'bag',
     description: 'HONEY ROSIE HOUSEロゴ入りトートバッグ。<br>A4サイズが入る大容量で、デイリーユースに最適。<br>丈夫なキャンバス生地を使用。<br><br>素材：コットンキャンバス<br>サイズ：W36 × H38 × D10 cm',
     colors: [{color:'#e8e0d0',name:'Natural'},{color:'#dca0b0',name:'Pink'},{color:'#a0c8d8',name:'Blue'},{color:'#c0c0c0',name:'Gray'},{color:'#2a2a3a',name:'Black'}],
     sizes: null,
@@ -823,6 +885,7 @@ const products = {
     price: '¥1,980',
     image: 'assets/product-hairclip.jpg',
     variant: null,
+    category: 'accessory',
     description: 'ブランドカラーを使ったリボンヘアクリップのセット。<br>2個入り。普段使いからお出かけまで。<br><br>素材：アクリル・金属<br>サイズ：約5cm',
     colors: [{color:'#c83050',name:'Red'},{color:'#4a7898',name:'Blue'},{color:'#2a2a3a',name:'Black'}],
     sizes: null,
@@ -833,6 +896,7 @@ const products = {
     price: '¥2,400',
     image: 'assets/product-pouch.jpg',
     variant: '3 colors',
+    category: 'bag',
     description: 'コンパクトな巾着ポーチ。<br>アクセサリーやイヤホンなど小物の収納に。<br>ゴールドのロゴ刺繍がポイント。<br><br>素材：ベルベット<br>サイズ：W10 × H12 cm',
     colors: [{color:'#1a2a50',name:'Navy'},{color:'#c83050',name:'Red'},{color:'#2a2a2a',name:'Black'}],
     sizes: null,
@@ -843,6 +907,7 @@ const products = {
     price: '¥800',
     image: 'assets/product-sticker.jpg',
     variant: null,
+    category: 'accessory',
     description: 'HONEY ROSIE HOUSEオリジナルステッカーパック。<br>ロゴステッカー5枚入り。<br>スマホ、PC、ノートに。<br><br>素材：PVC防水<br>サイズ：各 約5×5 cm',
     colors: null,
     sizes: null,
@@ -853,12 +918,36 @@ const products = {
     price: '¥1,500',
     image: 'assets/product-keychain.jpg',
     variant: null,
+    category: 'accessory',
     description: 'ブランドロゴの缶バッジキーチェーン。<br>バッグやキーリングのアクセントに。<br><br>素材：スチール・クロムメッキ<br>サイズ：直径 約4.4cm',
     colors: null,
     sizes: null,
     stock: '在庫あり'
+  },
+  'wide-pants': {
+    name: 'Wide Pants',
+    price: '¥7,800',
+    image: 'assets/product-sweatshirt.jpg',
+    variant: '3 colors / 3 sizes',
+    category: 'apparel',
+    description: 'HONEY ROSIE HOUSEオリジナルのワイドパンツ。<br>ゆったりとしたシルエットで、パーカーとのセットアップにも。<br>ウエストはゴム＋紐で調整可能。<br><br>素材：コットン100%<br>生産国：日本',
+    colors: [{color:'#c8a2a8',name:'Pink'},{color:'#4a7c7e',name:'Teal'},{color:'#2a1a2e',name:'Dark'}],
+    sizes: ['S','M','L'],
+    stock: '在庫あり'
   }
 };
+
+const allItems = [
+  { id:'original-sweatshirt', name:'Original Sweatshirt', price:'¥6,800', image:'assets/product-sweatshirt.jpg', variant:'3 colors / 4 sizes', category:'apparel', badge:'new' },
+  { id:'wide-pants', name:'Wide Pants', price:'¥7,800', image:'assets/product-sweatshirt.jpg', variant:'3 colors / 3 sizes', category:'apparel', badge:'new' },
+  { id:'logo-tote-bag', name:'Logo Tote Bag', price:'¥3,200', image:'assets/product-totebag.jpg', variant:'5 colors', category:'bag', badge:'new' },
+  { id:'mini-pouch', name:'Mini Pouch', price:'¥2,400', image:'assets/product-pouch.jpg', variant:'3 colors', category:'bag', badge:null },
+  { id:'ribbon-hair-clip', name:'Ribbon Hair Clip Set', price:'¥1,980', image:'assets/product-hairclip.jpg', variant:null, category:'accessory', badge:'limited' },
+  { id:'sticker-pack', name:'Sticker Pack', price:'¥800', image:'assets/product-sticker.jpg', variant:null, category:'accessory', badge:null },
+  { id:'charm-keychain', name:'Charm Keychain', price:'¥1,500', image:'assets/product-keychain.jpg', variant:null, category:'accessory', badge:null },
+  { id:null, name:'Pop-up Exclusive Tee', price:'¥4,500', image:'assets/product-tee.jpg', variant:null, category:'apparel', badge:'soldout' },
+  { id:null, name:'Heart Mirror', price:'¥1,200', image:'assets/product-mirror.jpg', variant:null, category:'accessory', badge:'soldout' }
+];
 
 function goDetail(productId, skipPush) {
   const p = products[productId];
@@ -947,6 +1036,8 @@ function go(page, pushState) {
     document.querySelector('.dev button:nth-child(1)').classList.add('on');
   } else if (page === 'collection') {
     document.getElementById('p-collection').classList.add('active');
+  } else if (page === 'items') {
+    document.getElementById('p-items').classList.add('active');
   } else {
     document.getElementById('p-detail').classList.add('active');
     document.querySelector('.dev button:nth-child(2)').classList.add('on');
@@ -1124,6 +1215,7 @@ const itemImages = {
 
 const productIdMap = {
   'Original Sweatshirt': 'original-sweatshirt',
+  'Wide Pants': 'wide-pants',
   'Logo Tote Bag': 'logo-tote-bag',
   'Ribbon Hair Clip Set': 'ribbon-hair-clip',
   'Mini Pouch': 'mini-pouch',
@@ -1132,6 +1224,52 @@ const productIdMap = {
   'Pop-up Exclusive Tee': null,
   'Heart Mirror': null
 };
+
+let currentFilter = 'all';
+
+function filterItems(cat) {
+  currentFilter = cat;
+  document.querySelectorAll('#items-filter .filter-pill').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  renderItems();
+}
+
+function renderItems() {
+  const grid = document.getElementById('items-grid');
+  const filtered = currentFilter === 'all' ? allItems : allItems.filter(i => i.category === currentFilter);
+
+  grid.innerHTML = filtered.map(item => {
+    const isSoldout = item.badge === 'soldout';
+    const badgeHtml = item.badge === 'new' ? '<span class="p-card__badge p-card__badge--new">NEW</span>' :
+                      item.badge === 'limited' ? '<span class="p-card__badge p-card__badge--limited">LIMITED</span>' :
+                      item.badge === 'soldout' ? '<span class="p-card__badge p-card__badge--soldout">SOLD OUT</span>' : '';
+    const overlayHtml = isSoldout ? '<div class="p-card__notify"><span>NOTIFY ME</span></div>' : '<div class="p-card__quick"><span>VIEW</span></div>';
+    const clickAttr = (isSoldout || !item.id) ? '' : " onclick=\"goDetail('" + item.id + "')\"";
+    const soldoutClass = isSoldout ? ' p-card--soldout' : '';
+    const priceStyle = isSoldout ? ' style="opacity:.45; text-decoration:line-through;"' : '';
+    const variantHtml = item.variant ? '<div class="p-card__variant">' + item.variant + '</div>' : '';
+
+    return '<div class="p-card' + soldoutClass + '"' + clickAttr + '>' +
+      '<div class="p-card__img"><img class="p-card-img-fill" src="' + item.image + '" alt="' + item.name + '">' + badgeHtml + overlayHtml + '</div>' +
+      '<div class="p-card__body"><div class="p-card__name">' + item.name + '</div>' + variantHtml +
+      '<div class="p-card__price"' + priceStyle + '>' + item.price + ' <span class="p-card__tax">税込</span></div></div></div>';
+  }).join('');
+
+  // Re-observe for fade-in
+  grid.querySelectorAll('.p-card').forEach(c => {
+    c.classList.remove('visible');
+    cardObserver.observe(c);
+  });
+}
+
+function goItems() {
+  currentFilter = 'all';
+  document.querySelectorAll('#items-filter .filter-pill').forEach(b => b.classList.remove('active'));
+  document.querySelector('#items-filter .filter-pill').classList.add('active');
+  renderItems();
+  go('items', false);
+  history.pushState({page: 'items'}, '', '');
+}
 
 function goCollection(key, skipPush) {
   const col = collections[key];
@@ -1178,6 +1316,12 @@ window.addEventListener('popstate', function(e) {
       goDetail(e.state.product, true);
     } else if (e.state.page === 'collection' && e.state.collection) {
       goCollection(e.state.collection, true);
+    } else if (e.state.page === 'items') {
+      currentFilter = 'all';
+      document.querySelectorAll('#items-filter .filter-pill').forEach(b => b.classList.remove('active'));
+      document.querySelector('#items-filter .filter-pill').classList.add('active');
+      renderItems();
+      go('items', false);
     } else {
       go(e.state.page, false);
     }
