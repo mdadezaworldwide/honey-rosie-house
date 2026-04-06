@@ -389,7 +389,7 @@ button { font-family:inherit; }
 }
 .p-card-img-fill {
   width:100%; height:100%;
-  background:linear-gradient(155deg,#d0dce4 0%,#c0ccd8 40%,#aab8c8 100%);
+  object-fit:cover;
 }
 .p-card__badge {
   position:absolute; top:8px; left:8px;
@@ -431,7 +431,7 @@ button { font-family:inherit; }
   width:100%; aspect-ratio:3/4;
   background:var(--card-bg); border-radius:10px; overflow:hidden;
 }
-.pd-img-fill { width:100%; height:100%; background:linear-gradient(155deg,#c8d4e0,#a8b8c8); }
+.pd-img-fill { width:100%; height:100%; object-fit:cover; }
 .pd-thumbs { display:flex; gap:7px; margin-top:10px; }
 .pd-thumb {
   width:62px; height:62px; border-radius:6px;
@@ -440,7 +440,7 @@ button { font-family:inherit; }
 }
 .pd-thumb.active { border-color:var(--text); }
 .pd-thumb:hover:not(.active) { border-color:rgba(26,42,58,.14); }
-.pd-thumb-fill { width:100%; height:100%; background:linear-gradient(155deg,#c0ccd8,#a8b8c8); }
+.pd-thumb-fill { width:100%; height:100%; object-fit:cover; }
 
 .pd-info { padding-top:4px; }
 .pd-info__name {
@@ -596,19 +596,13 @@ button { font-family:inherit; }
           <img src="assets/hero-kv.jpg" alt="HONEY ROSIE HOUSE">
         </div>
         <div class="hero-slider__slide">
-          <div class="slide-placeholder" style="background:linear-gradient(135deg,#c85060,#a03848);display:flex;align-items:center;justify-content:center;">
-            <span style="font-family:'Playfair Display',serif;font-size:clamp(14px,2.5vw,24px);font-weight:700;color:rgba(255,255,255,.4);">Slide 2</span>
-          </div>
+          <img src="assets/hero-slide2.jpg" alt="HONEY ROSIE HOUSE">
         </div>
         <div class="hero-slider__slide">
-          <div class="slide-placeholder" style="background:linear-gradient(135deg,#4a7898,#3a6080);display:flex;align-items:center;justify-content:center;">
-            <span style="font-family:'Playfair Display',serif;font-size:clamp(14px,2.5vw,24px);font-weight:700;color:rgba(255,255,255,.4);">Slide 3</span>
-          </div>
+          <img src="assets/hero-slide3.jpg" alt="HONEY ROSIE HOUSE">
         </div>
         <div class="hero-slider__slide">
-          <div class="slide-placeholder" style="background:linear-gradient(135deg,#6a78b0,#4a5890);display:flex;align-items:center;justify-content:center;">
-            <span style="font-family:'Playfair Display',serif;font-size:clamp(14px,2.5vw,24px);font-weight:700;color:rgba(255,255,255,.4);">Slide 4</span>
-          </div>
+          <img src="assets/hero-slide4.jpg" alt="HONEY ROSIE HOUSE">
         </div>
       </div>
     </div>
@@ -664,12 +658,12 @@ button { font-family:inherit; }
   </div>
   <div class="product-scroll">
     <div class="product-row">
-      <div class="p-card p-card--featured" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#c8d4e0 0%,#b0c0d0 40%,#98aabe 100%)"></div><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Original Sweatshirt</div><div class="p-card__variant">3 colors / 4 sizes</div><div class="p-card__price">&yen;6,800 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#d8c0c8 0%,#c8a8b4 40%,#b090a0 100%)"></div><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Logo Tote Bag</div><div class="p-card__variant">5 colors</div><div class="p-card__price">&yen;3,200 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#d0d8c8 0%,#b8c4b0 40%,#a0ae98 100%)"></div><span class="p-card__badge p-card__badge--limited">LIMITED</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#c8c8d8 0%,#b0b0c8 40%,#9898b0 100%)"></div><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Mini Pouch</div><div class="p-card__variant">3 colors</div><div class="p-card__price">&yen;2,400 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#d8d0c0 0%,#c8c0a8 40%,#b0a890 100%)"></div><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Sticker Pack</div><div class="p-card__price">&yen;800 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#c0d0d8 0%,#a8c0c8 40%,#90aab0 100%)"></div><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Charm Keychain</div><div class="p-card__price">&yen;1,500 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card p-card--featured" onclick="go('detail')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sweatshirt.jpg" alt="Original Sweatshirt"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Original Sweatshirt</div><div class="p-card__variant">3 colors / 4 sizes</div><div class="p-card__price">&yen;6,800 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="go('detail')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-totebag.jpg" alt="Logo Tote Bag"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Logo Tote Bag</div><div class="p-card__variant">5 colors</div><div class="p-card__price">&yen;3,200 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="go('detail')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-hairclip.jpg" alt="Ribbon Hair Clip Set"><span class="p-card__badge p-card__badge--limited">LIMITED</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="go('detail')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-pouch.jpg" alt="Mini Pouch"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Mini Pouch</div><div class="p-card__variant">3 colors</div><div class="p-card__price">&yen;2,400 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="go('detail')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sticker.jpg" alt="Sticker Pack"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Sticker Pack</div><div class="p-card__price">&yen;800 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="go('detail')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-keychain.jpg" alt="Charm Keychain"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Charm Keychain</div><div class="p-card__price">&yen;1,500 <span class="p-card__tax">税込</span></div></div></div>
     </div>
   </div>
 
@@ -682,14 +676,14 @@ button { font-family:inherit; }
     <a href="#" class="sec-head__viewall" onclick="showToast();return false">VIEW ALL &rarr;</a>
   </div>
   <div class="product-grid">
-    <div class="p-card" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#c8d4e0 0%,#b0c0d0 40%,#98aabe 100%)"></div><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Original Sweatshirt</div><div class="p-card__variant">3 colors / 4 sizes</div><div class="p-card__price">&yen;6,800 <span class="p-card__tax">税込</span></div></div></div>
-    <div class="p-card" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#d8c0c8 0%,#c8a8b4 40%,#b090a0 100%)"></div><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Logo Tote Bag</div><div class="p-card__variant">5 colors</div><div class="p-card__price">&yen;3,200 <span class="p-card__tax">税込</span></div></div></div>
-    <div class="p-card" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#d0d8c8 0%,#b8c4b0 40%,#a0ae98 100%)"></div><span class="p-card__badge p-card__badge--limited">LIMITED</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
-    <div class="p-card" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#c8c8d8 0%,#b0b0c8 40%,#9898b0 100%)"></div><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Mini Pouch</div><div class="p-card__variant">3 colors</div><div class="p-card__price">&yen;2,400 <span class="p-card__tax">税込</span></div></div></div>
-    <div class="p-card" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#d8d0c0 0%,#c8c0a8 40%,#b0a890 100%)"></div><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Sticker Pack</div><div class="p-card__price">&yen;800 <span class="p-card__tax">税込</span></div></div></div>
-    <div class="p-card" onclick="go('detail')"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#c0d0d8 0%,#a8c0c8 40%,#90aab0 100%)"></div><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Charm Keychain</div><div class="p-card__price">&yen;1,500 <span class="p-card__tax">税込</span></div></div></div>
-    <div class="p-card p-card--soldout"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#d0c0c0 0%,#b8a8a8 40%,#a09090 100%)"></div><span class="p-card__badge p-card__badge--soldout">SOLD OUT</span><div class="p-card__notify"><span>NOTIFY ME</span></div></div><div class="p-card__body"><div class="p-card__name">Pop-up Exclusive Tee</div><div class="p-card__price" style="opacity:.45; text-decoration:line-through;">&yen;4,500 <span class="p-card__tax">税込</span></div></div></div>
-    <div class="p-card p-card--soldout"><div class="p-card__img"><div class="p-card-img-fill" style="background:linear-gradient(155deg,#d8c0c8 0%,#c8a8b8 40%,#b098a8 100%)"></div><span class="p-card__badge p-card__badge--soldout">SOLD OUT</span><div class="p-card__notify"><span>NOTIFY ME</span></div></div><div class="p-card__body"><div class="p-card__name">Heart Mirror</div><div class="p-card__price" style="opacity:.45; text-decoration:line-through;">&yen;1,200 <span class="p-card__tax">税込</span></div></div></div>
+    <div class="p-card" onclick="go('detail')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sweatshirt.jpg" alt="Original Sweatshirt"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Original Sweatshirt</div><div class="p-card__variant">3 colors / 4 sizes</div><div class="p-card__price">&yen;6,800 <span class="p-card__tax">税込</span></div></div></div>
+    <div class="p-card" onclick="go('detail')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-totebag.jpg" alt="Logo Tote Bag"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Logo Tote Bag</div><div class="p-card__variant">5 colors</div><div class="p-card__price">&yen;3,200 <span class="p-card__tax">税込</span></div></div></div>
+    <div class="p-card" onclick="go('detail')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-hairclip.jpg" alt="Ribbon Hair Clip Set"><span class="p-card__badge p-card__badge--limited">LIMITED</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
+    <div class="p-card" onclick="go('detail')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-pouch.jpg" alt="Mini Pouch"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Mini Pouch</div><div class="p-card__variant">3 colors</div><div class="p-card__price">&yen;2,400 <span class="p-card__tax">税込</span></div></div></div>
+    <div class="p-card" onclick="go('detail')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sticker.jpg" alt="Sticker Pack"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Sticker Pack</div><div class="p-card__price">&yen;800 <span class="p-card__tax">税込</span></div></div></div>
+    <div class="p-card" onclick="go('detail')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-keychain.jpg" alt="Charm Keychain"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Charm Keychain</div><div class="p-card__price">&yen;1,500 <span class="p-card__tax">税込</span></div></div></div>
+    <div class="p-card p-card--soldout"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-tee.jpg" alt="Pop-up Exclusive Tee"><span class="p-card__badge p-card__badge--soldout">SOLD OUT</span><div class="p-card__notify"><span>NOTIFY ME</span></div></div><div class="p-card__body"><div class="p-card__name">Pop-up Exclusive Tee</div><div class="p-card__price" style="opacity:.45; text-decoration:line-through;">&yen;4,500 <span class="p-card__tax">税込</span></div></div></div>
+    <div class="p-card p-card--soldout"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-mirror.jpg" alt="Heart Mirror"><span class="p-card__badge p-card__badge--soldout">SOLD OUT</span><div class="p-card__notify"><span>NOTIFY ME</span></div></div><div class="p-card__body"><div class="p-card__name">Heart Mirror</div><div class="p-card__price" style="opacity:.45; text-decoration:line-through;">&yen;1,200 <span class="p-card__tax">税込</span></div></div></div>
   </div>
 
   <footer class="site-footer">
@@ -768,12 +762,12 @@ button { font-family:inherit; }
 
   <div class="pd-grid">
     <div>
-      <div class="pd-main-img"><div class="pd-img-fill"></div></div>
+      <div class="pd-main-img"><img class="pd-img-fill" src="assets/product-sweatshirt.jpg" alt="Original Sweatshirt" style="width:100%;height:100%;object-fit:cover;"></div>
       <div class="pd-thumbs">
-        <div class="pd-thumb active"><div class="pd-thumb-fill"></div></div>
-        <div class="pd-thumb"><div class="pd-thumb-fill"></div></div>
-        <div class="pd-thumb"><div class="pd-thumb-fill"></div></div>
-        <div class="pd-thumb"><div class="pd-thumb-fill"></div></div>
+        <div class="pd-thumb active"><img class="pd-thumb-fill" src="assets/product-sweatshirt.jpg" alt="" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="pd-thumb"><img class="pd-thumb-fill" src="assets/product-sweatshirt.jpg" alt="" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="pd-thumb"><img class="pd-thumb-fill" src="assets/product-sweatshirt.jpg" alt="" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="pd-thumb"><img class="pd-thumb-fill" src="assets/product-sweatshirt.jpg" alt="" style="width:100%;height:100%;object-fit:cover;"></div>
       </div>
     </div>
     <div class="pd-info">
@@ -1005,15 +999,15 @@ const collections = {
   }
 };
 
-const itemColors = {
-  'Original Sweatshirt': 'linear-gradient(155deg,#c8d4e0 0%,#b0c0d0 40%,#98aabe 100%)',
-  'Logo Tote Bag': 'linear-gradient(155deg,#d8c0c8 0%,#c8a8b4 40%,#b090a0 100%)',
-  'Ribbon Hair Clip Set': 'linear-gradient(155deg,#d0d8c8 0%,#b8c4b0 40%,#a0ae98 100%)',
-  'Mini Pouch': 'linear-gradient(155deg,#c8c8d8 0%,#b0b0c8 40%,#9898b0 100%)',
-  'Sticker Pack': 'linear-gradient(155deg,#d8d0c0 0%,#c8c0a8 40%,#b0a890 100%)',
-  'Charm Keychain': 'linear-gradient(155deg,#c0d0d8 0%,#a8c0c8 40%,#90aab0 100%)',
-  'Pop-up Exclusive Tee': 'linear-gradient(155deg,#d0c0c0 0%,#b8a8a8 40%,#a09090 100%)',
-  'Heart Mirror': 'linear-gradient(155deg,#d8c0c8 0%,#c8a8b8 40%,#b098a8 100%)'
+const itemImages = {
+  'Original Sweatshirt': 'assets/product-sweatshirt.jpg',
+  'Logo Tote Bag': 'assets/product-totebag.jpg',
+  'Ribbon Hair Clip Set': 'assets/product-hairclip.jpg',
+  'Mini Pouch': 'assets/product-pouch.jpg',
+  'Sticker Pack': 'assets/product-sticker.jpg',
+  'Charm Keychain': 'assets/product-keychain.jpg',
+  'Pop-up Exclusive Tee': 'assets/product-tee.jpg',
+  'Heart Mirror': 'assets/product-mirror.jpg'
 };
 
 function goCollection(key) {
@@ -1025,7 +1019,7 @@ function goCollection(key) {
 
   const grid = document.getElementById('collection-grid');
   grid.innerHTML = col.items.map(item => {
-    const color = itemColors[item.name] || '';
+    const img = itemImages[item.name] || '';
     const isSoldout = item.badge === 'soldout';
     const badgeHtml = item.badge === 'new' ? '<span class="p-card__badge p-card__badge--new">NEW</span>' :
                       item.badge === 'limited' ? '<span class="p-card__badge p-card__badge--limited">LIMITED</span>' :
@@ -1037,7 +1031,7 @@ function goCollection(key) {
     const variantHtml = item.variant ? '<div class="p-card__variant">' + item.variant + '</div>' : '';
 
     return '<div class="p-card' + soldoutClass + '"' + clickAttr + '>' +
-      '<div class="p-card__img"><div class="p-card-img-fill" style="background:' + color + '"></div>' + badgeHtml + overlayHtml + '</div>' +
+      '<div class="p-card__img"><img class="p-card-img-fill" src="' + img + '" alt="' + item.name + '">' + badgeHtml + overlayHtml + '</div>' +
       '<div class="p-card__body"><div class="p-card__name">' + item.name + '</div>' + variantHtml +
       '<div class="p-card__price"' + priceStyle + '>' + item.price + ' <span class="p-card__tax">税込</span></div></div></div>';
   }).join('');
