@@ -286,6 +286,7 @@ button { font-family:inherit; }
   overscroll-behavior-y:contain;
   scroll-snap-type: x proximity;
   position:relative;
+  cursor:grab;
 }
 .product-scroll::-webkit-scrollbar { display:none; }
 .product-row { display:flex; gap:14px; min-width:min-content; }
@@ -441,7 +442,7 @@ button { font-family:inherit; }
 }
 .pd-colors { display:flex; gap:10px; margin-bottom:22px; }
 .pd-color-swatch {
-  width:28px; height:28px; border-radius:50%;
+  width:36px; height:36px; border-radius:50%;
   border:2px solid transparent; cursor:pointer; transition:.3s var(--ease-spring);
 }
 .pd-color-swatch:hover { transform:scale(1.12); }
@@ -860,7 +861,7 @@ const products = {
   }
 };
 
-function goDetail(productId) {
+function goDetail(productId, skipPush) {
   const p = products[productId];
   if (!p) return;
 
@@ -926,7 +927,10 @@ function goDetail(productId) {
   // 在庫
   document.getElementById('detail-stock').textContent = p.stock;
 
-  go('detail');
+  go('detail', false);
+  if (!skipPush) {
+    history.pushState({page: 'detail', product: productId}, '', '');
+  }
 }
 
 function showToast(msg) {
@@ -936,7 +940,7 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 1800);
 }
 
-function go(page) {
+function go(page, pushState) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.dev button').forEach(b => b.classList.remove('on'));
   if (page === 'top') {
@@ -949,6 +953,9 @@ function go(page) {
     document.querySelector('.dev button:nth-child(2)').classList.add('on');
   }
   window.scrollTo(0,0);
+  if (pushState !== false) {
+    history.pushState({page: page}, '', '');
+  }
 }
 
 // Header scroll shadow
@@ -1127,7 +1134,7 @@ const productIdMap = {
   'Heart Mirror': null
 };
 
-function goCollection(key) {
+function goCollection(key, skipPush) {
   const col = collections[key];
   if (!col) return;
   document.getElementById('collection-title').textContent = col.title;
@@ -1159,8 +1166,47 @@ function goCollection(key) {
     cardObserver.observe(c);
   });
 
-  go('collection');
+  go('collection', false);
+  if (!skipPush) {
+    history.pushState({page: 'collection', collection: key}, '', '');
+  }
 }
+
+// Browser back/forward support
+window.addEventListener('popstate', function(e) {
+  if (e.state && e.state.page) {
+    if (e.state.page === 'detail' && e.state.product) {
+      goDetail(e.state.product, true);
+    } else if (e.state.page === 'collection' && e.state.collection) {
+      goCollection(e.state.collection, true);
+    } else {
+      go(e.state.page, false);
+    }
+  } else {
+    go('top', false);
+  }
+});
+history.replaceState({page: 'top'}, '', '');
+
+// Drag-to-scroll for product-scroll on PC
+document.querySelectorAll('.product-scroll').forEach(el => {
+  let isDown = false, startX, scrollLeft;
+  el.addEventListener('mousedown', e => {
+    isDown = true;
+    el.style.cursor = 'grabbing';
+    startX = e.pageX - el.offsetLeft;
+    scrollLeft = el.scrollLeft;
+    e.preventDefault();
+  });
+  el.addEventListener('mouseleave', () => { isDown = false; el.style.cursor = ''; });
+  el.addEventListener('mouseup', () => { isDown = false; el.style.cursor = ''; });
+  el.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    const x = e.pageX - el.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    el.scrollLeft = scrollLeft - walk;
+  });
+});
 </script>
 <div class="toast" id="toast">COMING SOON</div>
 </body>
