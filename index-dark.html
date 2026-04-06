@@ -287,7 +287,7 @@ button { font-family:inherit; }
   box-shadow:0 8px 30px rgba(10,5,20,.25);
 }
 .banner-fill {
-  width:100%; height:100%;
+  width:100%; height:100%; object-fit:cover;
 }
 .banner-fill--spring { background:linear-gradient(135deg,#6a2840 0%,#883050 50%,#9a2040 100%); }
 .banner-fill--summer { background:linear-gradient(135deg,#204858 0%,#306878 50%,#207888 100%); }
@@ -663,21 +663,21 @@ button { font-family:inherit; }
   </div>
   <div class="collection-banners">
     <div class="collection-banner" onclick="goCollection('spring2026')">
-      <div class="banner-fill banner-fill--spring"></div>
+      <img class="banner-fill" src="assets/collection-spring.png" alt="Spring 2026">
       <div class="collection-banner__overlay">
         <div class="collection-banner__name">Spring 2026</div>
         <div class="collection-banner__count">3 items</div>
       </div>
     </div>
     <div class="collection-banner" onclick="goCollection('summer2025')">
-      <div class="banner-fill banner-fill--summer"></div>
+      <img class="banner-fill" src="assets/collection-summer.png" alt="Summer 2025">
       <div class="collection-banner__overlay">
         <div class="collection-banner__name">Summer 2025</div>
         <div class="collection-banner__count">SOLD OUT</div>
       </div>
     </div>
     <div class="collection-banner" onclick="goCollection('winter2025')">
-      <div class="banner-fill banner-fill--winter"></div>
+      <img class="banner-fill" src="assets/collection-winter.png" alt="Winter 2025">
       <div class="collection-banner__overlay">
         <div class="collection-banner__name">Winter 2025</div>
         <div class="collection-banner__count">SOLD OUT</div>
