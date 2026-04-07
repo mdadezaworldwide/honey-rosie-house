@@ -328,10 +328,6 @@ button { font-family:inherit; }
   padding:0 24px 12px;
   display:grid; grid-template-columns:repeat(4, 1fr); gap:14px;
 }
-.product-grid .p-card:nth-child(1),
-.product-grid .p-card:nth-child(2) {
-  grid-column: span 2;
-}
 
 .p-card {
   width:190px; flex-shrink:0; cursor:pointer;
@@ -609,8 +605,6 @@ button { font-family:inherit; }
   .p-card--featured { width:190px; }
   .p-card--featured .p-card__img { aspect-ratio:3/4; }
   .product-grid { padding:0 16px 10px; grid-template-columns:repeat(2,1fr); gap:10px; }
-  .product-grid .p-card:nth-child(1),
-  .product-grid .p-card:nth-child(2) { grid-column: span 1; }
 
   .pd-grid { grid-template-columns:1fr; gap:22px; padding:14px 16px 28px; }
   .pd-breadcrumb { padding:10px 16px 0; }
