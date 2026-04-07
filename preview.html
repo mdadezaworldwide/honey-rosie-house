@@ -116,9 +116,14 @@ button { font-family:inherit; }
   text-decoration:none; color:#fff;
   font-family:'Cormorant Garamond',serif;
   font-size:11px; font-weight:600; letter-spacing:.12em;
-  opacity:.55; transition:opacity .25s;
+  opacity:.55; transition:opacity .25s, background .25s;
 }
 .site-header__nav a:hover { opacity:.85; }
+.site-header__nav a.nav-items {
+  opacity:1; padding:6px 16px; border-radius:14px;
+  border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.08);
+}
+.site-header__nav a.nav-items:hover { background:rgba(255,255,255,.18); }
 .cart-count {
   background:var(--teal); color:#e0f0ee;
   font-size:8px; font-weight:700;
@@ -578,7 +583,7 @@ button { font-family:inherit; }
         <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
       </a>
       <nav class="site-header__nav">
-        <a href="#" onclick="goItems();return false">ITEMS</a>
+        <a href="#" onclick="goItems();return false" class="nav-items">ITEMS</a>
         <a href="#">CART<span class="cart-count">0</span></a>
       </nav>
     </div>
@@ -657,10 +662,6 @@ button { font-family:inherit; }
       <div class="p-card p-card--featured" onclick="goDetail('original-sweatshirt')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sweatshirt.jpg" alt="Original Sweatshirt"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Original Sweatshirt</div><div class="p-card__variant">3 colors / 4 sizes</div><div class="p-card__price">&yen;6,800 <span class="p-card__tax">税込</span></div></div></div>
       <div class="p-card" onclick="goDetail('wide-pants')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sweatshirt.jpg" alt="Wide Pants"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Wide Pants</div><div class="p-card__variant">3 colors / 3 sizes</div><div class="p-card__price">&yen;7,800 <span class="p-card__tax">税込</span></div></div></div>
       <div class="p-card" onclick="goDetail('logo-tote-bag')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-totebag.jpg" alt="Logo Tote Bag"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Logo Tote Bag</div><div class="p-card__variant">5 colors</div><div class="p-card__price">&yen;3,200 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('ribbon-hair-clip')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-hairclip.jpg" alt="Ribbon Hair Clip Set"><span class="p-card__badge p-card__badge--limited">LIMITED</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('mini-pouch')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-pouch.jpg" alt="Mini Pouch"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Mini Pouch</div><div class="p-card__variant">3 colors</div><div class="p-card__price">&yen;2,400 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('sticker-pack')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sticker.jpg" alt="Sticker Pack"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Sticker Pack</div><div class="p-card__price">&yen;800 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('charm-keychain')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-keychain.jpg" alt="Charm Keychain"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Charm Keychain</div><div class="p-card__price">&yen;1,500 <span class="p-card__tax">税込</span></div></div></div>
     </div>
   </div>
 
@@ -673,8 +674,6 @@ button { font-family:inherit; }
     <a href="#" class="sec-head__viewall" onclick="showToast();return false">VIEW ALL &rarr;</a>
   </div>
   <div class="product-grid">
-    <div class="p-card" onclick="goDetail('original-sweatshirt')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sweatshirt.jpg" alt="Original Sweatshirt"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Original Sweatshirt</div><div class="p-card__variant">3 colors / 4 sizes</div><div class="p-card__price">&yen;6,800 <span class="p-card__tax">税込</span></div></div></div>
-    <div class="p-card" onclick="goDetail('logo-tote-bag')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-totebag.jpg" alt="Logo Tote Bag"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Logo Tote Bag</div><div class="p-card__variant">5 colors</div><div class="p-card__price">&yen;3,200 <span class="p-card__tax">税込</span></div></div></div>
     <div class="p-card" onclick="goDetail('ribbon-hair-clip')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-hairclip.jpg" alt="Ribbon Hair Clip Set"><span class="p-card__badge p-card__badge--limited">LIMITED</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
     <div class="p-card" onclick="goDetail('mini-pouch')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-pouch.jpg" alt="Mini Pouch"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Mini Pouch</div><div class="p-card__variant">3 colors</div><div class="p-card__price">&yen;2,400 <span class="p-card__tax">税込</span></div></div></div>
     <div class="p-card" onclick="goDetail('sticker-pack')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sticker.jpg" alt="Sticker Pack"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Sticker Pack</div><div class="p-card__price">&yen;800 <span class="p-card__tax">税込</span></div></div></div>
@@ -704,7 +703,7 @@ button { font-family:inherit; }
         <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
       </a>
       <nav class="site-header__nav">
-        <a href="#" onclick="goItems();return false">ITEMS</a>
+        <a href="#" onclick="goItems();return false" class="nav-items">ITEMS</a>
         <a href="#">CART<span class="cart-count">0</span></a>
       </nav>
     </div>
@@ -752,7 +751,7 @@ button { font-family:inherit; }
         <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
       </a>
       <nav class="site-header__nav">
-        <a href="#" onclick="goItems();return false">ITEMS</a>
+        <a href="#" onclick="goItems();return false" class="nav-items">ITEMS</a>
         <a href="#">CART<span class="cart-count">0</span></a>
       </nav>
     </div>
@@ -795,7 +794,7 @@ button { font-family:inherit; }
         <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
       </a>
       <nav class="site-header__nav">
-        <a href="#" onclick="goItems();return false">ITEMS</a>
+        <a href="#" onclick="goItems();return false" class="nav-items">ITEMS</a>
         <a href="#">CART<span class="cart-count">0</span></a>
       </nav>
     </div>
