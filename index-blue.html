@@ -146,11 +146,15 @@ button { font-family:inherit; }
 .category-nav a {
   font-family:'Zen Kaku Gothic New',sans-serif;
   font-size:13px; font-weight:700; letter-spacing:.1em;
-  color:#fff; opacity:.55; text-decoration:none;
-  padding:8px 18px; border:1px solid rgba(255,255,255,.2); border-radius:22px;
-  transition:opacity .25s, border-color .25s, background .25s;
+  color:#fff; opacity:.35; text-decoration:none;
+  padding:4px 0;
+  transition:opacity .25s;
 }
-.category-nav a:hover { opacity:1; border-color:rgba(255,255,255,.5); background:rgba(255,255,255,.08); }
+.category-nav a:hover { opacity:1; }
+.category-nav a + a::before {
+  content:'/'; margin-right:20px;
+  font-weight:300; opacity:.2;
+}
 
 @media (max-width:640px) {
   .category-nav { padding:14px 16px 0; gap:14px; overflow-x:auto; justify-content:flex-start; scrollbar-width:none; }
