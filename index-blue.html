@@ -504,8 +504,6 @@ button { font-family:inherit; }
 }
 .filter-pill:hover { border-color:rgba(255,255,255,.3); color:rgba(255,255,255,.7); }
 .filter-pill.active { background:rgba(255,255,255,.15); color:#fff; border-color:rgba(255,255,255,.3); }
-.items-subfilter { padding-top:0; }
-.filter-pill.sub { font-size:10px; padding:5px 14px; letter-spacing:.1em; }
 
 /* ═══ FOOTER ═══ */
 .site-footer {
@@ -730,15 +728,11 @@ button { font-family:inherit; }
 
   <div class="items-filter" id="items-filter">
     <button class="filter-pill active" onclick="filterItems('all')">ALL</button>
-    <button class="filter-pill" onclick="filterItems('apparel')">APPAREL</button>
+    <button class="filter-pill" onclick="filterItems('tops')">TOPS</button>
+    <button class="filter-pill" onclick="filterItems('bottoms')">BOTTOMS</button>
     <button class="filter-pill" onclick="filterItems('bag')">BAG</button>
-    <button class="filter-pill" onclick="filterItems('accessory')">ACCESSORY</button>
-  </div>
-  <div class="items-filter items-subfilter" id="items-subfilter" style="display:none;">
-    <button class="filter-pill sub active" onclick="filterSub('all')">ALL</button>
-    <button class="filter-pill sub" onclick="filterSub('hoodie')">HOODIE</button>
-    <button class="filter-pill sub" onclick="filterSub('tshirt')">T-SHIRT</button>
-    <button class="filter-pill sub" onclick="filterSub('bottoms')">BOTTOMS</button>
+    <button class="filter-pill" onclick="filterItems('cap')">CAP</button>
+    <button class="filter-pill" onclick="filterItems('goods')">GOODS</button>
   </div>
 
   <div class="product-grid" id="items-grid">
@@ -878,7 +872,7 @@ const products = {
     price: '¥6,800',
     image: 'assets/product-sweatshirt.jpg',
     variant: '3 colors / 4 sizes',
-    category: 'apparel',
+    category: 'tops',
     description: 'HONEY ROSIE HOUSEオリジナルのスウェットシャツ。<br>ゆったりとしたシルエットに、背面にブランドロゴをプリント。<br>裏起毛で秋冬の着回しにぴったりの一枚です。<br><br>素材：コットン100%<br>生産国：日本',
     colors: [{color:'#c8a2a8',name:'Pink'},{color:'#4a7c7e',name:'Teal'},{color:'#2a1a2e',name:'Dark'}],
     sizes: ['S','M','L','XL'],
@@ -900,7 +894,7 @@ const products = {
     price: '¥1,980',
     image: 'assets/product-hairclip.jpg',
     variant: null,
-    category: 'accessory',
+    category: 'goods',
     description: 'ブランドカラーを使ったリボンヘアクリップのセット。<br>2個入り。普段使いからお出かけまで。<br><br>素材：アクリル・金属<br>サイズ：約5cm',
     colors: [{color:'#c83050',name:'Red'},{color:'#4a7898',name:'Blue'},{color:'#2a2a3a',name:'Black'}],
     sizes: null,
@@ -922,7 +916,7 @@ const products = {
     price: '¥800',
     image: 'assets/product-sticker.jpg',
     variant: null,
-    category: 'accessory',
+    category: 'goods',
     description: 'HONEY ROSIE HOUSEオリジナルステッカーパック。<br>ロゴステッカー5枚入り。<br>スマホ、PC、ノートに。<br><br>素材：PVC防水<br>サイズ：各 約5×5 cm',
     colors: null,
     sizes: null,
@@ -933,7 +927,7 @@ const products = {
     price: '¥1,500',
     image: 'assets/product-keychain.jpg',
     variant: null,
-    category: 'accessory',
+    category: 'goods',
     description: 'ブランドロゴの缶バッジキーチェーン。<br>バッグやキーリングのアクセントに。<br><br>素材：スチール・クロムメッキ<br>サイズ：直径 約4.4cm',
     colors: null,
     sizes: null,
@@ -944,7 +938,7 @@ const products = {
     price: '¥7,800',
     image: 'assets/product-sweatshirt.jpg',
     variant: '3 colors / 3 sizes',
-    category: 'apparel',
+    category: 'bottoms',
     description: 'HONEY ROSIE HOUSEオリジナルのワイドパンツ。<br>ゆったりとしたシルエットで、パーカーとのセットアップにも。<br>ウエストはゴム＋紐で調整可能。<br><br>素材：コットン100%<br>生産国：日本',
     colors: [{color:'#c8a2a8',name:'Pink'},{color:'#4a7c7e',name:'Teal'},{color:'#2a1a2e',name:'Dark'}],
     sizes: ['S','M','L'],
@@ -953,15 +947,15 @@ const products = {
 };
 
 const allItems = [
-  { id:'original-sweatshirt', name:'Original Sweatshirt', price:'¥6,800', image:'assets/product-sweatshirt.jpg', variant:'3 colors / 4 sizes', category:'apparel', sub:'hoodie', badge:'new' },
-  { id:'wide-pants', name:'Wide Pants', price:'¥7,800', image:'assets/product-sweatshirt.jpg', variant:'3 colors / 3 sizes', category:'apparel', sub:'bottoms', badge:'new' },
-  { id:'logo-tote-bag', name:'Logo Tote Bag', price:'¥3,200', image:'assets/product-totebag.jpg', variant:'5 colors', category:'bag', sub:null, badge:'new' },
-  { id:'mini-pouch', name:'Mini Pouch', price:'¥2,400', image:'assets/product-pouch.jpg', variant:'3 colors', category:'bag', sub:null, badge:null },
-  { id:'ribbon-hair-clip', name:'Ribbon Hair Clip Set', price:'¥1,980', image:'assets/product-hairclip.jpg', variant:null, category:'accessory', sub:null, badge:'limited' },
-  { id:'sticker-pack', name:'Sticker Pack', price:'¥800', image:'assets/product-sticker.jpg', variant:null, category:'accessory', sub:null, badge:null },
-  { id:'charm-keychain', name:'Charm Keychain', price:'¥1,500', image:'assets/product-keychain.jpg', variant:null, category:'accessory', sub:null, badge:null },
-  { id:null, name:'Pop-up Exclusive Tee', price:'¥4,500', image:'assets/product-tee.jpg', variant:null, category:'apparel', sub:'tshirt', badge:'soldout' },
-  { id:null, name:'Heart Mirror', price:'¥1,200', image:'assets/product-mirror.jpg', variant:null, category:'accessory', sub:null, badge:'soldout' }
+  { id:'original-sweatshirt', name:'Original Sweatshirt', price:'¥6,800', image:'assets/product-sweatshirt.jpg', variant:'3 colors / 4 sizes', category:'tops', badge:'new' },
+  { id:'wide-pants', name:'Wide Pants', price:'¥7,800', image:'assets/product-sweatshirt.jpg', variant:'3 colors / 3 sizes', category:'bottoms', badge:'new' },
+  { id:'logo-tote-bag', name:'Logo Tote Bag', price:'¥3,200', image:'assets/product-totebag.jpg', variant:'5 colors', category:'bag', badge:'new' },
+  { id:'mini-pouch', name:'Mini Pouch', price:'¥2,400', image:'assets/product-pouch.jpg', variant:'3 colors', category:'bag', badge:null },
+  { id:'ribbon-hair-clip', name:'Ribbon Hair Clip Set', price:'¥1,980', image:'assets/product-hairclip.jpg', variant:null, category:'goods', badge:'limited' },
+  { id:'sticker-pack', name:'Sticker Pack', price:'¥800', image:'assets/product-sticker.jpg', variant:null, category:'goods', badge:null },
+  { id:'charm-keychain', name:'Charm Keychain', price:'¥1,500', image:'assets/product-keychain.jpg', variant:null, category:'goods', badge:null },
+  { id:null, name:'Pop-up Exclusive Tee', price:'¥4,500', image:'assets/product-tee.jpg', variant:null, category:'tops', badge:'soldout' },
+  { id:null, name:'Heart Mirror', price:'¥1,200', image:'assets/product-mirror.jpg', variant:null, category:'goods', badge:'soldout' }
 ];
 
 function goDetail(productId, skipPush) {
@@ -1241,37 +1235,17 @@ const productIdMap = {
 };
 
 let currentFilter = 'all';
-let currentSub = 'all';
 
 function filterItems(cat) {
   currentFilter = cat;
-  currentSub = 'all';
   document.querySelectorAll('#items-filter .filter-pill').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
-  const subEl = document.getElementById('items-subfilter');
-  if (cat === 'apparel') {
-    subEl.style.display = '';
-    subEl.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
-    subEl.querySelector('.filter-pill').classList.add('active');
-  } else {
-    subEl.style.display = 'none';
-  }
-  renderItems();
-}
-
-function filterSub(sub) {
-  currentSub = sub;
-  document.querySelectorAll('#items-subfilter .filter-pill').forEach(b => b.classList.remove('active'));
   event.target.classList.add('active');
   renderItems();
 }
 
 function renderItems() {
   const grid = document.getElementById('items-grid');
-  let filtered = currentFilter === 'all' ? allItems : allItems.filter(i => i.category === currentFilter);
-  if (currentFilter === 'apparel' && currentSub !== 'all') {
-    filtered = filtered.filter(i => i.sub === currentSub);
-  }
+  const filtered = currentFilter === 'all' ? allItems : allItems.filter(i => i.category === currentFilter);
 
   grid.innerHTML = filtered.map(item => {
     const isSoldout = item.badge === 'soldout';
@@ -1299,10 +1273,8 @@ function renderItems() {
 
 function goItems() {
   currentFilter = 'all';
-  currentSub = 'all';
   document.querySelectorAll('#items-filter .filter-pill').forEach(b => b.classList.remove('active'));
   document.querySelector('#items-filter .filter-pill').classList.add('active');
-  document.getElementById('items-subfilter').style.display = 'none';
   renderItems();
   go('items', false);
   history.pushState({page: 'items'}, '', '');
