@@ -320,7 +320,7 @@ button { font-family:inherit; }
 
 /* Featured card (first in New Arrival) */
 .p-card--featured { width:245px; }
-.p-card--featured .p-card__img { aspect-ratio:4/3.5; }
+.p-card--featured .p-card__img { aspect-ratio:2.8/4; }
 
 /* SOLD OUT card */
 .p-card--soldout { }
@@ -363,7 +363,7 @@ button { font-family:inherit; }
 .p-card--soldout.visible:hover .p-card__notify span { transform:translateY(0); }
 
 .p-card__img {
-  width:100%; aspect-ratio:4/4;
+  width:100%; aspect-ratio:3/4;
   background:var(--card-bg); border-radius:8px;
   overflow:hidden; position:relative;
   box-shadow:0 2px 12px rgba(26,42,58,.04), inset 0 0 0 1px rgba(26,42,58,.04);
@@ -387,13 +387,13 @@ button { font-family:inherit; }
   object-fit:cover;
 }
 .p-card__badge {
-  position:absolute; top:8px; left:8px;
-  font-family:'Cormorant Garamond',serif;
-  font-size:9px; font-weight:700; letter-spacing:.1em;
-  padding:3px 9px; border-radius:3px;
+  position:absolute; top:10px; left:10px;
+  font-family:'Zen Kaku Gothic New',sans-serif;
+  font-size:8px; font-weight:700; letter-spacing:.12em;
+  padding:4px 10px; border-radius:2px;
 }
-.p-card__badge--new { background:var(--accent); color:#fff; }
-.p-card__badge--limited { background:var(--purple); color:#fff; }
+.p-card__badge--new { background:transparent; color:#fff; border:1px solid rgba(255,255,255,.6); }
+.p-card__badge--limited { background:transparent; color:#fff; border:1px solid rgba(255,255,255,.6); }
 .p-card__badge--soldout {
   top:0; left:0; right:0; bottom:0; width:100%; height:100%;
   border-radius:0; background:rgba(26,42,58,.32);
@@ -422,7 +422,7 @@ button { font-family:inherit; }
   display:grid; grid-template-columns:1fr 1fr; gap:36px; align-items:start;
 }
 .pd-main-img {
-  width:100%; aspect-ratio:4/4;
+  width:100%; aspect-ratio:3/4;
   background:var(--card-bg); border-radius:10px; overflow:hidden;
 }
 .pd-img-fill { width:100%; height:100%; object-fit:cover; }
@@ -563,7 +563,7 @@ button { font-family:inherit; }
   .product-scroll { padding:0 16px 8px; touch-action:pan-x pinch-zoom; }
   .p-card { width:150px; }
   .p-card--featured { width:190px; }
-  .p-card--featured .p-card__img { aspect-ratio:1/1; }
+  .p-card--featured .p-card__img { aspect-ratio:3/4; }
   .product-grid { padding:0 16px 10px; grid-template-columns:repeat(2,1fr); gap:10px; }
 
   .pd-grid { grid-template-columns:1fr; gap:22px; padding:14px 16px 28px; }
