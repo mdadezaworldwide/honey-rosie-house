@@ -145,17 +145,12 @@ button { font-family:inherit; }
 }
 .category-nav a {
   font-family:'Zen Kaku Gothic New',sans-serif;
-  font-size:11px; font-weight:500; letter-spacing:.08em;
-  color:#fff; opacity:.4; text-decoration:none;
-  transition:opacity .25s;
-  position:relative;
+  font-size:12px; font-weight:700; letter-spacing:.1em;
+  color:#fff; opacity:.55; text-decoration:none;
+  padding:6px 14px; border:1px solid rgba(255,255,255,.2); border-radius:20px;
+  transition:opacity .25s, border-color .25s, background .25s;
 }
-.category-nav a::after {
-  content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px;
-  background:#fff; transition:width .25s var(--ease-out);
-}
-.category-nav a:hover { opacity:.8; }
-.category-nav a:hover::after { width:100%; }
+.category-nav a:hover { opacity:1; border-color:rgba(255,255,255,.5); background:rgba(255,255,255,.08); }
 
 @media (max-width:640px) {
   .category-nav { padding:14px 16px 0; gap:14px; overflow-x:auto; justify-content:flex-start; scrollbar-width:none; }
