@@ -594,12 +594,12 @@ button { font-family:inherit; }
   </header>
 
   <!-- HERO — Featured Product -->
-  <div class="hero-feature" onclick="goDetail('original-sweatshirt')">
-    <img class="hero-feature__img" src="assets/product-sweatshirt.jpg" alt="Original Sweatshirt">
+  <div class="hero-feature" onclick="goDetail('cap')">
+    <img class="hero-feature__img" src="assets/product-cap.jpg" alt="CAP">
     <div class="hero-feature__overlay">
       <span class="hero-feature__badge">NEW</span>
-      <h2 class="hero-feature__title">Original Sweatshirt</h2>
-      <p class="hero-feature__price">&yen;6,800 <span class="hero-feature__tax">税込</span></p>
+      <h2 class="hero-feature__title">CAP</h2>
+      <p class="hero-feature__price">&yen;8,800 <span class="hero-feature__tax">税込</span></p>
       <span class="hero-feature__cta">VIEW DETAILS &rarr;</span>
     </div>
   </div>
@@ -614,7 +614,8 @@ button { font-family:inherit; }
   </div>
   <div class="product-scroll">
     <div class="product-row">
-      <div class="p-card p-card--featured" onclick="goDetail('original-sweatshirt')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sweatshirt.jpg" alt="Original Sweatshirt"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Original Sweatshirt</div><div class="p-card__variant">3 colors / 4 sizes</div><div class="p-card__price">&yen;6,800 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card p-card--featured" onclick="goDetail('cap')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-cap.jpg" alt="CAP"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">CAP</div><div class="p-card__variant">4 colors / Free</div><div class="p-card__price">&yen;8,800 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="goDetail('original-sweatshirt')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sweatshirt.jpg" alt="Original Sweatshirt"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Original Sweatshirt</div><div class="p-card__variant">3 colors / 4 sizes</div><div class="p-card__price">&yen;6,800 <span class="p-card__tax">税込</span></div></div></div>
       <div class="p-card" onclick="goDetail('wide-pants')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sweatshirt.jpg" alt="Wide Pants"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Wide Pants</div><div class="p-card__variant">3 colors / 3 sizes</div><div class="p-card__price">&yen;7,800 <span class="p-card__tax">税込</span></div></div></div>
       <div class="p-card" onclick="goDetail('logo-tote-bag')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-totebag.jpg" alt="Logo Tote Bag"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Logo Tote Bag</div><div class="p-card__variant">5 colors</div><div class="p-card__price">&yen;3,200 <span class="p-card__tax">税込</span></div></div></div>
       <div class="p-card" onclick="goDetail('ribbon-hair-clip')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-hairclip.jpg" alt="Ribbon Hair Clip Set"><span class="p-card__badge p-card__badge--limited">LIMITED</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
@@ -880,6 +881,17 @@ const products = {
     sizes: null,
     stock: '在庫あり'
   },
+  'cap': {
+    name: 'CAP',
+    price: '¥8,800',
+    image: 'assets/product-cap.jpg',
+    variant: '4 colors / Free size',
+    category: 'cap',
+    description: 'HONEY ROSIE HOUSEオリジナルキャップ。<br>刺繍ロゴ入り。ユニセックスで使えるベーシックなシルエット。<br><br>カラー：バーガンディー / ネイビー / ライトブラウン / ブラック<br>サイズ：FREE（アジャスター付き）<br>素材：コットン100%',
+    colors: [{color:'#6a2030',name:'Burgundy'},{color:'#1a2a50',name:'Navy'},{color:'#b09070',name:'Light Brown'},{color:'#1a1a1a',name:'Black'}],
+    sizes: null,
+    stock: '在庫あり'
+  },
   'wide-pants': {
     name: 'Wide Pants',
     price: '¥7,800',
@@ -894,6 +906,7 @@ const products = {
 };
 
 const allItems = [
+  { id:'cap', name:'CAP', price:'¥8,800', image:'assets/product-cap.jpg', variant:'4 colors / Free', category:'cap', badge:'new' },
   { id:'original-sweatshirt', name:'Original Sweatshirt', price:'¥6,800', image:'assets/product-sweatshirt.jpg', variant:'3 colors / 4 sizes', category:'tops', badge:'new' },
   { id:'wide-pants', name:'Wide Pants', price:'¥7,800', image:'assets/product-sweatshirt.jpg', variant:'3 colors / 3 sizes', category:'bottoms', badge:'new' },
   { id:'logo-tote-bag', name:'Logo Tote Bag', price:'¥3,200', image:'assets/product-totebag.jpg', variant:'5 colors', category:'bag', badge:'new' },
@@ -1085,6 +1098,7 @@ const itemImages = {
 };
 
 const productIdMap = {
+  'CAP': 'cap',
   'Original Sweatshirt': 'original-sweatshirt',
   'Wide Pants': 'wide-pants',
   'Logo Tote Bag': 'logo-tote-bag',
