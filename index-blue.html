@@ -137,6 +137,32 @@ button { font-family:inherit; }
   margin-left:5px; vertical-align:middle;
 }
 
+/* ═══ CATEGORY NAV ═══ */
+.category-nav {
+  max-width:var(--max-w); margin:0 auto;
+  padding:18px 24px 0;
+  display:flex; gap:20px; justify-content:center;
+}
+.category-nav a {
+  font-family:'Zen Kaku Gothic New',sans-serif;
+  font-size:11px; font-weight:500; letter-spacing:.08em;
+  color:#fff; opacity:.4; text-decoration:none;
+  transition:opacity .25s;
+  position:relative;
+}
+.category-nav a::after {
+  content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px;
+  background:#fff; transition:width .25s var(--ease-out);
+}
+.category-nav a:hover { opacity:.8; }
+.category-nav a:hover::after { width:100%; }
+
+@media (max-width:640px) {
+  .category-nav { padding:14px 16px 0; gap:14px; overflow-x:auto; justify-content:flex-start; scrollbar-width:none; }
+  .category-nav::-webkit-scrollbar { display:none; }
+  .category-nav a { flex-shrink:0; }
+}
+
 /* ═══ HERO — Featured Product ═══ */
 .hero-feature {
   max-width:var(--max-w); margin:0 auto;
@@ -609,6 +635,16 @@ button { font-family:inherit; }
       <p class="hero-feature__price">&yen;8,800 <span class="hero-feature__tax">税込</span></p>
       <span class="hero-feature__cta">詳しく見る</span>
     </div>
+  </div>
+
+  <!-- CATEGORY NAV -->
+  <div class="category-nav">
+    <a href="#" onclick="goItemsFilter('all');return false">ALL</a>
+    <a href="#" onclick="goItemsFilter('tops');return false">TOPS</a>
+    <a href="#" onclick="goItemsFilter('bottoms');return false">BOTTOMS</a>
+    <a href="#" onclick="goItemsFilter('bag');return false">BAG</a>
+    <a href="#" onclick="goItemsFilter('cap');return false">CAP</a>
+    <a href="#" onclick="goItemsFilter('goods');return false">GOODS</a>
   </div>
 
   <!-- NEW ARRIVAL -->
@@ -1158,6 +1194,17 @@ function goItems() {
   currentFilter = 'all';
   document.querySelectorAll('#items-filter .filter-pill').forEach(b => b.classList.remove('active'));
   document.querySelector('#items-filter .filter-pill').classList.add('active');
+  renderItems();
+  go('items', false);
+  history.pushState({page: 'items'}, '', '');
+}
+
+function goItemsFilter(cat) {
+  currentFilter = cat;
+  document.querySelectorAll('#items-filter .filter-pill').forEach(b => {
+    b.classList.remove('active');
+    if (b.textContent === cat.toUpperCase() || (cat === 'all' && b.textContent === 'ALL')) b.classList.add('active');
+  });
   renderItems();
   go('items', false);
   history.pushState({page: 'items'}, '', '');
