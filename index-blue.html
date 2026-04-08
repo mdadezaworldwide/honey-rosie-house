@@ -151,43 +151,47 @@ button { font-family:inherit; }
 }
 .hero-feature:hover .hero-feature__img { transform:scale(1.02); }
 .hero-feature__overlay {
-  position:absolute; bottom:24px; left:24px; right:24px;
-  padding:24px 28px;
-  background:rgba(26,42,58,.55);
-  backdrop-filter:blur(12px);
-  border-radius:12px;
-  display:flex; flex-direction:column; gap:4px;
+  position:absolute; bottom:0; left:0; right:0;
+  padding:48px 32px 28px;
+  background:linear-gradient(to top, rgba(10,15,25,.7) 0%, rgba(10,15,25,.3) 60%, transparent 100%);
+  display:flex; flex-direction:column; gap:0;
   pointer-events:none;
 }
 .hero-feature__badge {
-  font-family:'Cormorant Garamond',serif;
-  font-size:9px; font-weight:700; letter-spacing:.12em;
-  background:var(--accent); color:#fff;
-  padding:3px 10px; border-radius:3px;
-  align-self:flex-start; margin-bottom:4px;
+  font-family:'Zen Kaku Gothic New',sans-serif;
+  font-size:9px; font-weight:700; letter-spacing:.15em;
+  color:var(--accent);
+  margin-bottom:8px;
 }
 .hero-feature__title {
   font-family:'Playfair Display',serif;
-  font-size:clamp(20px,3vw,32px); font-weight:700; color:#fff;
-  margin:0;
+  font-size:clamp(24px,4vw,42px); font-weight:700; color:#fff;
+  margin:0; line-height:1.1;
 }
 .hero-feature__price {
   font-family:'Zen Kaku Gothic New',sans-serif;
-  font-size:16px; font-weight:700; color:#fff;
+  font-size:14px; font-weight:500; color:rgba(255,255,255,.7);
+  margin-top:8px;
 }
-.hero-feature__tax { font-size:10px; color:rgba(255,255,255,.5); }
+.hero-feature__tax { font-size:10px; color:rgba(255,255,255,.4); }
 .hero-feature__cta {
-  font-family:'Cormorant Garamond',serif;
-  font-size:11px; font-weight:600; letter-spacing:.2em;
-  color:rgba(255,255,255,.7); margin-top:8px;
-  transition:color .25s;
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:'Zen Kaku Gothic New',sans-serif;
+  font-size:11px; font-weight:500; letter-spacing:.08em;
+  color:#fff; margin-top:16px;
+  opacity:.6; transition:opacity .3s, gap .3s var(--ease-out);
 }
-.hero-feature:hover .hero-feature__cta { color:#fff; }
+.hero-feature__cta::after {
+  content:''; display:block; width:20px; height:1px; background:#fff;
+  transition:width .3s var(--ease-out);
+}
+.hero-feature:hover .hero-feature__cta { opacity:1; gap:12px; }
+.hero-feature:hover .hero-feature__cta::after { width:32px; }
 
 @media (max-width:640px) {
   .hero-feature { padding:10px 16px 0; }
   .hero-feature__img { aspect-ratio:4/3; }
-  .hero-feature__overlay { bottom:16px; left:16px; right:16px; padding:16px 20px; }
+  .hero-feature__overlay { padding:36px 20px 20px; }
 }
 
 /* ═══ COLLECTION INFO ═══ */
@@ -600,7 +604,7 @@ button { font-family:inherit; }
       <span class="hero-feature__badge">NEW</span>
       <h2 class="hero-feature__title">CAP</h2>
       <p class="hero-feature__price">&yen;8,800 <span class="hero-feature__tax">税込</span></p>
-      <span class="hero-feature__cta">詳しく見る &rarr;</span>
+      <span class="hero-feature__cta">詳しく見る</span>
     </div>
   </div>
 
