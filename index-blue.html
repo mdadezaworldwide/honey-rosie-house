@@ -157,9 +157,9 @@ button { font-family:inherit; }
 }
 
 @media (max-width:640px) {
-  .category-nav { padding:14px 16px 0; gap:14px; overflow-x:auto; justify-content:flex-start; scrollbar-width:none; }
-  .category-nav::-webkit-scrollbar { display:none; }
-  .category-nav a { flex-shrink:0; }
+  .category-nav { padding:14px 16px 0; gap:10px; justify-content:center; flex-wrap:wrap; }
+  .category-nav a { font-size:11px; letter-spacing:.06em; }
+  .category-nav a + a::before { margin-right:10px; }
 }
 
 /* ═══ HERO — Featured Product ═══ */
