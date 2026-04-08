@@ -280,6 +280,26 @@ button { font-family:inherit; }
   font-size:10px; letter-spacing:.1em; color:rgba(255,255,255,.7); margin-top:2px;
 }
 
+/* ═══ PICK UP — zigzag layout ═══ */
+.pickup-wrap {
+  max-width:var(--max-w); margin:0 auto;
+  padding:0 24px 12px;
+  display:flex; flex-direction:column; gap:14px;
+}
+.pickup-row {
+  display:grid; gap:14px;
+}
+.pickup-row--a { grid-template-columns:5fr 3fr; }
+.pickup-row--b { grid-template-columns:3fr 5fr; }
+.pickup-wrap .p-card { width:auto; }
+
+@media (max-width:640px) {
+  .pickup-wrap { padding:0 16px 10px; gap:10px; }
+  .pickup-row { gap:10px; }
+  .pickup-row--a { grid-template-columns:1.4fr 1fr; }
+  .pickup-row--b { grid-template-columns:1fr 1.4fr; }
+}
+
 /* ═══ PRODUCT CARD ═══ */
 .product-scroll {
   max-width:var(--max-w); margin:0 auto;
@@ -631,11 +651,15 @@ button { font-family:inherit; }
     </div>
     <a href="#" class="sec-head__viewall" onclick="showToast();return false">VIEW ALL &rarr;</a>
   </div>
-  <div class="product-grid">
-    <div class="p-card" onclick="goDetail('ribbon-hair-clip')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-hairclip.jpg" alt="Ribbon Hair Clip Set"><span class="p-card__badge p-card__badge--limited">LIMITED</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
-    <div class="p-card" onclick="goDetail('mini-pouch')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-pouch.jpg" alt="Mini Pouch"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Mini Pouch</div><div class="p-card__variant">3 colors</div><div class="p-card__price">&yen;2,400 <span class="p-card__tax">税込</span></div></div></div>
-    <div class="p-card" onclick="goDetail('sticker-pack')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sticker.jpg" alt="Sticker Pack"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Sticker Pack</div><div class="p-card__price">&yen;800 <span class="p-card__tax">税込</span></div></div></div>
-    <div class="p-card" onclick="goDetail('charm-keychain')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-keychain.jpg" alt="Charm Keychain"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Charm Keychain</div><div class="p-card__price">&yen;1,500 <span class="p-card__tax">税込</span></div></div></div>
+  <div class="pickup-wrap">
+    <div class="pickup-row pickup-row--a">
+      <div class="p-card" onclick="goDetail('ribbon-hair-clip')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-hairclip.jpg" alt="Ribbon Hair Clip Set"><span class="p-card__badge p-card__badge--limited">LIMITED</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="goDetail('mini-pouch')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-pouch.jpg" alt="Mini Pouch"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Mini Pouch</div><div class="p-card__variant">3 colors</div><div class="p-card__price">&yen;2,400 <span class="p-card__tax">税込</span></div></div></div>
+    </div>
+    <div class="pickup-row pickup-row--b">
+      <div class="p-card" onclick="goDetail('sticker-pack')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sticker.jpg" alt="Sticker Pack"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Sticker Pack</div><div class="p-card__price">&yen;800 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="goDetail('charm-keychain')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-keychain.jpg" alt="Charm Keychain"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Charm Keychain</div><div class="p-card__price">&yen;1,500 <span class="p-card__tax">税込</span></div></div></div>
+    </div>
   </div>
 
   <footer class="site-footer">
