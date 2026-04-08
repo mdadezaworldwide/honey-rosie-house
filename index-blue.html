@@ -137,65 +137,58 @@ button { font-family:inherit; }
   margin-left:5px; vertical-align:middle;
 }
 
-/* ═══ HERO SLIDER — peek style ═══ */
-.hero-slider {
-  width:100%; padding:16px 0 0;
-  position:relative; overflow:hidden;
+/* ═══ HERO — Featured Product ═══ */
+.hero-feature {
+  max-width:var(--max-w); margin:0 auto;
+  padding:16px 24px 0;
+  position:relative; cursor:pointer;
+  border-radius:14px; overflow:hidden;
 }
-.hero-slider__viewport {
-  overflow:hidden; width:100%;
-}
-.hero-slider__track {
-  display:flex; gap:16px;
+.hero-feature__img {
+  width:100%; aspect-ratio:21/9; object-fit:cover; display:block;
+  border-radius:14px;
   transition:transform .6s var(--ease-out);
 }
-.hero-slider__slide {
-  border-radius:12px; overflow:hidden;
-  opacity:.35; transform:scale(.95);
-  transition:opacity .5s var(--ease-out), transform .5s var(--ease-out);
-  flex-shrink:0;
-  flex:0 0 70%; max-width:70%;
-}
-.hero-slider__slide.active {
-  opacity:1; transform:scale(1);
-  box-shadow:0 6px 40px rgba(26,42,58,.12);
-}
-.hero-slider__slide::after {
-  content:''; position:absolute; inset:0; pointer-events:none; border-radius:12px;
-  background:
-    linear-gradient(180deg, rgba(255,240,220,.06) 0%, transparent 30%, transparent 70%, rgba(10,20,35,.06) 100%),
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='5' seed='15'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
-  background-size:cover, 150px;
-  opacity:.1; mix-blend-mode:multiply;
-}
-.hero-slider__slide { position:relative; }
-.hero-slider__slide img,
-.hero-slider__slide .slide-placeholder {
-  width:100%; aspect-ratio:2.4/1; object-fit:cover; display:block;
+.hero-feature:hover .hero-feature__img { transform:scale(1.02); }
+.hero-feature__overlay {
+  position:absolute; bottom:24px; left:24px; right:24px;
+  padding:24px 28px;
+  background:rgba(26,42,58,.55);
+  backdrop-filter:blur(12px);
   border-radius:12px;
+  display:flex; flex-direction:column; gap:4px;
+  pointer-events:none;
 }
-.hero-slider__dots {
-  display:flex; justify-content:center; gap:8px; padding-top:14px;
+.hero-feature__badge {
+  font-family:'Cormorant Garamond',serif;
+  font-size:9px; font-weight:700; letter-spacing:.12em;
+  background:var(--accent); color:#fff;
+  padding:3px 10px; border-radius:3px;
+  align-self:flex-start; margin-bottom:4px;
 }
-.hero-slider__dot {
-  width:7px; height:7px; border-radius:50%;
-  background:var(--text); opacity:.15; border:none;
-  cursor:pointer; padding:0; transition:.35s var(--ease-out);
+.hero-feature__title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(20px,3vw,32px); font-weight:700; color:#fff;
+  margin:0;
 }
-.hero-slider__dot.active { opacity:.8; width:22px; border-radius:4px; background:var(--accent); }
-.hero-slider__nav {
-  position:absolute; top:50%; transform:translateY(-50%);
-  width:36px; height:36px; border-radius:50%;
-  background:rgba(255,255,255,.5); border:none;
-  backdrop-filter:blur(10px);
-  cursor:pointer; display:flex; align-items:center; justify-content:center;
-  font-size:16px; color:var(--text); opacity:0;
-  transition:opacity .3s; z-index:2;
+.hero-feature__price {
+  font-family:'Zen Kaku Gothic New',sans-serif;
+  font-size:16px; font-weight:700; color:#fff;
 }
-.hero-slider:hover .hero-slider__nav { opacity:1; }
-.hero-slider__nav:hover { background:rgba(255,255,255,.8); }
-.hero-slider__nav--prev { left:calc(15% + 12px); }
-.hero-slider__nav--next { right:calc(15% + 12px); }
+.hero-feature__tax { font-size:10px; color:rgba(255,255,255,.5); }
+.hero-feature__cta {
+  font-family:'Cormorant Garamond',serif;
+  font-size:11px; font-weight:600; letter-spacing:.2em;
+  color:rgba(255,255,255,.7); margin-top:8px;
+  transition:color .25s;
+}
+.hero-feature:hover .hero-feature__cta { color:#fff; }
+
+@media (max-width:640px) {
+  .hero-feature { padding:10px 16px 0; }
+  .hero-feature__img { aspect-ratio:4/3; }
+  .hero-feature__overlay { bottom:16px; left:16px; right:16px; padding:16px 20px; }
+}
 
 /* ═══ COLLECTION INFO ═══ */
 .collection-info {
@@ -599,63 +592,14 @@ button { font-family:inherit; }
     </div>
   </header>
 
-  <!-- HERO SLIDER -->
-  <div class="hero-slider" id="heroSlider">
-    <div class="hero-slider__viewport">
-      <div class="hero-slider__track" id="heroTrack">
-        <div class="hero-slider__slide active">
-          <img src="assets/hero-kv.jpg" alt="HONEY ROSIE HOUSE">
-        </div>
-        <div class="hero-slider__slide">
-          <img src="assets/hero-slide2.jpg" alt="HONEY ROSIE HOUSE">
-        </div>
-        <div class="hero-slider__slide">
-          <img src="assets/hero-slide3.jpg" alt="HONEY ROSIE HOUSE">
-        </div>
-        <div class="hero-slider__slide">
-          <img src="assets/hero-slide4.jpg" alt="HONEY ROSIE HOUSE">
-        </div>
-      </div>
-    </div>
-    <button class="hero-slider__nav hero-slider__nav--prev" onclick="slideHero(-1)">&lsaquo;</button>
-    <button class="hero-slider__nav hero-slider__nav--next" onclick="slideHero(1)">&rsaquo;</button>
-    <div class="hero-slider__dots" id="heroDots">
-      <button class="hero-slider__dot active" onclick="goSlide(0)"></button>
-      <button class="hero-slider__dot" onclick="goSlide(1)"></button>
-      <button class="hero-slider__dot" onclick="goSlide(2)"></button>
-      <button class="hero-slider__dot" onclick="goSlide(3)"></button>
-    </div>
-  </div>
-
-  <!-- COLLECTION BANNERS -->
-  <div class="sec-head">
-    <div>
-      <span class="sec-head__title">Collection</span>
-      <span class="sec-head__sub">コレクション</span>
-    </div>
-    <a href="#" class="sec-head__viewall" onclick="showToast();return false">VIEW ALL &rarr;</a>
-  </div>
-  <div class="collection-banners">
-    <div class="collection-banner" onclick="goCollection('spring2026')">
-      <img class="banner-fill" src="assets/collection-spring.png" alt="Spring 2026">
-      <div class="collection-banner__overlay">
-        <div class="collection-banner__name">Spring 2026</div>
-        <div class="collection-banner__count">3 items</div>
-      </div>
-    </div>
-    <div class="collection-banner" onclick="goCollection('summer2025')">
-      <img class="banner-fill" src="assets/collection-summer.png" alt="Summer 2025">
-      <div class="collection-banner__overlay">
-        <div class="collection-banner__name">Summer 2025</div>
-        <div class="collection-banner__count">SOLD OUT</div>
-      </div>
-    </div>
-    <div class="collection-banner" onclick="goCollection('winter2025')">
-      <img class="banner-fill" src="assets/collection-winter.png" alt="Winter 2025">
-      <div class="collection-banner__overlay">
-        <div class="collection-banner__name">Winter 2025</div>
-        <div class="collection-banner__count">SOLD OUT</div>
-      </div>
+  <!-- HERO — Featured Product -->
+  <div class="hero-feature" onclick="goDetail('original-sweatshirt')">
+    <img class="hero-feature__img" src="assets/product-sweatshirt.jpg" alt="Original Sweatshirt">
+    <div class="hero-feature__overlay">
+      <span class="hero-feature__badge">NEW</span>
+      <h2 class="hero-feature__title">Original Sweatshirt</h2>
+      <p class="hero-feature__price">&yen;6,800 <span class="hero-feature__tax">税込</span></p>
+      <span class="hero-feature__cta">VIEW DETAILS &rarr;</span>
     </div>
   </div>
 
@@ -1063,91 +1007,6 @@ window.addEventListener('scroll', () => {
     h.classList.toggle('scrolled', window.scrollY > 10));
 }, {passive:true});
 
-// Hero Slider — infinite loop
-let heroIdx = 0;
-const heroTotal = 4;
-let heroTimer;
-let isTransitioning = false;
-
-// Clone first and last slides for seamless loop
-(function initLoop() {
-  const track = document.getElementById('heroTrack');
-  const slides = track.querySelectorAll('.hero-slider__slide');
-  const first = slides[0].cloneNode(true);
-  const last = slides[slides.length - 1].cloneNode(true);
-  first.classList.remove('active');
-  last.classList.remove('active');
-  track.appendChild(first);   // clone of slide 1 at the end
-  track.insertBefore(last, slides[0]); // clone of slide 4 at the start
-})();
-
-function getSliderMetrics() {
-  const slider = document.getElementById('heroSlider');
-  const isMobile = window.innerWidth <= 640;
-  const sliderW = slider.offsetWidth;
-  const slideW = Math.round(sliderW * (isMobile ? 0.90 : 0.70));
-  const gap = isMobile ? 10 : 16;
-  return { sliderW, slideW, gap };
-}
-
-function updateSlider(animate) {
-  const track = document.getElementById('heroTrack');
-  const allSlides = track.querySelectorAll('.hero-slider__slide');
-  const { sliderW, slideW, gap } = getSliderMetrics();
-
-  allSlides.forEach(s => s.style.width = slideW + 'px');
-
-  // Real index in track = heroIdx + 1 (because of prepended clone)
-  const trackIdx = heroIdx + 1;
-  const centerOffset = (sliderW - slideW) / 2;
-  const tx = trackIdx * (slideW + gap) - centerOffset;
-
-  track.style.transition = animate !== false ? 'transform .6s cubic-bezier(.22,1,.36,1)' : 'none';
-  track.style.transform = 'translateX(' + (-tx) + 'px)';
-
-  // Highlight active (real slides only, skip clones)
-  allSlides.forEach((s, i) => {
-    // trackIdx matches i
-    s.classList.toggle('active', i === trackIdx);
-  });
-  document.querySelectorAll('#heroDots .hero-slider__dot').forEach((d, i) =>
-    d.classList.toggle('active', i === heroIdx));
-}
-
-function goSlide(i) {
-  if (isTransitioning) return;
-  heroIdx = i;
-  isTransitioning = true;
-  updateSlider(true);
-
-  const track = document.getElementById('heroTrack');
-
-  setTimeout(() => {
-    // Snap to real position if we've gone past the edges
-    if (heroIdx >= heroTotal) {
-      heroIdx = 0;
-      updateSlider(false); // instant jump, no animation
-    } else if (heroIdx < 0) {
-      heroIdx = heroTotal - 1;
-      updateSlider(false);
-    }
-    isTransitioning = false;
-  }, 620);
-
-  resetHeroTimer();
-}
-
-function slideHero(dir) { goSlide(heroIdx + dir); }
-function resetHeroTimer() {
-  clearInterval(heroTimer);
-  heroTimer = setInterval(() => slideHero(1), 5000);
-}
-
-window.addEventListener('resize', () => updateSlider(false));
-window.addEventListener('load', () => {
-  updateSlider(false);
-  resetHeroTimer();
-});
 
 // Detail page interactions
 document.querySelectorAll('.pd-thumb').forEach(t => {
