@@ -466,7 +466,7 @@ button { font-family:inherit; }
 }
 .pd-size-pill.active { background:var(--text); color:#d8e4ec; border-color:var(--text); }
 .pd-size-pill:hover:not(.active) { border-color:rgba(26,42,58,.3); }
-.pd-stock { font-size:11px; color:var(--accent); margin-bottom:16px; }
+.pd-stock { font-size:11px; color:#fff; opacity:.7; margin-bottom:16px; }
 .pd-add-btn {
   width:100%; padding:15px; background:var(--text); color:#d8e4ec;
   border:none; border-radius:26px;
@@ -600,7 +600,7 @@ button { font-family:inherit; }
       <span class="hero-feature__badge">NEW</span>
       <h2 class="hero-feature__title">CAP</h2>
       <p class="hero-feature__price">&yen;8,800 <span class="hero-feature__tax">税込</span></p>
-      <span class="hero-feature__cta">VIEW DETAILS &rarr;</span>
+      <span class="hero-feature__cta">詳しく見る &rarr;</span>
     </div>
   </div>
 
@@ -610,18 +610,18 @@ button { font-family:inherit; }
       <span class="sec-head__title">New Arrival</span>
       <span class="sec-head__sub">新着アイテム</span>
     </div>
-    <a href="#" class="sec-head__viewall" onclick="showToast();return false">VIEW ALL &rarr;</a>
+    <a href="#" class="sec-head__viewall" onclick="showToast();return false">すべて見る &rarr;</a>
   </div>
   <div class="product-scroll">
     <div class="product-row">
-      <div class="p-card p-card--featured" onclick="goDetail('cap')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-cap.jpg" alt="CAP"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">CAP</div><div class="p-card__variant">4 colors / Free</div><div class="p-card__price">&yen;8,800 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('original-sweatshirt')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sweatshirt.jpg" alt="Original Sweatshirt"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Original Sweatshirt</div><div class="p-card__variant">3 colors / 4 sizes</div><div class="p-card__price">&yen;6,800 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('wide-pants')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sweatshirt.jpg" alt="Wide Pants"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Wide Pants</div><div class="p-card__variant">3 colors / 3 sizes</div><div class="p-card__price">&yen;7,800 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('logo-tote-bag')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-totebag.jpg" alt="Logo Tote Bag"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Logo Tote Bag</div><div class="p-card__variant">5 colors</div><div class="p-card__price">&yen;3,200 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('ribbon-hair-clip')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-hairclip.jpg" alt="Ribbon Hair Clip Set"><span class="p-card__badge p-card__badge--limited">LIMITED</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('mini-pouch')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-pouch.jpg" alt="Mini Pouch"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Mini Pouch</div><div class="p-card__variant">3 colors</div><div class="p-card__price">&yen;2,400 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('sticker-pack')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sticker.jpg" alt="Sticker Pack"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Sticker Pack</div><div class="p-card__price">&yen;800 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('charm-keychain')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-keychain.jpg" alt="Charm Keychain"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Charm Keychain</div><div class="p-card__price">&yen;1,500 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card p-card--featured" onclick="goDetail('cap')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-cap.jpg" alt="CAP"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">CAP</div><div class="p-card__variant">4 colors / Free</div><div class="p-card__price">&yen;8,800 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="goDetail('original-sweatshirt')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sweatshirt.jpg" alt="Original Sweatshirt"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Original Sweatshirt</div><div class="p-card__variant">3 colors / 4 sizes</div><div class="p-card__price">&yen;6,800 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="goDetail('wide-pants')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sweatshirt.jpg" alt="Wide Pants"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Wide Pants</div><div class="p-card__variant">3 colors / 3 sizes</div><div class="p-card__price">&yen;7,800 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="goDetail('logo-tote-bag')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-totebag.jpg" alt="Logo Tote Bag"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Logo Tote Bag</div><div class="p-card__variant">5 colors</div><div class="p-card__price">&yen;3,200 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="goDetail('ribbon-hair-clip')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-hairclip.jpg" alt="Ribbon Hair Clip Set"><span class="p-card__badge p-card__badge--limited">LIMITED</span><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="goDetail('mini-pouch')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-pouch.jpg" alt="Mini Pouch"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Mini Pouch</div><div class="p-card__variant">3 colors</div><div class="p-card__price">&yen;2,400 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="goDetail('sticker-pack')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sticker.jpg" alt="Sticker Pack"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Sticker Pack</div><div class="p-card__price">&yen;800 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="goDetail('charm-keychain')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-keychain.jpg" alt="Charm Keychain"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Charm Keychain</div><div class="p-card__price">&yen;1,500 <span class="p-card__tax">税込</span></div></div></div>
     </div>
   </div>
 
@@ -631,14 +631,14 @@ button { font-family:inherit; }
       <span class="sec-head__title">Pick Up</span>
       <span class="sec-head__sub">おすすめアイテム</span>
     </div>
-    <a href="#" class="sec-head__viewall" onclick="showToast();return false">VIEW ALL &rarr;</a>
+    <a href="#" class="sec-head__viewall" onclick="showToast();return false">すべて見る &rarr;</a>
   </div>
   <div class="product-scroll">
     <div class="product-row">
-      <div class="p-card p-card--featured" onclick="goDetail('ribbon-hair-clip')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-hairclip.jpg" alt="Ribbon Hair Clip Set"><span class="p-card__badge p-card__badge--limited">LIMITED</span><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('mini-pouch')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-pouch.jpg" alt="Mini Pouch"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Mini Pouch</div><div class="p-card__variant">3 colors</div><div class="p-card__price">&yen;2,400 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('sticker-pack')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sticker.jpg" alt="Sticker Pack"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Sticker Pack</div><div class="p-card__price">&yen;800 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('charm-keychain')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-keychain.jpg" alt="Charm Keychain"><div class="p-card__quick"><span>VIEW</span></div></div><div class="p-card__body"><div class="p-card__name">Charm Keychain</div><div class="p-card__price">&yen;1,500 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card p-card--featured" onclick="goDetail('ribbon-hair-clip')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-hairclip.jpg" alt="Ribbon Hair Clip Set"><span class="p-card__badge p-card__badge--limited">LIMITED</span><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="goDetail('mini-pouch')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-pouch.jpg" alt="Mini Pouch"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Mini Pouch</div><div class="p-card__variant">3 colors</div><div class="p-card__price">&yen;2,400 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="goDetail('sticker-pack')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-sticker.jpg" alt="Sticker Pack"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Sticker Pack</div><div class="p-card__price">&yen;800 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="goDetail('charm-keychain')"><div class="p-card__img"><img class="p-card-img-fill" src="assets/product-keychain.jpg" alt="Charm Keychain"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Charm Keychain</div><div class="p-card__price">&yen;1,500 <span class="p-card__tax">税込</span></div></div></div>
     </div>
   </div>
 
@@ -776,13 +776,13 @@ button { font-family:inherit; }
       <h1 class="pd-info__name" id="detail-name">Original Sweatshirt</h1>
       <div class="pd-info__price" id="detail-price">&yen;6,800</div>
       <div class="pd-info__tax">税込</div>
-      <div class="pd-info__label" id="detail-color-label">Color</div>
+      <div class="pd-info__label" id="detail-color-label">カラー</div>
       <div class="pd-colors" id="detail-colors">
         <div class="pd-color-swatch active" style="background:#c8a2a8;" title="Pink"></div>
         <div class="pd-color-swatch" style="background:#4a7c7e;" title="Teal"></div>
         <div class="pd-color-swatch" style="background:#2a1a2e;" title="Dark"></div>
       </div>
-      <div class="pd-info__label" id="detail-size-label">Size</div>
+      <div class="pd-info__label" id="detail-size-label">サイズ</div>
       <div class="pd-sizes" id="detail-sizes">
         <button class="pd-size-pill" type="button">S</button>
         <button class="pd-size-pill active" type="button">M</button>
@@ -790,8 +790,8 @@ button { font-family:inherit; }
         <button class="pd-size-pill" type="button">XL</button>
       </div>
       <div class="pd-stock" id="detail-stock">残りわずか &mdash; お早めにどうぞ</div>
-      <button class="pd-add-btn" type="button">ADD TO CART</button>
-      <div class="pd-detail-label">Details</div>
+      <button class="pd-add-btn" type="button">カートに追加</button>
+      <div class="pd-detail-label">商品について</div>
       <div class="pd-detail-text" id="detail-description">
         HONEY ROSIE HOUSEオリジナルのスウェットシャツ。<br>
         ゆったりとしたシルエットに、背面にブランドロゴをプリント。<br>
@@ -992,7 +992,7 @@ function goDetail(productId, skipPush) {
 
 function showToast(msg) {
   const t = document.getElementById('toast');
-  t.textContent = msg || 'COMING SOON';
+  t.textContent = msg || '準備中';
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 1800);
 }
@@ -1034,7 +1034,7 @@ document.querySelectorAll('.pd-thumb').forEach(t => {
 document.querySelectorAll('.pd-add-btn').forEach(btn => {
   btn.addEventListener('click', function() {
     const orig = this.textContent;
-    this.textContent = 'ADDED';
+    this.textContent = '追加しました';
     this.style.background = 'var(--accent)';
     document.querySelectorAll('.cart-count').forEach(c => c.textContent = '1');
     setTimeout(() => { this.textContent = orig; this.style.background = ''; }, 1200);
@@ -1128,7 +1128,7 @@ function renderItems() {
     const badgeHtml = item.badge === 'new' ? '<span class="p-card__badge p-card__badge--new">NEW</span>' :
                       item.badge === 'limited' ? '<span class="p-card__badge p-card__badge--limited">LIMITED</span>' :
                       item.badge === 'soldout' ? '<span class="p-card__badge p-card__badge--soldout">SOLD OUT</span>' : '';
-    const overlayHtml = isSoldout ? '<div class="p-card__notify"><span>NOTIFY ME</span></div>' : '<div class="p-card__quick"><span>VIEW</span></div>';
+    const overlayHtml = isSoldout ? '<div class="p-card__notify"><span>再入荷通知</span></div>' : '<div class="p-card__quick"><span>詳しく見る</span></div>';
     const clickAttr = (isSoldout || !item.id) ? '' : " onclick=\"goDetail('" + item.id + "')\"";
     const soldoutClass = isSoldout ? ' p-card--soldout' : '';
     const priceStyle = isSoldout ? ' style="opacity:.45; text-decoration:line-through;"' : '';
@@ -1170,7 +1170,7 @@ function goCollection(key, skipPush) {
     const badgeHtml = item.badge === 'new' ? '<span class="p-card__badge p-card__badge--new">NEW</span>' :
                       item.badge === 'limited' ? '<span class="p-card__badge p-card__badge--limited">LIMITED</span>' :
                       item.badge === 'soldout' ? '<span class="p-card__badge p-card__badge--soldout">SOLD OUT</span>' : '';
-    const overlayHtml = isSoldout ? '<div class="p-card__notify"><span>NOTIFY ME</span></div>' : '<div class="p-card__quick"><span>VIEW</span></div>';
+    const overlayHtml = isSoldout ? '<div class="p-card__notify"><span>再入荷通知</span></div>' : '<div class="p-card__quick"><span>詳しく見る</span></div>';
     const pid = productIdMap[item.name];
     const clickAttr = (isSoldout || !pid) ? '' : ' onclick="goDetail(\'' + pid + '\')"';
     const soldoutClass = isSoldout ? ' p-card--soldout' : '';
@@ -1236,6 +1236,6 @@ document.querySelectorAll('.product-scroll').forEach(el => {
   });
 });
 </script>
-<div class="toast" id="toast">COMING SOON</div>
+<div class="toast" id="toast">準備中</div>
 </body>
 </html>
