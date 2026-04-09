@@ -101,6 +101,7 @@ button { font-family:inherit; }
 }
 .site-header__top {
   width:100%; display:flex; align-items:center; justify-content:center;
+  position:relative;
 }
 .site-header__brand {
   display:flex; align-items:center; gap:10px;
@@ -115,7 +116,10 @@ button { font-family:inherit; }
   font-weight:900; font-size:22px; letter-spacing:.03em;
   color:#fff;
 }
-.site-header__util { display:none; }
+.site-header__util {
+  position:absolute; right:0; top:50%; transform:translateY(-50%);
+  display:flex; align-items:center;
+}
 .site-header__util a {
   text-decoration:none; color:#fff;
   font-family:'Zen Kaku Gothic New',sans-serif;
@@ -128,10 +132,8 @@ button { font-family:inherit; }
   margin-left:2px;
 }
 .site-header__nav {
-  width:100%;
   display:flex; gap:36px; align-items:center;
   padding-bottom:16px;
-  justify-content:center;
 }
 .site-header__nav a {
   text-decoration:none; color:#fff;
@@ -140,7 +142,7 @@ button { font-family:inherit; }
   opacity:.5; transition:opacity .25s;
 }
 .site-header__nav a:hover { opacity:1; }
-.site-header__nav .nav-bag { margin-left:auto; opacity:.35; font-size:10px; }
+.site-header__nav .nav-bag { display:none; }
 
 /* ═══ CATEGORY NAV ═══ */
 .category-nav {
