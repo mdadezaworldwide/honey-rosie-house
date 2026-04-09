@@ -181,8 +181,9 @@ button { font-family:inherit; }
 }
 .hero-main__img {
   width:100%; aspect-ratio:16/10; object-fit:cover; display:block;
-  transition:opacity .4s;
+  transition:opacity .5s ease;
 }
+.hero-main__img.fading { opacity:0; }
 .hero-main__info {
   position:absolute; bottom:0; left:0; right:0;
   padding:16px 20px;
@@ -1113,16 +1114,33 @@ function go(page, pushState) {
   let heroIdx = 0;
   let heroTimer;
 
-  function setHeroSlide(i) {
-    heroIdx = i;
+  let isTransitioning = false;
+  function setHeroSlide(i, instant) {
+    if (isTransitioning || i === heroIdx && !instant) return;
     const thumb = thumbs[i];
-    mainImg.src = thumb.src;
-    mainImg.alt = thumb.alt;
-    mainName.textContent = thumb.dataset.name;
-    mainPrice.textContent = thumb.dataset.price;
-    heroMain.onclick = function() { goDetail(thumb.dataset.product); };
     thumbs.forEach(t => t.classList.remove('active'));
     thumb.classList.add('active');
+    if (instant) {
+      heroIdx = i;
+      mainImg.src = thumb.src;
+      mainImg.alt = thumb.alt;
+      mainName.textContent = thumb.dataset.name;
+      mainPrice.textContent = thumb.dataset.price;
+      heroMain.onclick = function() { goDetail(thumb.dataset.product); };
+      return;
+    }
+    isTransitioning = true;
+    mainImg.classList.add('fading');
+    setTimeout(function() {
+      heroIdx = i;
+      mainImg.src = thumb.src;
+      mainImg.alt = thumb.alt;
+      mainName.textContent = thumb.dataset.name;
+      mainPrice.textContent = thumb.dataset.price;
+      heroMain.onclick = function() { goDetail(thumb.dataset.product); };
+      mainImg.classList.remove('fading');
+      setTimeout(function() { isTransitioning = false; }, 500);
+    }, 500);
   }
 
   function nextHero() {
@@ -1139,7 +1157,7 @@ function go(page, pushState) {
   });
 
   heroTimer = setInterval(nextHero, 5000);
-  setHeroSlide(0);
+  setHeroSlide(0, true);
 })();
 
 // Header scroll shadow
