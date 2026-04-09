@@ -100,9 +100,12 @@ button { font-family:inherit; }
   display:flex; flex-direction:column; align-items:center; gap:14px;
 }
 .site-header__top {
-  width:100%; display:flex; align-items:center; justify-content:center;
-  position:relative;
+  width:100%; display:flex; align-items:center;
 }
+.site-header__top > * { flex:1; }
+.site-header__top > :first-child { }
+.site-header__brand { justify-content:center; }
+.site-header__util { justify-content:flex-end; }
 .site-header__brand {
   display:flex; align-items:center; gap:10px;
   text-decoration:none; color:#fff;
@@ -117,7 +120,6 @@ button { font-family:inherit; }
   color:#fff;
 }
 .site-header__util {
-  position:absolute; right:0; top:50%; transform:translateY(-50%);
   display:flex; align-items:center;
 }
 .site-header__util a {
@@ -634,7 +636,7 @@ button { font-family:inherit; }
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
         </a>
         <div class="site-header__util">
-          <a href="#">MY BAG (<span class="cart-count">0</span>)</a>
+          <a href="#">MY BAG</a>
         </div>
       </div>
       <nav class="site-header__nav">
@@ -643,8 +645,7 @@ button { font-family:inherit; }
         <a href="#" onclick="goItemsFilter('bag');return false">BAG</a>
         <a href="#" onclick="goItemsFilter('cap');return false">CAP</a>
         <a href="#" onclick="goItemsFilter('goods');return false">GOODS</a>
-        <a href="#" class="nav-bag">MY BAG (<span class="cart-count">0</span>)</a>
-      </nav>
+              </nav>
     </div>
   </header>
 
@@ -721,7 +722,7 @@ button { font-family:inherit; }
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
         </a>
         <div class="site-header__util">
-          <a href="#">MY BAG (<span class="cart-count">0</span>)</a>
+          <a href="#">MY BAG</a>
         </div>
       </div>
       <nav class="site-header__nav">
@@ -730,8 +731,7 @@ button { font-family:inherit; }
         <a href="#" onclick="goItemsFilter('bag');return false">BAG</a>
         <a href="#" onclick="goItemsFilter('cap');return false">CAP</a>
         <a href="#" onclick="goItemsFilter('goods');return false">GOODS</a>
-        <a href="#" class="nav-bag">MY BAG (<span class="cart-count">0</span>)</a>
-      </nav>
+              </nav>
     </div>
   </header>
 
@@ -775,7 +775,7 @@ button { font-family:inherit; }
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
         </a>
         <div class="site-header__util">
-          <a href="#">MY BAG (<span class="cart-count">0</span>)</a>
+          <a href="#">MY BAG</a>
         </div>
       </div>
       <nav class="site-header__nav">
@@ -784,8 +784,7 @@ button { font-family:inherit; }
         <a href="#" onclick="goItemsFilter('bag');return false">BAG</a>
         <a href="#" onclick="goItemsFilter('cap');return false">CAP</a>
         <a href="#" onclick="goItemsFilter('goods');return false">GOODS</a>
-        <a href="#" class="nav-bag">MY BAG (<span class="cart-count">0</span>)</a>
-      </nav>
+              </nav>
     </div>
   </header>
 
@@ -828,7 +827,7 @@ button { font-family:inherit; }
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
         </a>
         <div class="site-header__util">
-          <a href="#">MY BAG (<span class="cart-count">0</span>)</a>
+          <a href="#">MY BAG</a>
         </div>
       </div>
       <nav class="site-header__nav">
@@ -837,8 +836,7 @@ button { font-family:inherit; }
         <a href="#" onclick="goItemsFilter('bag');return false">BAG</a>
         <a href="#" onclick="goItemsFilter('cap');return false">CAP</a>
         <a href="#" onclick="goItemsFilter('goods');return false">GOODS</a>
-        <a href="#" class="nav-bag">MY BAG (<span class="cart-count">0</span>)</a>
-      </nav>
+              </nav>
     </div>
   </header>
 
