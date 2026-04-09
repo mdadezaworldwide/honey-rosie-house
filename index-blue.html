@@ -170,14 +170,14 @@ button { font-family:inherit; }
 
 /* ═══ HERO — Featured Product ═══ */
 .hero-feature {
-  max-width:var(--max-w); margin:0 auto;
+  max-width:880px; margin:0 auto;
   padding:20px 40px 0;
   position:relative; cursor:pointer;
   overflow:hidden;
 }
 .hero-feature__img {
-  width:100%; height:65vh; object-fit:cover; display:block;
-  border-radius:8px;
+  width:100%; aspect-ratio:16/9; object-fit:cover; display:block;
+  border-radius:4px;
   transition:transform .6s var(--ease-out);
 }
 .hero-feature:hover .hero-feature__img { transform:scale(1.02); }
@@ -586,7 +586,7 @@ button { font-family:inherit; }
   .site-header__nav::-webkit-scrollbar { display:none; }
   .site-header__nav a { flex-shrink:0; font-size:9px; letter-spacing:.14em; }
   .hero-feature { padding:12px 20px 0; }
-  .hero-feature__img { height:55vh; border-radius:6px; }
+  .hero-feature__img { aspect-ratio:4/3; border-radius:4px; }
   .site-header__logo-img { height:26px; }
   .site-header__brand-name { font-size:13px; }
 
