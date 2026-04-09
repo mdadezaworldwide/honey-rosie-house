@@ -96,11 +96,12 @@ button { font-family:inherit; }
 }
 .site-header__inner {
   max-width:var(--max-w); margin:0 auto;
-  padding:16px 32px 0;
-  display:flex; flex-direction:column; align-items:center; gap:12px;
+  padding:20px 40px 0;
+  display:flex; flex-direction:column; align-items:center; gap:14px;
 }
 .site-header__top {
-  width:100%; display:flex; align-items:center; justify-content:space-between;
+  width:100%; display:flex; align-items:center; justify-content:center;
+  position:relative;
 }
 .site-header__brand {
   display:flex; align-items:center; gap:10px;
@@ -108,49 +109,39 @@ button { font-family:inherit; }
 }
 .site-header__brand:hover { opacity:.8; }
 .site-header__logo-img {
-  height:28px; width:auto; border-radius:4px;
+  height:26px; width:auto; border-radius:4px;
 }
 .site-header__brand-name {
   font-family:'Playfair Display',serif;
-  font-weight:900; font-size:20px; letter-spacing:.02em;
+  font-weight:900; font-size:22px; letter-spacing:.03em;
   color:#fff;
 }
-@keyframes holoShift {
-  0%,100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+.site-header__util {
+  position:absolute; right:0; top:50%; transform:translateY(-50%);
+  display:flex; gap:12px; align-items:center;
 }
-.site-header__nav {
-  display:flex; gap:28px; align-items:center;
-  padding-bottom:14px;
-}
-.site-header__util { display:flex; gap:16px; align-items:center; }
-.site-header__nav a {
-  text-decoration:none; color:#fff;
-  font-family:'Zen Kaku Gothic New',sans-serif;
-  font-size:11px; font-weight:500; letter-spacing:.12em;
-  opacity:.45; transition:opacity .25s;
-  position:relative;
-}
-.site-header__nav a:hover { opacity:1; }
-.site-header__nav a::after {
-  content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px;
-  background:#fff; transition:width .25s var(--ease-out);
-}
-.site-header__nav a:hover::after { width:100%; }
 .site-header__util a {
   text-decoration:none; color:#fff;
   font-family:'Zen Kaku Gothic New',sans-serif;
-  font-size:10px; font-weight:500; letter-spacing:.08em;
+  font-size:10px; font-weight:400; letter-spacing:.1em;
+  opacity:.4; transition:opacity .25s;
+}
+.site-header__util a:hover { opacity:.8; }
+.cart-count {
+  font-size:9px; font-weight:400; opacity:.4;
+  margin-left:2px;
+}
+.site-header__nav {
+  display:flex; gap:36px; align-items:center;
+  padding-bottom:16px;
+}
+.site-header__nav a {
+  text-decoration:none; color:#fff;
+  font-family:'Zen Kaku Gothic New',sans-serif;
+  font-size:11px; font-weight:400; letter-spacing:.18em;
   opacity:.5; transition:opacity .25s;
 }
-.site-header__util a:hover { opacity:1; }
-.cart-count {
-  background:var(--accent); color:#fff;
-  font-size:8px; font-weight:700;
-  width:15px; height:15px; border-radius:50%;
-  display:inline-flex; align-items:center; justify-content:center;
-  margin-left:5px; vertical-align:middle;
-}
+.site-header__nav a:hover { opacity:1; }
 
 /* ═══ CATEGORY NAV ═══ */
 .category-nav {
@@ -179,13 +170,14 @@ button { font-family:inherit; }
 
 /* ═══ HERO — Featured Product ═══ */
 .hero-feature {
-  max-width:100%; margin:0;
-  padding:0;
+  max-width:var(--max-w); margin:0 auto;
+  padding:20px 40px 0;
   position:relative; cursor:pointer;
   overflow:hidden;
 }
 .hero-feature__img {
   width:100%; height:65vh; object-fit:cover; display:block;
+  border-radius:8px;
   transition:transform .6s var(--ease-out);
 }
 .hero-feature:hover .hero-feature__img { transform:scale(1.02); }
@@ -228,8 +220,6 @@ button { font-family:inherit; }
 .hero-feature:hover .hero-feature__cta::after { width:32px; }
 
 @media (max-width:640px) {
-  .hero-feature { padding:0; border-radius:0; }
-  .hero-feature__img { border-radius:0; height:70vh; }
   .hero-feature__overlay { padding:36px 20px 20px; }
 }
 
@@ -588,11 +578,15 @@ button { font-family:inherit; }
 
 /* Mobile */
 @media (max-width:640px) {
-  .site-header__inner { padding:10px 20px 0; }
-  .site-header__brand-name { font-size:14px; }
-  .site-header__nav { gap:16px; padding-bottom:10px; overflow-x:auto; scrollbar-width:none; }
+  .site-header__inner { padding:12px 20px 0; gap:10px; }
+  .site-header__brand-name { font-size:15px; }
+  .site-header__logo-img { height:20px; }
+  .site-header__util a { font-size:9px; }
+  .site-header__nav { gap:18px; padding-bottom:10px; overflow-x:auto; scrollbar-width:none; }
   .site-header__nav::-webkit-scrollbar { display:none; }
-  .site-header__nav a { flex-shrink:0; font-size:10px; }
+  .site-header__nav a { flex-shrink:0; font-size:9px; letter-spacing:.14em; }
+  .hero-feature { padding:12px 20px 0; }
+  .hero-feature__img { height:55vh; border-radius:6px; }
   .site-header__logo-img { height:26px; }
   .site-header__brand-name { font-size:13px; }
 
@@ -639,7 +633,7 @@ button { font-family:inherit; }
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
         </a>
         <div class="site-header__util">
-          <a href="#">CART<span class="cart-count">0</span></a>
+          <a href="#">MY BAG (<span class="cart-count">0</span>)</a>
         </div>
       </div>
       <nav class="site-header__nav">
@@ -725,7 +719,7 @@ button { font-family:inherit; }
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
         </a>
         <div class="site-header__util">
-          <a href="#">CART<span class="cart-count">0</span></a>
+          <a href="#">MY BAG (<span class="cart-count">0</span>)</a>
         </div>
       </div>
       <nav class="site-header__nav">
@@ -778,7 +772,7 @@ button { font-family:inherit; }
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
         </a>
         <div class="site-header__util">
-          <a href="#">CART<span class="cart-count">0</span></a>
+          <a href="#">MY BAG (<span class="cart-count">0</span>)</a>
         </div>
       </div>
       <nav class="site-header__nav">
@@ -830,7 +824,7 @@ button { font-family:inherit; }
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
         </a>
         <div class="site-header__util">
-          <a href="#">CART<span class="cart-count">0</span></a>
+          <a href="#">MY BAG (<span class="cart-count">0</span>)</a>
         </div>
       </div>
       <nav class="site-header__nav">
