@@ -96,16 +96,14 @@ button { font-family:inherit; }
 }
 .site-header__inner {
   max-width:var(--max-w); margin:0 auto;
-  padding:20px 40px 0;
-  display:flex; flex-direction:column; align-items:center; gap:14px;
+  padding:0 40px;
 }
+/* Row 1: Logo centered + MY BAG right */
 .site-header__top {
-  width:100%; display:flex; align-items:center;
+  display:flex; align-items:center; justify-content:center;
+  padding:18px 0 12px;
+  position:relative;
 }
-.site-header__top > * { flex:1; }
-.site-header__top > :first-child { }
-.site-header__brand { justify-content:center; }
-.site-header__util { justify-content:flex-end; }
 .site-header__brand {
   display:flex; align-items:center; gap:10px;
   text-decoration:none; color:#fff;
@@ -120,7 +118,7 @@ button { font-family:inherit; }
   color:#fff;
 }
 .site-header__util {
-  display:flex; align-items:center;
+  position:absolute; right:0; top:50%; transform:translateY(-50%);
 }
 .site-header__util a {
   text-decoration:none; color:#fff;
@@ -129,13 +127,12 @@ button { font-family:inherit; }
   opacity:.4; transition:opacity .25s;
 }
 .site-header__util a:hover { opacity:.8; }
-.cart-count {
-  font-size:9px; font-weight:400; opacity:.4;
-  margin-left:2px;
-}
+/* Row 2: Category nav centered */
 .site-header__nav {
-  display:flex; gap:36px; align-items:center;
-  padding-bottom:16px;
+  display:flex; gap:36px; align-items:center; justify-content:center;
+  padding-bottom:14px;
+  border-top:1px solid rgba(255,255,255,.06);
+  padding-top:12px;
 }
 .site-header__nav a {
   text-decoration:none; color:#fff;
@@ -581,11 +578,12 @@ button { font-family:inherit; }
 
 /* Mobile */
 @media (max-width:640px) {
-  .site-header__inner { padding:12px 20px 0; gap:10px; }
+  .site-header__inner { padding:0 20px; }
+  .site-header__top { padding:12px 0 8px; }
   .site-header__brand-name { font-size:15px; }
   .site-header__logo-img { height:20px; }
-  .site-header__util a { font-size:9px; }
-  .site-header__nav { gap:18px; padding-bottom:10px; overflow-x:auto; scrollbar-width:none; }
+  .site-header__util a { font-size:8px; }
+  .site-header__nav { gap:18px; padding:8px 0 10px; overflow-x:auto; scrollbar-width:none; justify-content:flex-start; }
   .site-header__nav::-webkit-scrollbar { display:none; }
   .site-header__nav a { flex-shrink:0; font-size:9px; letter-spacing:.14em; }
   .hero-feature { padding:12px 20px 0; }
