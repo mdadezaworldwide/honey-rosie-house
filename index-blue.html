@@ -169,17 +169,55 @@ button { font-family:inherit; }
 }
 
 /* ═══ HERO — Featured Product ═══ */
-.hero-feature {
-  max-width:880px; margin:0 auto;
-  padding:30px 0 0;
-  cursor:pointer;
+.hero-wrap {
+  max-width:1000px; margin:0 auto;
+  padding:30px 40px 0;
+  display:flex; gap:12px;
 }
-.hero-feature__img {
-  width:100%; aspect-ratio:16/9; object-fit:cover; display:block;
-  border:1px solid rgba(255,255,255,.1);
-  transition:opacity .3s;
+.hero-main {
+  flex:1; position:relative; cursor:pointer; overflow:hidden;
 }
-.hero-feature:hover .hero-feature__img { opacity:.9; }
+.hero-main__img {
+  width:100%; aspect-ratio:16/10; object-fit:cover; display:block;
+  border:1px solid rgba(255,255,255,.08);
+  transition:opacity .4s;
+}
+.hero-main__info {
+  position:absolute; bottom:0; left:0; right:0;
+  padding:16px 20px;
+  background:linear-gradient(to top, rgba(0,0,0,.5) 0%, transparent 100%);
+  opacity:0; transition:opacity .3s;
+  display:flex; align-items:baseline; gap:12px;
+}
+.hero-main:hover .hero-main__info { opacity:1; }
+.hero-main__name {
+  font-family:'Playfair Display',serif;
+  font-size:16px; font-weight:700; color:#fff;
+}
+.hero-main__price {
+  font-family:'Zen Kaku Gothic New',sans-serif;
+  font-size:12px; color:rgba(255,255,255,.7);
+}
+.hero-thumbs {
+  width:120px; display:flex; flex-direction:column; gap:8px;
+  flex-shrink:0;
+}
+.hero-thumb {
+  width:100%; aspect-ratio:1/1; object-fit:cover; display:block;
+  border:1px solid rgba(255,255,255,.08);
+  cursor:pointer; opacity:.5;
+  transition:opacity .25s;
+}
+.hero-thumb:hover { opacity:.8; }
+.hero-thumb.active { opacity:1; border-color:rgba(255,255,255,.3); }
+
+@media (max-width:640px) {
+  .hero-wrap { padding:16px 20px 0; gap:8px; }
+  .hero-thumbs { width:60px; gap:6px; }
+  .hero-main__info { padding:10px 14px; }
+  .hero-main__name { font-size:13px; }
+  .hero-main__price { font-size:10px; }
+}
 
 /* ═══ COLLECTION INFO ═══ */
 .collection-info {
@@ -544,8 +582,6 @@ button { font-family:inherit; }
   .site-header__nav { gap:18px; padding:8px 0 10px; overflow-x:auto; scrollbar-width:none; justify-content:flex-start; }
   .site-header__nav::-webkit-scrollbar { display:none; }
   .site-header__nav a { flex-shrink:0; font-size:9px; letter-spacing:.14em; }
-  .hero-feature { padding:20px 20px 0; }
-  .hero-feature__img { aspect-ratio:4/3; }
   .site-header__logo-img { height:26px; }
   .site-header__brand-name { font-size:13px; }
 
@@ -605,9 +641,21 @@ button { font-family:inherit; }
     </div>
   </header>
 
-  <!-- HERO — Featured Product -->
-  <div class="hero-feature" onclick="goDetail('cap')">
-    <img class="hero-feature__img" src="assets/product-cap.jpg" alt="CAP">
+  <!-- HERO — Featured Product Slider -->
+  <div class="hero-wrap">
+    <div class="hero-main" id="heroMain">
+      <img class="hero-main__img" id="heroMainImg" src="assets/product-cap.jpg" alt="CAP">
+      <div class="hero-main__info">
+        <span class="hero-main__name" id="heroMainName">CAP</span>
+        <span class="hero-main__price" id="heroMainPrice">¥8,800</span>
+      </div>
+    </div>
+    <div class="hero-thumbs" id="heroThumbs">
+      <img class="hero-thumb active" src="assets/product-cap.jpg" alt="CAP" data-product="cap" data-name="CAP" data-price="¥8,800">
+      <img class="hero-thumb" src="assets/product-sweatshirt.jpg" alt="Original Sweatshirt" data-product="original-sweatshirt" data-name="Original Sweatshirt" data-price="¥6,800">
+      <img class="hero-thumb" src="assets/product-totebag.jpg" alt="Logo Tote Bag" data-product="logo-tote-bag" data-name="Logo Tote Bag" data-price="¥3,200">
+      <img class="hero-thumb" src="assets/product-pouch.jpg" alt="Mini Pouch" data-product="mini-pouch" data-name="Mini Pouch" data-price="¥2,400">
+    </div>
   </div>
 
   <!-- CATEGORY NAV -->
@@ -1050,6 +1098,45 @@ function go(page, pushState) {
     history.pushState({page: page}, '', '');
   }
 }
+
+// Hero slider
+(function() {
+  const thumbs = document.querySelectorAll('#heroThumbs .hero-thumb');
+  const mainImg = document.getElementById('heroMainImg');
+  const mainName = document.getElementById('heroMainName');
+  const mainPrice = document.getElementById('heroMainPrice');
+  const heroMain = document.getElementById('heroMain');
+  let heroIdx = 0;
+  let heroTimer;
+
+  function setHeroSlide(i) {
+    heroIdx = i;
+    const thumb = thumbs[i];
+    mainImg.src = thumb.src;
+    mainImg.alt = thumb.alt;
+    mainName.textContent = thumb.dataset.name;
+    mainPrice.textContent = thumb.dataset.price;
+    heroMain.onclick = function() { goDetail(thumb.dataset.product); };
+    thumbs.forEach(t => t.classList.remove('active'));
+    thumb.classList.add('active');
+  }
+
+  function nextHero() {
+    setHeroSlide((heroIdx + 1) % thumbs.length);
+  }
+
+  thumbs.forEach((t, i) => {
+    t.addEventListener('click', function(e) {
+      e.stopPropagation();
+      setHeroSlide(i);
+      clearInterval(heroTimer);
+      heroTimer = setInterval(nextHero, 5000);
+    });
+  });
+
+  heroTimer = setInterval(nextHero, 5000);
+  setHeroSlide(0);
+})();
 
 // Header scroll shadow
 window.addEventListener('scroll', () => {
