@@ -180,10 +180,13 @@ button { font-family:inherit; }
   display:flex;
 }
 .hero-main__img {
-  width:100%; aspect-ratio:16/10; object-fit:cover; display:block;
-  transition:opacity .5s ease;
+  position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;
+  transition:opacity .6s ease;
 }
+.hero-main__img.behind { z-index:0; }
+.hero-main__img.front { z-index:1; }
 .hero-main__img.fading { opacity:0; }
+.hero-main__sizer { width:100%; aspect-ratio:16/10; }
 .hero-main__info {
   position:absolute; bottom:0; left:0; right:0;
   padding:16px 20px;
@@ -646,7 +649,9 @@ button { font-family:inherit; }
   <!-- HERO — Featured Product Slider -->
   <div class="hero-wrap">
     <div class="hero-main" id="heroMain">
-      <img class="hero-main__img" id="heroMainImg" src="assets/product-cap.jpg" alt="CAP">
+      <div class="hero-main__sizer"></div>
+      <img class="hero-main__img behind" id="heroImgBehind" src="assets/product-cap.jpg" alt="CAP">
+      <img class="hero-main__img front" id="heroImgFront" src="assets/product-cap.jpg" alt="CAP">
       <div class="hero-main__info">
         <span class="hero-main__name" id="heroMainName">CAP</span>
         <span class="hero-main__price" id="heroMainPrice">¥8,800</span>
@@ -1107,7 +1112,8 @@ function go(page, pushState) {
 // Hero slider
 (function() {
   const thumbs = document.querySelectorAll('#heroThumbs .hero-thumb');
-  const mainImg = document.getElementById('heroMainImg');
+  const imgFront = document.getElementById('heroImgFront');
+  const imgBehind = document.getElementById('heroImgBehind');
   const mainName = document.getElementById('heroMainName');
   const mainPrice = document.getElementById('heroMainPrice');
   const heroMain = document.getElementById('heroMain');
@@ -1116,31 +1122,31 @@ function go(page, pushState) {
 
   let isTransitioning = false;
   function setHeroSlide(i, instant) {
-    if (isTransitioning || i === heroIdx && !instant) return;
+    if (isTransitioning || (i === heroIdx && !instant)) return;
     const thumb = thumbs[i];
     thumbs.forEach(t => t.classList.remove('active'));
     thumb.classList.add('active');
+    heroMain.onclick = function() { goDetail(thumb.dataset.product); };
+    mainName.textContent = thumb.dataset.name;
+    mainPrice.textContent = thumb.dataset.price;
     if (instant) {
       heroIdx = i;
-      mainImg.src = thumb.src;
-      mainImg.alt = thumb.alt;
-      mainName.textContent = thumb.dataset.name;
-      mainPrice.textContent = thumb.dataset.price;
-      heroMain.onclick = function() { goDetail(thumb.dataset.product); };
+      imgFront.src = thumb.src;
+      imgBehind.src = thumb.src;
       return;
     }
     isTransitioning = true;
-    mainImg.classList.add('fading');
+    // Set next image behind current
+    imgBehind.src = thumb.src;
+    // Fade out front to reveal behind
+    imgFront.classList.add('fading');
     setTimeout(function() {
       heroIdx = i;
-      mainImg.src = thumb.src;
-      mainImg.alt = thumb.alt;
-      mainName.textContent = thumb.dataset.name;
-      mainPrice.textContent = thumb.dataset.price;
-      heroMain.onclick = function() { goDetail(thumb.dataset.product); };
-      mainImg.classList.remove('fading');
-      setTimeout(function() { isTransitioning = false; }, 500);
-    }, 500);
+      // Swap: front gets the new image, remove fade
+      imgFront.src = thumb.src;
+      imgFront.classList.remove('fading');
+      isTransitioning = false;
+    }, 600);
   }
 
   function nextHero() {
