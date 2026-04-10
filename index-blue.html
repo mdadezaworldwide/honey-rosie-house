@@ -731,7 +731,7 @@ button { font-family:inherit; }
 </div>
 
 <!-- ═══ PAGE: TOP ═══ -->
-<div class="page active" id="p-top">
+<div class="page active entering" id="p-top">
 
   <header class="site-header">
     <div class="site-header__inner">
@@ -1442,6 +1442,29 @@ const cardObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.p-card').forEach(c => cardObserver.observe(c));
 
+// Force any still-hidden cards in `root` visible. Used as a safety net
+// when IntersectionObserver fails to fire (scroll restore, horizontally
+// clipped rows, bfcache, late re-renders).
+function forceCardsVisible(root) {
+  (root || document).querySelectorAll('.p-card:not(.visible)').forEach((c, i) => {
+    setTimeout(() => {
+      c.classList.add('visible');
+      cardObserver.unobserve(c);
+    }, i * 60);
+  });
+}
+
+setTimeout(() => forceCardsVisible(), 800);
+
+window.addEventListener('pageshow', (e) => {
+  if (e.persisted) {
+    document.querySelectorAll('.p-card:not(.visible)').forEach(c => {
+      c.classList.add('visible');
+      cardObserver.unobserve(c);
+    });
+  }
+});
+
 // SOLD OUT cards: click to show notify toast
 document.addEventListener('click', function(e) {
   var notify = e.target.closest('.p-card--soldout');
@@ -1539,6 +1562,7 @@ function renderItems() {
     c.classList.remove('visible');
     cardObserver.observe(c);
   });
+  setTimeout(() => forceCardsVisible(grid), 800);
 }
 
 function goItems() {
@@ -1594,6 +1618,7 @@ function goCollection(key, skipPush) {
     c.classList.remove('visible');
     cardObserver.observe(c);
   });
+  setTimeout(() => forceCardsVisible(grid), 800);
 
   go('collection', false);
   if (!skipPush) {
