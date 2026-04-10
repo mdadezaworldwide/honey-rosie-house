@@ -128,6 +128,11 @@ button { font-family:inherit; }
   opacity:.4; transition:opacity .25s;
 }
 .site-header__util a:hover { opacity:.8; }
+.cart-count {
+  display:inline-block; margin-left:4px;
+  font-size:9px; font-weight:700;
+  color:var(--accent);
+}
 /* Row 2: Category nav centered */
 .site-header__nav {
   display:flex; gap:36px; align-items:center; justify-content:center;
@@ -223,6 +228,9 @@ button { font-family:inherit; }
   .hero-main__info { padding:10px 14px; }
   .hero-main__name { font-size:13px; }
   .hero-main__price { font-size:10px; }
+}
+@media (hover: none) {
+  .hero-main__info { opacity:1; }
 }
 
 /* ═══ COLLECTION INFO ═══ */
@@ -635,6 +643,9 @@ button { font-family:inherit; }
 }
 .cart-item__info { flex:1; display:flex; flex-direction:column; justify-content:space-between; }
 .cart-item__name { font-size:12px; color:#fff; font-weight:500; }
+.cart-item__meta {
+  font-size:10px; color:rgba(255,255,255,.5); margin-top:2px;
+}
 .cart-item__price { font-size:12px; color:#fff; font-weight:700; }
 .cart-item__remove {
   background:transparent; border:none; color:rgba(255,255,255,.4);
@@ -731,7 +742,7 @@ button { font-family:inherit; }
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
         </a>
         <div class="site-header__util">
-          <a href="#" onclick="openCart();return false">MY BAG</a>
+          <a href="#" onclick="openCart();return false">MY BAG <span class="cart-count" style="display:none">0</span></a>
         </div>
       </div>
       <nav class="site-header__nav">
@@ -770,7 +781,7 @@ button { font-family:inherit; }
       <span class="sec-head__title">New Arrival</span>
       <span class="sec-head__sub">新着アイテム</span>
     </div>
-    <a href="#" class="sec-head__viewall" onclick="showToast();return false">すべて見る &rarr;</a>
+    <a href="#" class="sec-head__viewall" onclick="goItems();return false">すべて見る &rarr;</a>
   </div>
   <div class="product-scroll">
     <div class="product-row">
@@ -791,7 +802,7 @@ button { font-family:inherit; }
       <span class="sec-head__title">Pick Up</span>
       <span class="sec-head__sub">おすすめアイテム</span>
     </div>
-    <a href="#" class="sec-head__viewall" onclick="showToast();return false">すべて見る &rarr;</a>
+    <a href="#" class="sec-head__viewall" onclick="goItems();return false">すべて見る &rarr;</a>
   </div>
   <div class="product-scroll">
     <div class="product-row">
@@ -825,7 +836,7 @@ button { font-family:inherit; }
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
         </a>
         <div class="site-header__util">
-          <a href="#" onclick="openCart();return false">MY BAG</a>
+          <a href="#" onclick="openCart();return false">MY BAG <span class="cart-count" style="display:none">0</span></a>
         </div>
       </div>
       <nav class="site-header__nav">
@@ -878,7 +889,7 @@ button { font-family:inherit; }
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
         </a>
         <div class="site-header__util">
-          <a href="#" onclick="openCart();return false">MY BAG</a>
+          <a href="#" onclick="openCart();return false">MY BAG <span class="cart-count" style="display:none">0</span></a>
         </div>
       </div>
       <nav class="site-header__nav">
@@ -930,7 +941,7 @@ button { font-family:inherit; }
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
         </a>
         <div class="site-header__util">
-          <a href="#" onclick="openCart();return false">MY BAG</a>
+          <a href="#" onclick="openCart();return false">MY BAG <span class="cart-count" style="display:none">0</span></a>
         </div>
       </div>
       <nav class="site-header__nav">
@@ -1340,10 +1351,14 @@ function renderCart() {
   body.innerHTML = cart.map(function(item, i) {
     var priceNum = parseInt(item.price.replace(/[^\d]/g, ''), 10);
     total += priceNum;
+    var meta = [];
+    if (item.color) meta.push(item.color);
+    if (item.size) meta.push(item.size);
+    var metaHtml = meta.length ? '<div class="cart-item__meta">' + meta.join(' / ') + '</div>' : '';
     return '<div class="cart-item">' +
       '<img class="cart-item__img" src="' + item.image + '" alt="' + item.name + '">' +
       '<div class="cart-item__info">' +
-        '<div><div class="cart-item__name">' + item.name + '</div><div class="cart-item__price">' + item.price + '</div></div>' +
+        '<div><div class="cart-item__name">' + item.name + '</div>' + metaHtml + '<div class="cart-item__price">' + item.price + '</div></div>' +
         '<button class="cart-item__remove" onclick="removeFromCart(' + i + ')" type="button">削除</button>' +
       '</div></div>';
   }).join('');
@@ -1357,6 +1372,7 @@ function removeFromCart(i) {
 function updateCartCount() {
   document.querySelectorAll('.cart-count').forEach(function(c) {
     c.textContent = cart.length;
+    c.style.display = cart.length > 0 ? 'inline-block' : 'none';
   });
 }
 
@@ -1368,7 +1384,15 @@ document.querySelectorAll('.pd-add-btn').forEach(btn => {
       if (products[key].name === productId) { p = products[key]; break; }
     }
     if (p) {
-      cart.push({name: p.name, price: p.price, image: p.image});
+      var colorEl = document.querySelector('#detail-colors .pd-color-swatch.active');
+      var sizeEl = document.querySelector('#detail-sizes .pd-size-pill.active');
+      cart.push({
+        name: p.name,
+        price: p.price,
+        image: p.image,
+        color: colorEl ? colorEl.title : null,
+        size: sizeEl ? sizeEl.textContent : null
+      });
       updateCartCount();
     }
     var b = this;
