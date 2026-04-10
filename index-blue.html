@@ -965,9 +965,6 @@ button { font-family:inherit; }
       <div class="pd-main-img"><img class="pd-img-fill" id="detail-main-img" src="assets/product-sweatshirt.jpg" alt="Original Sweatshirt" style="width:100%;height:100%;object-fit:cover;"></div>
       <div class="pd-thumbs">
         <div class="pd-thumb active"><img class="pd-thumb-fill" src="assets/product-sweatshirt.jpg" alt="" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="pd-thumb"><img class="pd-thumb-fill" src="assets/product-sweatshirt.jpg" alt="" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="pd-thumb"><img class="pd-thumb-fill" src="assets/product-sweatshirt.jpg" alt="" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="pd-thumb"><img class="pd-thumb-fill" src="assets/product-sweatshirt.jpg" alt="" style="width:100%;height:100%;object-fit:cover;"></div>
       </div>
     </div>
     <div class="pd-info">
@@ -1445,6 +1442,15 @@ const cardObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.p-card').forEach(c => cardObserver.observe(c));
 
+// SOLD OUT cards: click to show notify toast
+document.addEventListener('click', function(e) {
+  var notify = e.target.closest('.p-card--soldout');
+  if (notify && notify.querySelector('.p-card__notify')) {
+    e.stopPropagation();
+    showToast('再入荷通知を受け取るには準備中');
+  }
+}, true);
+
 const collections = {
   spring2026: {
     title: 'Spring 2026',
@@ -1544,7 +1550,7 @@ function goItems() {
   history.pushState({page: 'items'}, '', '');
 }
 
-function goItemsFilter(cat) {
+function goItemsFilter(cat, skipPush) {
   currentFilter = cat;
   document.querySelectorAll('#items-filter .filter-pill').forEach(b => {
     b.classList.remove('active');
@@ -1552,7 +1558,9 @@ function goItemsFilter(cat) {
   });
   renderItems();
   go('items', false);
-  history.pushState({page: 'items'}, '', '');
+  if (!skipPush) {
+    history.pushState({page: 'items', filter: cat}, '', '');
+  }
 }
 
 function goCollection(key, skipPush) {
@@ -1601,11 +1609,7 @@ window.addEventListener('popstate', function(e) {
     } else if (e.state.page === 'collection' && e.state.collection) {
       goCollection(e.state.collection, true);
     } else if (e.state.page === 'items') {
-      currentFilter = 'all';
-      document.querySelectorAll('#items-filter .filter-pill').forEach(b => b.classList.remove('active'));
-      document.querySelector('#items-filter .filter-pill').classList.add('active');
-      renderItems();
-      go('items', false);
+      goItemsFilter(e.state.filter || 'all', true);
     } else {
       go(e.state.page, false);
     }
