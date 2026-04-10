@@ -61,9 +61,10 @@ img { display:block; max-width:100%; }
 button { font-family:inherit; }
 
 /* Page switch */
-.page { display:none; }
-.page.active { display:block; animation:fadeIn .4s ease forwards; }
-@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+.page { display:none; opacity:0; }
+.page.active { display:block; }
+.page.entering { animation:pageIn .35s ease forwards; }
+@keyframes pageIn { from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:translateY(0)} }
 
 /* Dev nav */
 .dev {
@@ -505,13 +506,14 @@ button { font-family:inherit; }
 .pd-size-pill:hover:not(.active) { border-color:rgba(26,42,58,.3); }
 .pd-stock { font-size:11px; color:#fff; opacity:.7; margin-bottom:16px; }
 .pd-add-btn {
-  width:100%; padding:15px; background:var(--text); color:#d8e4ec;
-  border:none; border-radius:26px;
-  font-family:'Cormorant Garamond',serif;
-  font-size:13px; font-weight:600; letter-spacing:.22em;
-  cursor:pointer; transition:.3s var(--ease-out); margin-bottom:24px;
+  width:100%; padding:16px; background:var(--text); color:#d8e4ec;
+  border:none; border-radius:0;
+  font-family:'Zen Kaku Gothic New',sans-serif;
+  font-size:12px; font-weight:700; letter-spacing:.15em;
+  cursor:pointer; transition:background .25s, transform .15s; margin-bottom:24px;
 }
-.pd-add-btn:hover { background:var(--accent); box-shadow:0 4px 20px rgba(200,48,80,.25); transform:translateY(-1px); }
+.pd-add-btn:hover { background:var(--accent); transform:translateY(-1px); }
+.pd-add-btn:active { transform:scale(.98); }
 .pd-add-btn:disabled { opacity:.35; cursor:not-allowed; }
 .pd-detail-label {
   font-family:'Cormorant Garamond',serif;
@@ -607,7 +609,12 @@ button { font-family:inherit; }
   .p-card--featured .p-card__img { aspect-ratio:3/4; }
   .product-grid { padding:0 20px 10px; grid-template-columns:repeat(2,1fr); gap:10px; }
 
-  .pd-grid { grid-template-columns:1fr; gap:22px; padding:14px 20px 28px; }
+  .pd-grid { grid-template-columns:1fr; gap:22px; padding:14px 20px 100px; }
+  .pd-add-btn {
+    position:fixed; bottom:0; left:0; right:0; z-index:400;
+    border-radius:0; margin:0; padding:18px;
+    box-shadow:0 -2px 20px rgba(0,0,0,.15);
+  }
   .pd-breadcrumb { padding:10px 20px 0; }
   .site-footer { padding:24px 20px 22px; }
   .dev { top:auto; bottom:12px; right:12px; background:rgba(26,42,58,.18); }
@@ -892,6 +899,15 @@ button { font-family:inherit; }
     </div>
   </div>
 
+  <div class="sec-head">
+    <div>
+      <span class="sec-head__title">You May Also Like</span>
+    </div>
+  </div>
+  <div class="product-scroll">
+    <div class="product-row" id="related-products"></div>
+  </div>
+
   <footer class="site-footer">
     <div class="site-footer__links">
       <a href="#" onclick="showToast();return false">特定商取引法に基づく表記</a>
@@ -1077,6 +1093,19 @@ function goDetail(productId, skipPush) {
   // 在庫
   document.getElementById('detail-stock').textContent = p.stock;
 
+  // Related products
+  var relGrid = document.getElementById('related-products');
+  var others = allItems.filter(function(item) { return item.id && item.id !== productId && item.badge !== 'soldout'; });
+  others = others.sort(function() { return .5 - Math.random(); }).slice(0,4);
+  relGrid.innerHTML = others.map(function(item) {
+    return '<div class="p-card" onclick="goDetail(\'' + item.id + '\')">' +
+      '<div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="' + item.image + '" alt="' + item.name + '">' +
+      '<div class="p-card__quick"><span>詳しく見る</span></div></div>' +
+      '<div class="p-card__body"><div class="p-card__name">' + item.name + '</div>' +
+      '<div class="p-card__price">' + item.price + ' <span class="p-card__tax">税込</span></div></div></div>';
+  }).join('');
+  relGrid.querySelectorAll('.p-card').forEach(function(c) { c.classList.add('visible'); });
+
   go('detail', false);
   if (!skipPush) {
     history.pushState({page: 'detail', product: productId}, '', '');
@@ -1091,20 +1120,24 @@ function showToast(msg) {
 }
 
 function go(page, pushState) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.dev button').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('.page').forEach(p => {
+    p.classList.remove('active','entering');
+  });
+  var target;
   if (page === 'top') {
-    document.getElementById('p-top').classList.add('active');
-    document.querySelector('.dev button:nth-child(1)').classList.add('on');
+    target = document.getElementById('p-top');
   } else if (page === 'collection') {
-    document.getElementById('p-collection').classList.add('active');
+    target = document.getElementById('p-collection');
   } else if (page === 'items') {
-    document.getElementById('p-items').classList.add('active');
+    target = document.getElementById('p-items');
   } else {
-    document.getElementById('p-detail').classList.add('active');
-    document.querySelector('.dev button:nth-child(2)').classList.add('on');
+    target = document.getElementById('p-detail');
   }
+  target.classList.add('active');
   window.scrollTo(0,0);
+  requestAnimationFrame(function() {
+    target.classList.add('entering');
+  });
   if (pushState !== false) {
     history.pushState({page: page}, '', '');
   }
@@ -1181,13 +1214,23 @@ document.querySelectorAll('.pd-thumb').forEach(t => {
     t.classList.add('active');
   });
 });
+var cartCount = 0;
 document.querySelectorAll('.pd-add-btn').forEach(btn => {
   btn.addEventListener('click', function() {
-    const orig = this.textContent;
-    this.textContent = '追加しました';
-    this.style.background = 'var(--accent)';
-    document.querySelectorAll('.cart-count').forEach(c => c.textContent = '1');
-    setTimeout(() => { this.textContent = orig; this.style.background = ''; }, 1200);
+    var b = this;
+    b.style.background = 'var(--accent)';
+    b.textContent = '✓';
+    b.style.pointerEvents = 'none';
+    cartCount++;
+    document.querySelectorAll('.cart-count').forEach(function(c) {
+      c.textContent = cartCount;
+      c.style.opacity = '1';
+    });
+    setTimeout(function() {
+      b.textContent = 'カートに追加';
+      b.style.background = '';
+      b.style.pointerEvents = '';
+    }, 1500);
   });
 });
 
