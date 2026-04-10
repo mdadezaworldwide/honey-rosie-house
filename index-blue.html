@@ -515,6 +515,23 @@ button { font-family:inherit; }
 .pd-add-btn:hover { background:var(--accent); transform:translateY(-1px); }
 .pd-add-btn:active { transform:scale(.98); }
 .pd-add-btn:disabled { opacity:.35; cursor:not-allowed; }
+.pd-share {
+  display:flex; align-items:center; gap:10px;
+  margin-bottom:28px; padding-top:4px;
+}
+.pd-share__label {
+  font-family:'Zen Kaku Gothic New',sans-serif;
+  font-size:10px; font-weight:700; letter-spacing:.14em;
+  color:rgba(255,255,255,.55); margin-right:4px;
+}
+.pd-share__btn {
+  display:flex; align-items:center; justify-content:center;
+  width:30px; height:30px; border-radius:50%;
+  color:#fff; opacity:.5;
+  border:1px solid rgba(255,255,255,.15);
+  transition:opacity .25s, border-color .25s, transform .2s;
+}
+.pd-share__btn:hover { opacity:1; border-color:rgba(255,255,255,.4); transform:translateY(-2px); }
 .pd-detail-label {
   font-family:'Cormorant Garamond',serif;
   font-size:10px; font-weight:700; letter-spacing:.14em;
@@ -568,6 +585,79 @@ button { font-family:inherit; }
 .toast.show {
   opacity:1; transform:translateX(-50%) translateY(0);
 }
+
+/* ═══ CART PANEL ═══ */
+.cart-panel {
+  position:fixed; inset:0; z-index:9000;
+  pointer-events:none; visibility:hidden;
+}
+.cart-panel.open { pointer-events:auto; visibility:visible; }
+.cart-panel__backdrop {
+  position:absolute; inset:0; background:rgba(0,0,0,.5);
+  opacity:0; transition:opacity .3s;
+}
+.cart-panel.open .cart-panel__backdrop { opacity:1; }
+.cart-panel__inner {
+  position:absolute; top:0; right:0; bottom:0; width:380px; max-width:90vw;
+  background:#2c3e5a; display:flex; flex-direction:column;
+  transform:translateX(100%); transition:transform .35s var(--ease-out);
+  box-shadow:-10px 0 40px rgba(0,0,0,.3);
+}
+.cart-panel.open .cart-panel__inner { transform:translateX(0); }
+.cart-panel__head {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:20px 24px; border-bottom:1px solid rgba(255,255,255,.08);
+}
+.cart-panel__title {
+  font-family:'Zen Kaku Gothic New',sans-serif;
+  font-size:13px; font-weight:700; letter-spacing:.18em; color:#fff;
+}
+.cart-panel__close {
+  background:transparent; border:none; color:#fff; font-size:24px;
+  cursor:pointer; padding:0; width:28px; height:28px;
+  opacity:.5; transition:opacity .2s;
+}
+.cart-panel__close:hover { opacity:1; }
+.cart-panel__body {
+  flex:1; overflow-y:auto; padding:20px 24px;
+}
+.cart-panel__empty {
+  text-align:center; padding:60px 0;
+  color:rgba(255,255,255,.4); font-size:12px;
+}
+.cart-item {
+  display:flex; gap:14px; padding:14px 0;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.cart-item__img {
+  width:70px; height:70px; object-fit:cover;
+  flex-shrink:0;
+}
+.cart-item__info { flex:1; display:flex; flex-direction:column; justify-content:space-between; }
+.cart-item__name { font-size:12px; color:#fff; font-weight:500; }
+.cart-item__price { font-size:12px; color:#fff; font-weight:700; }
+.cart-item__remove {
+  background:transparent; border:none; color:rgba(255,255,255,.4);
+  cursor:pointer; font-size:11px; text-align:left; padding:0;
+  transition:color .2s;
+}
+.cart-item__remove:hover { color:#fff; }
+.cart-panel__foot {
+  padding:20px 24px; border-top:1px solid rgba(255,255,255,.08);
+}
+.cart-panel__subtotal {
+  display:flex; justify-content:space-between;
+  font-family:'Zen Kaku Gothic New',sans-serif;
+  font-size:13px; color:#fff; margin-bottom:14px;
+}
+.cart-panel__subtotal span:last-child { font-weight:700; font-size:16px; }
+.cart-panel__checkout {
+  width:100%; padding:16px; background:var(--accent); color:#fff;
+  border:none; font-family:'Zen Kaku Gothic New',sans-serif;
+  font-size:12px; font-weight:700; letter-spacing:.15em;
+  cursor:pointer; transition:opacity .2s;
+}
+.cart-panel__checkout:hover { opacity:.85; }
 
 /* ═══ RESPONSIVE ═══ */
 
@@ -641,7 +731,7 @@ button { font-family:inherit; }
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
         </a>
         <div class="site-header__util">
-          <a href="#">MY BAG</a>
+          <a href="#" onclick="openCart();return false">MY BAG</a>
         </div>
       </div>
       <nav class="site-header__nav">
@@ -735,7 +825,7 @@ button { font-family:inherit; }
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
         </a>
         <div class="site-header__util">
-          <a href="#">MY BAG</a>
+          <a href="#" onclick="openCart();return false">MY BAG</a>
         </div>
       </div>
       <nav class="site-header__nav">
@@ -788,7 +878,7 @@ button { font-family:inherit; }
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
         </a>
         <div class="site-header__util">
-          <a href="#">MY BAG</a>
+          <a href="#" onclick="openCart();return false">MY BAG</a>
         </div>
       </div>
       <nav class="site-header__nav">
@@ -840,7 +930,7 @@ button { font-family:inherit; }
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
         </a>
         <div class="site-header__util">
-          <a href="#">MY BAG</a>
+          <a href="#" onclick="openCart();return false">MY BAG</a>
         </div>
       </div>
       <nav class="site-header__nav">
@@ -888,6 +978,21 @@ button { font-family:inherit; }
       </div>
       <div class="pd-stock" id="detail-stock">残りわずか &mdash; お早めにどうぞ</div>
       <button class="pd-add-btn" type="button">カートに追加</button>
+      <div class="pd-share">
+        <span class="pd-share__label">SHARE</span>
+        <a href="#" class="pd-share__btn" id="share-instagram" title="Instagram">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        </a>
+        <a href="#" class="pd-share__btn" id="share-line" title="LINE">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.58 2 10c0 3.72 3.11 6.85 7.32 7.76.28.06.67.19.77.43.09.22.06.56.03.78l-.12.75c-.04.22-.18.86.76.47.93-.39 5.02-2.96 6.85-5.06C18.94 13.76 20 11.98 20 10c0-4.42-4.48-8-8-8z"/></svg>
+        </a>
+        <a href="#" class="pd-share__btn" id="share-twitter" title="X">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="#" class="pd-share__btn" id="share-copy" title="リンクをコピー">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </a>
+      </div>
       <div class="pd-detail-label">商品について</div>
       <div class="pd-detail-text" id="detail-description">
         HONEY ROSIE HOUSEオリジナルのスウェットシャツ。<br>
@@ -1214,18 +1319,62 @@ document.querySelectorAll('.pd-thumb').forEach(t => {
     t.classList.add('active');
   });
 });
-var cartCount = 0;
+var cart = [];
+
+function openCart() {
+  renderCart();
+  document.getElementById('cartPanel').classList.add('open');
+}
+function closeCart() {
+  document.getElementById('cartPanel').classList.remove('open');
+}
+function renderCart() {
+  var body = document.getElementById('cartPanelBody');
+  var subtotal = document.getElementById('cartSubtotal');
+  if (cart.length === 0) {
+    body.innerHTML = '<div class="cart-panel__empty">カートは空です</div>';
+    subtotal.textContent = '¥0';
+    return;
+  }
+  var total = 0;
+  body.innerHTML = cart.map(function(item, i) {
+    var priceNum = parseInt(item.price.replace(/[^\d]/g, ''), 10);
+    total += priceNum;
+    return '<div class="cart-item">' +
+      '<img class="cart-item__img" src="' + item.image + '" alt="' + item.name + '">' +
+      '<div class="cart-item__info">' +
+        '<div><div class="cart-item__name">' + item.name + '</div><div class="cart-item__price">' + item.price + '</div></div>' +
+        '<button class="cart-item__remove" onclick="removeFromCart(' + i + ')" type="button">削除</button>' +
+      '</div></div>';
+  }).join('');
+  subtotal.textContent = '¥' + total.toLocaleString();
+}
+function removeFromCart(i) {
+  cart.splice(i, 1);
+  updateCartCount();
+  renderCart();
+}
+function updateCartCount() {
+  document.querySelectorAll('.cart-count').forEach(function(c) {
+    c.textContent = cart.length;
+  });
+}
+
 document.querySelectorAll('.pd-add-btn').forEach(btn => {
   btn.addEventListener('click', function() {
+    var productId = document.getElementById('detail-name').textContent;
+    var p = null;
+    for (var key in products) {
+      if (products[key].name === productId) { p = products[key]; break; }
+    }
+    if (p) {
+      cart.push({name: p.name, price: p.price, image: p.image});
+      updateCartCount();
+    }
     var b = this;
     b.style.background = 'var(--accent)';
     b.textContent = '✓';
     b.style.pointerEvents = 'none';
-    cartCount++;
-    document.querySelectorAll('.cart-count').forEach(function(c) {
-      c.textContent = cartCount;
-      c.style.opacity = '1';
-    });
     setTimeout(function() {
       b.textContent = 'カートに追加';
       b.style.background = '';
@@ -1233,6 +1382,28 @@ document.querySelectorAll('.pd-add-btn').forEach(btn => {
     }, 1500);
   });
 });
+
+function shareProduct(type) {
+  const name = document.getElementById('detail-name').textContent;
+  const url = location.href;
+  const text = name + ' - HONEY ROSIE HOUSE';
+  if (type === 'twitter') {
+    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url), '_blank');
+  } else if (type === 'line') {
+    window.open('https://social-plugins.line.me/lineit/share?url=' + encodeURIComponent(url), '_blank');
+  } else if (type === 'instagram') {
+    navigator.clipboard && navigator.clipboard.writeText(url);
+    showToast('Instagramアプリで貼り付けてください');
+  } else if (type === 'copy') {
+    navigator.clipboard && navigator.clipboard.writeText(url);
+    showToast('リンクをコピーしました');
+  }
+}
+
+document.getElementById('share-instagram').addEventListener('click', function(e) { e.preventDefault(); shareProduct('instagram'); });
+document.getElementById('share-line').addEventListener('click', function(e) { e.preventDefault(); shareProduct('line'); });
+document.getElementById('share-twitter').addEventListener('click', function(e) { e.preventDefault(); shareProduct('twitter'); });
+document.getElementById('share-copy').addEventListener('click', function(e) { e.preventDefault(); shareProduct('copy'); });
 
 
 // Intersection Observer for card fade-in
@@ -1421,6 +1592,22 @@ window.addEventListener('popstate', function(e) {
 history.replaceState({page: 'top'}, '', '');
 </script>
 
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-panel__backdrop" onclick="closeCart()"></div>
+  <div class="cart-panel__inner">
+    <div class="cart-panel__head">
+      <span class="cart-panel__title">MY BAG</span>
+      <button class="cart-panel__close" onclick="closeCart()" type="button">×</button>
+    </div>
+    <div class="cart-panel__body" id="cartPanelBody">
+      <div class="cart-panel__empty">カートは空です</div>
+    </div>
+    <div class="cart-panel__foot">
+      <div class="cart-panel__subtotal"><span>小計</span><span id="cartSubtotal">¥0</span></div>
+      <button class="cart-panel__checkout" onclick="showToast('レジ機能は準備中')" type="button">レジに進む</button>
+    </div>
+  </div>
+</div>
 <div class="toast" id="toast">準備中</div>
 
 <script>
