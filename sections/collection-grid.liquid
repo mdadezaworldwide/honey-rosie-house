@@ -8,11 +8,8 @@
 <div class="product-grid">
   {%- for product in collection.products -%}
     {%- assign badge_type = '' -%}
-    {%- for tag in product.tags -%}
-      {%- if tag == 'new' -%}{%- assign badge_type = 'new' -%}
-      {%- elsif tag == 'limited' -%}{%- assign badge_type = 'limited' -%}
-      {%- endif -%}
-    {%- endfor -%}
+    {%- if product.tags contains 'new' -%}{%- assign badge_type = 'new' -%}{%- endif -%}
+    {%- if product.tags contains 'limited' -%}{%- assign badge_type = 'limited' -%}{%- endif -%}
     {% render 'product-card', product: product, badge: badge_type %}
   {%- endfor -%}
 </div>

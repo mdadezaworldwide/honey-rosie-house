@@ -1,32 +1,42 @@
 <header class="site-header">
   <div class="site-header__inner">
-    <a href="/" class="site-header__brand">
-      {%- if section.settings.logo != blank -%}
-        <img
-          class="site-header__logo-img"
-          src="{{ section.settings.logo | image_url: height: 64 }}"
-          alt="{{ shop.name }}"
-          width="{{ section.settings.logo.width }}"
-          height="32"
-          loading="eager"
-        >
-      {%- elsif images['logo.jpg'] -%}
-        <img
-          class="site-header__logo-img"
-          src="{{ 'logo.jpg' | asset_url }}"
-          alt="{{ shop.name }}"
-          height="32"
-          loading="eager"
-        >
-      {%- endif -%}
-      <span class="site-header__brand-name">{{ shop.name }}</span>
-    </a>
-    <nav class="site-header__nav">
-      <a href="/collections/all">ITEMS</a>
-      <a href="/cart">
-        CART
-        <span class="cart-count">{{ cart.item_count }}</span>
+    <div class="site-header__top">
+      <div></div>
+      <a href="/" class="site-header__brand">
+        {%- if section.settings.logo != blank -%}
+          <img
+            class="site-header__logo-img"
+            src="{{ section.settings.logo | image_url: height: 64 }}"
+            alt="{{ shop.name }}"
+            width="{{ section.settings.logo.width }}"
+            height="32"
+            loading="eager"
+          >
+        {%- elsif images['logo.jpg'] -%}
+          <img
+            class="site-header__logo-img"
+            src="{{ 'logo.jpg' | asset_url }}"
+            alt="{{ shop.name }}"
+            height="32"
+            loading="eager"
+          >
+        {%- endif -%}
+        <span class="site-header__brand-name">{{ shop.name }}</span>
       </a>
+      <div class="site-header__util">
+        <a href="/cart">MY BAG <span class="cart-count"{% if cart.item_count == 0 %} style="display:none"{% endif %}>{{ cart.item_count }}</span></a>
+      </div>
+    </div>
+    <nav class="site-header__nav">
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}">{{ link.title | upcase }}</a>
+      {%- else -%}
+        <a href="/collections/tops">TOPS</a>
+        <a href="/collections/bottoms">BOTTOMS</a>
+        <a href="/collections/bag">BAG</a>
+        <a href="/collections/cap">CAP</a>
+        <a href="/collections/goods">GOODS</a>
+      {%- endfor -%}
     </nav>
   </div>
 </header>
@@ -39,6 +49,12 @@
       "type": "image_picker",
       "id": "logo",
       "label": "Logo image"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Category menu",
+      "default": "main-menu"
     }
   ]
 }
