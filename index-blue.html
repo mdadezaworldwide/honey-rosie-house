@@ -3,14 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HONEY ROSIE HOUSE</title>
+<meta name="theme-color" content="#1a2a3a">
+<title>HONEY ROSIE HOUSE — Online & Pop-up from Tokyo</title>
+<meta name="description" content="HONEY ROSIE HOUSEの公式オンラインストア。東京を拠点とした個人ブランドのトップス・バッグ・キャップ・雑貨を展開。オンラインとポップアップで販売しています。">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HONEY ROSIE HOUSE">
+<meta property="og:title" content="HONEY ROSIE HOUSE — Online & Pop-up from Tokyo">
+<meta property="og:description" content="東京を拠点にした個人ブランド。オンラインとポップアップで販売しています。">
+<meta property="og:image" content="assets/hero-kv.jpg">
+<meta property="og:locale" content="ja_JP">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HONEY ROSIE HOUSE">
+<meta name="twitter:description" content="Online & Pop-up from Tokyo, 2020 —">
+<meta name="twitter:image" content="assets/hero-kv.jpg">
+
+<!-- Favicon -->
+<link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+<link rel="apple-touch-icon" href="assets/logo.jpg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Instrument+Sans:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #5a8098;
-  --card-bg: #e8eef2;
+  --bg: #6e96b0;
+  --card-bg: #eef3f6;
   --text: #1a2a3a;
   --text-light: rgba(26,42,58,.42);
   --text-mid: rgba(26,42,58,.62);
@@ -23,18 +44,38 @@
   --max-w: 1200px;
   --ease-out: cubic-bezier(.22,1,.36,1);
   --ease-spring: cubic-bezier(.34,1.56,.64,1);
+  --font-sans: 'Instrument Sans','Zen Kaku Gothic New','Hiragino Kaku Gothic ProN','Hiragino Sans',YuGothic,'Yu Gothic',Meiryo,sans-serif;
+  --font-serif: 'Playfair Display','Zen Kaku Gothic New','Hiragino Kaku Gothic ProN','Hiragino Sans',sans-serif;
+  --font-jp: 'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN','Hiragino Sans',sans-serif;
 }
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
+html {
+  scroll-behavior:smooth;
+  scrollbar-color: rgba(255,255,255,.2) transparent;
+  scrollbar-width: thin;
+}
+::-webkit-scrollbar { width:10px; height:10px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb {
+  background:rgba(255,255,255,.18);
+  border-radius:0;
+  transition:background .2s;
+}
+::-webkit-scrollbar-thumb:hover { background:rgba(255,255,255,.32); }
+::selection { background:var(--accent); color:#fff; }
+::-moz-selection { background:var(--accent); color:#fff; }
+:focus { outline:none; }
+:focus-visible {
+  outline:2px solid var(--accent);
+  outline-offset:3px;
+}
 body {
-  font-family:'Zen Kaku Gothic New',sans-serif;
+  font-family:var(--font-sans);
   background:
-    radial-gradient(ellipse 60% 40% at 15% 8%, rgba(200,48,80,.12) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 35% at 90% 85%, rgba(106,120,176,.08) 0%, transparent 50%),
-    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(110,160,190,.5) 0%, transparent 60%),
-    radial-gradient(ellipse 70% 50% at 85% 80%, rgba(90,128,152,.4) 0%, transparent 55%),
-    radial-gradient(ellipse 90% 70% at 50% 50%, rgba(100,145,170,.3) 0%, transparent 70%),
-    linear-gradient(160deg, #6a9ab0 0%, #5a8098 30%, #4e7890 60%, #5a8498 100%);
+    radial-gradient(ellipse 60% 40% at 15% 8%, rgba(200,48,80,.08) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(140,180,205,.4) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 85% 80%, rgba(106,148,176,.32) 0%, transparent 55%),
+    linear-gradient(165deg, #84a8be 0%, #7099b2 30%, #6090a8 60%, #6494ac 100%);
   color:var(--text);
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden; min-height:100vh;
@@ -60,6 +101,7 @@ a { color:inherit; text-decoration:none; }
 img { display:block; max-width:100%; }
 button { font-family:inherit; }
 
+
 /* Page switch */
 .page { display:none; opacity:0; }
 .page.active { display:block; }
@@ -76,7 +118,7 @@ button { font-family:inherit; }
 .dev button {
   border:none; padding:7px 14px; cursor:pointer;
   font-size:9px; font-weight:700; letter-spacing:.06em;
-  border-radius:11px; font-family:'Cormorant Garamond',serif;
+  border-radius:11px; font-family:var(--font-sans);
   background:transparent; color:var(--text-light); transition:.3s;
 }
 .dev button.on { background:var(--text); color:#d8e4ec; }
@@ -85,7 +127,7 @@ button { font-family:inherit; }
 .site-header {
   position:sticky; top:0; z-index:500;
   background:var(--bg);
-  border-bottom:1px solid rgba(255,255,255,.06);
+  border-bottom:1px solid rgba(255,255,255,.14);
 }
 .site-header.scrolled {
   box-shadow:0 2px 20px rgba(26,42,58,.1);
@@ -99,50 +141,67 @@ button { font-family:inherit; }
   max-width:var(--max-w); margin:0 auto;
   padding:0 40px;
 }
-/* Row 1: Logo centered + MY BAG right */
+/* Row 1: 3-col grid — lang / brand / my bag */
 .site-header__top {
-  display:flex; align-items:center; justify-content:center;
-  padding:18px 0 12px;
-  position:relative;
+  display:grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items:center;
+  padding:22px 0 18px;
+  gap:20px;
+}
+.site-header__lang {
+  justify-self:start;
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:600; letter-spacing:.26em;
+  color:rgba(255,255,255,.62);
+  text-transform:uppercase;
 }
 .site-header__brand {
+  justify-self:center;
   display:flex; align-items:center; gap:10px;
   text-decoration:none; color:#fff;
 }
-.site-header__brand:hover { opacity:.8; }
+.site-header__brand:hover { opacity:.85; }
 .site-header__logo-img {
   height:26px; width:auto; border-radius:4px;
 }
 .site-header__brand-name {
-  font-family:'Playfair Display',serif;
+  font-family:var(--font-serif);
   font-weight:900; font-size:22px; letter-spacing:.03em;
   color:#fff;
 }
 .site-header__util {
-  position:absolute; right:0; top:50%; transform:translateY(-50%);
+  justify-self:end;
+  display:flex; align-items:center; gap:18px;
 }
 .site-header__util a {
   text-decoration:none; color:#fff;
-  font-family:'Zen Kaku Gothic New',sans-serif;
-  font-size:10px; font-weight:400; letter-spacing:.1em;
-  opacity:.4; transition:opacity .25s;
+  font-family:var(--font-sans);
+  font-size:11px; font-weight:600; letter-spacing:.22em;
+  text-transform:uppercase;
+  opacity:.78; transition:opacity .25s;
+  display:inline-flex; align-items:center; gap:6px;
 }
-.site-header__util a:hover { opacity:.8; }
+.site-header__util a:hover { opacity:1; }
 .cart-count {
-  display:inline-block; margin-left:4px;
-  font-size:9px; font-weight:700;
-  color:var(--accent);
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:18px; height:18px;
+  padding:0 5px;
+  margin-left:2px;
+  font-size:10px; font-weight:700; letter-spacing:0;
+  color:#fff;
+  background:var(--accent);
+  border-radius:9px;
 }
-/* Row 2: Category nav centered */
+/* Row 2: Category nav centered with subtle top divider */
 .site-header__nav {
   display:flex; gap:36px; align-items:center; justify-content:center;
-  padding-bottom:14px;
-  border-top:1px solid rgba(255,255,255,.06);
-  padding-top:12px;
+  padding:14px 0 16px;
+  border-top:1px solid rgba(255,255,255,.1);
 }
 .site-header__nav a {
   text-decoration:none; color:#fff;
-  font-family:'Zen Kaku Gothic New',sans-serif;
+  font-family:var(--font-sans);
   font-size:11px; font-weight:400; letter-spacing:.18em;
   opacity:.5; transition:opacity .25s;
 }
@@ -156,7 +215,7 @@ button { font-family:inherit; }
   display:flex; gap:20px; justify-content:center;
 }
 .category-nav a {
-  font-family:'Zen Kaku Gothic New',sans-serif;
+  font-family:var(--font-sans);
   font-size:13px; font-weight:700; letter-spacing:.1em;
   color:#fff; opacity:.35; text-decoration:none;
   padding:4px 0;
@@ -176,39 +235,122 @@ button { font-family:inherit; }
 
 /* ═══ HERO — Featured Product ═══ */
 .hero-wrap {
-  max-width:1000px; margin:0 auto;
-  padding:34px 40px 0;
-  display:flex; gap:12px;
+  max-width:1160px; margin:0 auto;
+  padding:70px 40px 0;
+  display:grid;
+  grid-template-columns: 150px 1fr 120px;
+  gap:16px;
+  align-items:start;
+}
+.hero-side-nav {
+  display:flex; flex-direction:column;
+  gap:0;
+  border-top:1px solid rgba(255,255,255,.22);
+}
+.hero-side-nav a {
+  position:relative;
+  display:block;
+  padding:18px 2px;
+  font-family:var(--font-sans);
+  font-size:13px; font-weight:500; letter-spacing:.22em;
+  text-transform:uppercase;
+  color:#fff;
+  opacity:.65;
+  border-bottom:1px solid rgba(255,255,255,.22);
+  transition: opacity .25s, padding-left .3s var(--ease-out);
+}
+.hero-side-nav a:hover {
+  opacity:1;
+  padding-left:10px;
 }
 .hero-main {
   flex:1; position:relative; cursor:pointer; overflow:hidden;
   border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 40px 80px -30px rgba(10,20,35,.55);
   display:flex;
 }
 .hero-main__img {
   position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;
   transition:opacity .6s ease;
+  animation:heroZoom 14s ease-out infinite alternate;
+  transform-origin:52% 48%;
 }
+@keyframes heroZoom {
+  from { transform:scale(1); }
+  to   { transform:scale(1.07); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-main__img { animation:none; }
+}
+.reveal { opacity:0; transform:translateY(14px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+.reveal.visible { opacity:1; transform:none; }
+
+/* Staggered child reveal — children slide in one-by-one */
+.reveal > * {
+  opacity:0;
+  transform:translateY(8px);
+  transition: opacity .6s var(--ease-out), transform .6s var(--ease-out);
+}
+.reveal.visible > * { opacity:1; transform:none; }
+.reveal.visible > *:nth-child(1) { transition-delay: .08s; }
+.reveal.visible > *:nth-child(2) { transition-delay: .18s; }
+.reveal.visible > *:nth-child(3) { transition-delay: .28s; }
+.reveal.visible > *:nth-child(4) { transition-delay: .38s; }
+.reveal.visible > *:nth-child(5) { transition-delay: .48s; }
+.reveal.visible > *:nth-child(6) { transition-delay: .56s; }
 .hero-main__img.behind { z-index:0; }
 .hero-main__img.front { z-index:1; }
 .hero-main__img.fading { opacity:0; }
 .hero-main__sizer { width:100%; aspect-ratio:16/10; }
 .hero-main__info {
-  position:absolute; bottom:0; left:0; right:0; z-index:2;
-  padding:16px 20px;
-  background:linear-gradient(to top, rgba(0,0,0,.5) 0%, transparent 100%);
-  opacity:0; transition:opacity .3s;
-  display:flex; align-items:baseline; gap:12px;
+  position:absolute; bottom:24px; left:24px; z-index:3;
+  background:rgba(238,243,246,.94);
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  padding:22px 26px 22px;
+  max-width:300px;
+  border-radius:6px;
+  box-shadow:0 24px 48px -20px rgba(10,20,35,.45);
+  display:block;
 }
-.hero-main:hover .hero-main__info { opacity:1; }
+.hero-main__eyebrow {
+  font-family:var(--font-sans);
+  font-size:9px; font-weight:700; letter-spacing:.32em;
+  color:var(--accent);
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
 .hero-main__name {
-  font-family:'Playfair Display',serif;
-  font-size:16px; font-weight:700; color:#fff;
+  font-family:var(--font-serif);
+  font-size:24px; font-weight:700;
+  color:var(--text);
+  letter-spacing:-.01em;
+  line-height:1.1;
+  margin-bottom:8px;
 }
 .hero-main__price {
-  font-family:'Zen Kaku Gothic New',sans-serif;
-  font-size:12px; color:rgba(255,255,255,.7);
+  font-family:var(--font-sans);
+  font-size:13px; font-weight:500;
+  color:var(--text-mid);
+  letter-spacing:.02em;
+  margin-bottom:16px;
+  display:block;
 }
+.hero-main__cta {
+  display:inline-flex; align-items:center; gap:10px;
+  padding:11px 18px;
+  background:var(--text);
+  color:#fff;
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:700; letter-spacing:.26em;
+  text-transform:uppercase;
+  transition:background .25s;
+}
+.hero-main__cta::after {
+  content:''; width:14px; height:1px; background:currentColor;
+  transition:width .3s var(--ease-out);
+}
+.hero-main__cta:hover { background:var(--accent); }
+.hero-main__cta:hover::after { width:20px; }
 .hero-thumbs {
   width:120px; display:flex; flex-direction:column; gap:8px;
   flex-shrink:0;
@@ -223,8 +365,32 @@ button { font-family:inherit; }
 .hero-thumb.active { opacity:1; border-color:rgba(255,255,255,.3); }
 
 @media (max-width:640px) {
-  .hero-wrap { padding:16px 20px 0; gap:8px; }
-  .hero-thumbs { width:60px; gap:6px; }
+  .hero-wrap {
+    padding:16px 20px 0;
+    grid-template-columns: 1fr 60px;
+    grid-template-rows: auto auto;
+    gap:10px;
+  }
+  .hero-side-nav {
+    grid-column: 1 / -1; grid-row: 1;
+    flex-direction:row;
+    gap:22px;
+    overflow-x:auto;
+    scrollbar-width:none;
+    padding:6px 0 10px;
+    border-top:none;
+    border-bottom:1px solid rgba(255,255,255,.18);
+  }
+  .hero-side-nav::-webkit-scrollbar { display:none; }
+  .hero-side-nav a {
+    flex-shrink:0;
+    padding:6px 0;
+    font-size:11px; letter-spacing:.18em;
+    border-bottom:none;
+  }
+  .hero-side-nav a:hover { padding-left:0; }
+  .hero-main { grid-column:1; grid-row:2; }
+  .hero-thumbs { grid-column:2; grid-row:2; width:60px; gap:6px; }
   .hero-main__info { padding:10px 14px; }
   .hero-main__name { font-size:13px; }
   .hero-main__price { font-size:10px; }
@@ -240,15 +406,15 @@ button { font-family:inherit; }
   display:flex; align-items:center; justify-content:space-between;
 }
 .collection-info__title {
-  font-family:'Playfair Display',serif;
-  font-size:clamp(20px,3vw,28px); font-weight:700;
+  font-family:var(--font-serif);
+  font-size:clamp(20px,3vw,28px); font-weight:800; letter-spacing:-.01em;
 }
 .collection-info__date {
-  font-family:'Cormorant Garamond',serif;
+  font-family:var(--font-sans);
   font-size:12px; color:var(--text-light); letter-spacing:.12em; margin-top:3px;
 }
 .collection-info__badge {
-  font-family:'Cormorant Garamond',serif;
+  font-family:var(--font-sans);
   font-size:10px; font-weight:600; letter-spacing:.22em;
   color:var(--accent); border:1px solid rgba(200,48,80,.2);
   padding:6px 16px; border-radius:20px;
@@ -258,26 +424,34 @@ button { font-family:inherit; }
 /* ═══ SECTION HEAD ═══ */
 .sec-head {
   max-width:var(--max-w); margin:0 auto;
-  padding:38px 24px 14px;
-  display:flex; align-items:baseline; justify-content:space-between;
+  padding:48px 40px 22px;
+  display:flex; align-items:flex-end; justify-content:space-between;
+  gap:24px;
 }
 .sec-head__title {
-  font-family:'Playfair Display',serif;
-  font-size:clamp(18px,2.5vw,24px); font-weight:400; font-style:italic; letter-spacing:.03em;
+  font-family:var(--font-serif);
+  font-size:clamp(28px,3.8vw,44px); font-weight:700; letter-spacing:-.015em;
+  line-height:1.08;
   position:relative; display:inline-block; color:#fff;
 }
 .sec-head__title::after {
   content:''; position:absolute;
-  bottom:-4px; left:0; width:60%; height:2px;
-  border-radius:1px; opacity:.5;
+  bottom:-6px; left:0; width:32px; height:1px;
+  opacity:.55;
 }
-/* Each section gets a different accent line */
+/* Accent underline — brand colors */
 .sec-head:nth-of-type(1) .sec-head__title::after { background:var(--accent); }
 .sec-head:nth-of-type(2) .sec-head__title::after { background:var(--purple); }
-.sec-head:nth-of-type(3) .sec-head__title::after { background:var(--green); }
-.sec-head__sub { font-size:11px; color:rgba(255,255,255,.45); margin-left:10px; }
+.sec-head:nth-of-type(3) .sec-head__title::after { background:var(--accent); }
+.sec-head__sub {
+  display:block; margin-left:0; margin-top:14px;
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:600; letter-spacing:.3em;
+  color:rgba(255,255,255,.48);
+  text-transform:uppercase;
+}
 .sec-head__viewall {
-  font-family:'Cormorant Garamond',serif;
+  font-family:var(--font-sans);
   font-size:11px; font-weight:600; letter-spacing:.15em;
   color:rgba(255,255,255,.5); transition:.25s;
 }
@@ -290,7 +464,7 @@ button { font-family:inherit; }
   display:grid; grid-template-columns:repeat(3,1fr); gap:14px;
 }
 .collection-banner {
-  position:relative; border-radius:10px; overflow:hidden;
+  position:relative; border-radius:2px; overflow:hidden;
   aspect-ratio:5/3; cursor:pointer; background:var(--card-bg);
   transition:transform .35s var(--ease-out), box-shadow .35s;
 }
@@ -310,16 +484,16 @@ button { font-family:inherit; }
   display:flex; flex-direction:column; justify-content:flex-end; padding:16px;
 }
 .collection-banner::after {
-  content:''; position:absolute; inset:0; pointer-events:none; border-radius:10px;
+  content:''; position:absolute; inset:0; pointer-events:none; border-radius:2px;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1' numOctaves='4' seed='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
   background-size:120px; opacity:.07; mix-blend-mode:multiply;
 }
 .collection-banner__name {
-  font-family:'Playfair Display',serif;
+  font-family:var(--font-serif);
   font-size:clamp(14px,1.8vw,18px); font-weight:700; color:#fff;
 }
 .collection-banner__count {
-  font-family:'Cormorant Garamond',serif;
+  font-family:var(--font-sans);
   font-size:10px; letter-spacing:.1em; color:rgba(255,255,255,.7); margin-top:2px;
 }
 
@@ -344,17 +518,11 @@ button { font-family:inherit; }
 }
 
 .p-card {
-  width:190px; flex-shrink:0; cursor:pointer;
+  width:200px; flex-shrink:0; cursor:pointer;
   text-decoration:none; color:var(--text);
-  opacity:0; transform:translateY(16px);
   scroll-snap-align: start;
 }
-.p-card.visible {
-  opacity:1; transform:translateY(0);
-  transition:opacity .5s var(--ease-out), transform .5s var(--ease-out);
-}
-.p-card--soldout.visible { opacity:.65; }
-.p-card.visible:hover { transform:translateY(-3px); }
+.p-card--soldout { opacity:.65; }
 .product-grid .p-card { width:auto; }
 
 /* Featured card (first in New Arrival) */
@@ -370,11 +538,11 @@ button { font-family:inherit; }
   display:flex; align-items:flex-end; justify-content:flex-start;
   background:linear-gradient(to top, rgba(10,15,25,.5) 0%, transparent 50%);
   opacity:0; transition:opacity .3s var(--ease-out);
-  border-radius:8px; padding:14px;
+  border-radius:2px; padding:14px;
 }
-.p-card.visible:hover .p-card__quick { opacity:1; }
+.p-card:hover .p-card__quick { opacity:1; }
 .p-card__quick span {
-  font-family:'Zen Kaku Gothic New',sans-serif;
+  font-family:var(--font-sans);
   font-size:10px; font-weight:500; letter-spacing:.06em;
   color:#fff; display:inline-flex; align-items:center; gap:6px;
   transform:translateY(4px); transition:transform .3s var(--ease-out);
@@ -383,207 +551,461 @@ button { font-family:inherit; }
   content:''; display:block; width:14px; height:1px; background:#fff;
   transition:width .25s var(--ease-out);
 }
-.p-card.visible:hover .p-card__quick span { transform:translateY(0); }
-.p-card.visible:hover .p-card__quick span::after { width:22px; }
+.p-card:hover .p-card__quick span { transform:translateY(0); }
+.p-card:hover .p-card__quick span::after { width:22px; }
 
 /* NOTIFY ME overlay */
 .p-card__notify {
   position:absolute; inset:0; z-index:3;
   display:flex; align-items:center; justify-content:center;
   opacity:0; transition:opacity .3s;
-  border-radius:8px;
+  border-radius:2px;
 }
-.p-card--soldout.visible:hover .p-card__notify { opacity:1; }
+.p-card--soldout:hover .p-card__notify { opacity:1; }
 .p-card__notify span {
-  font-family:'Cormorant Garamond',serif;
+  font-family:var(--font-sans);
   font-size:10px; font-weight:600; letter-spacing:.18em;
   color:#fff; background:rgba(106,120,176,.75);
   padding:8px 18px; border-radius:20px;
   backdrop-filter:blur(4px);
   transform:translateY(6px); transition:transform .3s var(--ease-spring);
 }
-.p-card--soldout.visible:hover .p-card__notify span { transform:translateY(0); }
+.p-card--soldout:hover .p-card__notify span { transform:translateY(0); }
 
 .p-card__img {
   width:100%; aspect-ratio:3/4;
-  background:var(--card-bg); border-radius:8px;
+  background:var(--card-bg); border-radius:6px;
   overflow:hidden; position:relative;
-  box-shadow:0 2px 12px rgba(26,42,58,.04), inset 0 0 0 1px rgba(26,42,58,.04);
-  transition:box-shadow .35s;
+  box-shadow:0 20px 40px -20px rgba(10,20,35,.4);
+  transition:box-shadow .4s var(--ease-out);
 }
-.p-card.visible:hover .p-card__img {
-  box-shadow:
-    0 6px 24px rgba(26,42,58,.1),
-    inset 0 0 0 1px rgba(26,42,58,.06),
-    0 0 0 2px rgba(200,48,80,.22),
-    0 0 16px rgba(200,48,80,.1),
-    0 0 12px rgba(106,120,176,.08);
+.p-card:hover .p-card__img {
+  box-shadow:0 30px 60px -20px rgba(10,20,35,.55);
+}
+.p-card-img-fill {
+  transition: transform 1.1s var(--ease-out), filter .5s;
+  filter:saturate(.96);
+}
+.p-card:hover .p-card-img-fill {
+  transform:scale(1.05);
+  filter:saturate(1.08);
 }
 .p-card__img::after {
   content:''; position:absolute; inset:0; pointer-events:none;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='4' seed='12'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
-  background-size:100px; opacity:.06; mix-blend-mode:multiply; border-radius:8px;
+  background-size:100px; opacity:.04; mix-blend-mode:multiply; border-radius:6px;
 }
 .p-card-img-fill {
   width:100%; height:100%;
   object-fit:cover;
 }
-.p-card__badge {
-  position:absolute; top:10px; left:10px;
-  font-family:'Zen Kaku Gothic New',sans-serif;
-  font-size:8px; font-weight:700; letter-spacing:.12em;
-  padding:2px 6px; border-radius:2px;
+.p-card-img-fill--secondary {
+  position:absolute; inset:0;
+  opacity:0;
+  transition:opacity .5s ease;
 }
-.p-card__badge--new { background:transparent; color:#fff; border:1px solid rgba(255,255,255,.6); }
-.p-card__badge--limited { background:transparent; color:#fff; border:1px solid rgba(255,255,255,.6); }
+.p-card:hover .p-card-img-fill--secondary { opacity:1; }
+/* Unified badge (currently hidden — enable by re-adding span.p-card__badge) */
+.p-card__badge {
+  position:absolute; top:12px; left:12px;
+  font-family:var(--font-sans);
+  font-size:9px; font-weight:700; letter-spacing:.22em;
+  padding:4px 9px;
+  color:#fff;
+  background:transparent;
+  border:1px solid rgba(255,255,255,.55);
+  text-transform:uppercase;
+}
 .p-card__badge--soldout {
   top:0; left:0; right:0; bottom:0; width:100%; height:100%;
-  border-radius:0; background:rgba(26,42,58,.32);
+  padding:0;
+  border:none;
+  background:rgba(26,42,58,.55);
   display:flex; align-items:center; justify-content:center;
-  font-family:'Cormorant Garamond',serif;
-  font-size:12px; font-weight:600; letter-spacing:.25em; color:rgba(255,255,255,.8);
+  font-size:11px; letter-spacing:.3em;
+  color:rgba(255,255,255,.88);
 }
-.p-card__body { padding:10px 2px 4px; }
-.p-card__name { font-size:12px; font-weight:500; line-height:1.5; margin-bottom:2px; color:#fff; }
-.p-card__variant { font-size:9.5px; color:rgba(255,255,255,.55); margin-bottom:4px; }
+.p-card__body { padding:18px 2px 6px; }
+.p-card__name {
+  font-family:var(--font-serif);
+  font-size:14px; font-weight:500; line-height:1.35;
+  letter-spacing:-.005em;
+  margin-bottom:8px; color:#fff;
+}
+.p-card__variant {
+  font-family:var(--font-sans);
+  font-size:10px; color:rgba(255,255,255,.5); letter-spacing:.08em;
+  margin-bottom:6px;
+}
 .p-card__price {
-  font-family:'Zen Kaku Gothic New',sans-serif; font-size:13px; font-weight:700; color:#fff;
+  font-family:var(--font-sans);
+  font-size:13px; font-weight:500; letter-spacing:.04em;
+  color:rgba(255,255,255,.85);
 }
-.p-card__tax { font-size:9px; color:rgba(255,255,255,.5); margin-left:2px; }
+.p-card__tax {
+  font-size:9px; letter-spacing:.14em;
+  color:rgba(255,255,255,.4); margin-left:6px;
+  text-transform:uppercase;
+}
 
 /* ═══ PRODUCT DETAIL ═══ */
 .pd-breadcrumb {
-  max-width:var(--max-w); margin:0 auto; padding:14px 24px 0;
-  font-family:'Cormorant Garamond',serif; font-size:10px; color:rgba(255,255,255,.4); letter-spacing:.06em;
+  max-width:var(--max-w); margin:0 auto; padding:28px 40px 0;
+  font-family:var(--font-sans); font-size:10px; font-weight:500;
+  color:rgba(255,255,255,.42); letter-spacing:.26em; text-transform:uppercase;
 }
-.pd-breadcrumb a { color:rgba(255,255,255,.4); transition:color .2s; }
+.pd-breadcrumb a { color:rgba(255,255,255,.42); transition:color .2s; }
 .pd-breadcrumb a:hover { color:#fff; }
 .pd-grid {
   max-width:var(--max-w); margin:0 auto;
-  padding:18px 24px 40px;
-  display:grid; grid-template-columns:1fr 1fr; gap:36px; align-items:start;
+  padding:36px 40px 120px;
+  display:grid; grid-template-columns:1.1fr 1fr; gap:64px; align-items:start;
 }
 .pd-main-img {
-  width:100%; aspect-ratio:3/4;
-  background:var(--card-bg); border-radius:10px; overflow:hidden;
+  width:100%; aspect-ratio:4/5;
+  background:var(--card-bg); border-radius:6px; overflow:hidden;
+  box-shadow:0 40px 80px -30px rgba(10,20,35,.55);
+  position:relative;
 }
-.pd-img-fill { width:100%; height:100%; object-fit:cover; }
-.pd-thumbs { display:flex; gap:7px; margin-top:10px; }
+.pd-img-fill {
+  width:100%; height:100%; object-fit:cover;
+  transition: transform 1s var(--ease-out), filter .5s;
+  filter:saturate(.96);
+}
+.pd-main-img:hover .pd-img-fill {
+  transform:scale(1.03);
+  filter:saturate(1.08);
+}
+.pd-thumbs { display:flex; gap:10px; margin-top:14px; }
 .pd-thumb {
-  width:62px; height:62px; border-radius:6px;
+  width:72px; height:72px; border-radius:4px;
   background:var(--card-bg); overflow:hidden; cursor:pointer;
-  border:2px solid transparent; transition:.25s var(--ease-out);
+  border:1px solid rgba(255,255,255,.15);
+  transition:.3s var(--ease-out); opacity:.6;
 }
-.pd-thumb.active { border-color:var(--text); }
-.pd-thumb:hover:not(.active) { border-color:rgba(26,42,58,.14); }
+.pd-thumb.active { border-color:rgba(255,255,255,.7); opacity:1; }
+.pd-thumb:hover:not(.active) { border-color:rgba(255,255,255,.3); opacity:.85; }
 .pd-thumb-fill { width:100%; height:100%; object-fit:cover; }
 
-.pd-info { padding-top:4px; }
+.pd-info { padding-top:4px; position:sticky; top:90px; }
 .pd-info__name {
-  font-family:'Playfair Display',serif;
-  font-size:clamp(18px,2.8vw,24px); font-weight:700; margin-bottom:10px; color:#fff;
+  font-family:var(--font-serif);
+  font-size:clamp(32px,4.2vw,52px);
+  font-weight:700; line-height:1.04;
+  letter-spacing:-.02em;
+  color:#fff;
+  margin-bottom:22px;
 }
 .pd-info__price {
-  font-family:'Zen Kaku Gothic New',sans-serif; font-size:22px; font-weight:700; margin-bottom:3px; color:#fff;
+  font-family:var(--font-sans);
+  font-size:clamp(20px,2.2vw,26px);
+  font-weight:500; letter-spacing:.01em;
+  color:rgba(255,255,255,.92);
+  margin-bottom:8px;
+  display:flex; align-items:baseline; gap:12px;
 }
-.pd-info__tax { font-size:10px; color:rgba(255,255,255,.5); margin-bottom:22px; }
+.pd-info__tax {
+  font-size:9px; letter-spacing:.26em;
+  color:rgba(255,255,255,.42);
+  text-transform:uppercase;
+}
+.pd-info__divider {
+  height:1px; background:rgba(255,255,255,.15);
+  margin:36px 0 30px;
+}
 .pd-info__label {
-  font-family:'Cormorant Garamond',serif;
-  font-size:10px; font-weight:700; letter-spacing:.14em;
-  color:rgba(255,255,255,.55); margin-bottom:10px;
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:700; letter-spacing:.3em;
+  color:rgba(255,255,255,.55);
+  text-transform:uppercase;
+  margin-bottom:14px;
 }
-.pd-colors { display:flex; gap:10px; margin-bottom:22px; }
+.pd-colors { display:flex; gap:12px; margin-bottom:30px; }
 .pd-color-swatch {
-  width:36px; height:36px; border-radius:50%;
-  border:2px solid transparent; cursor:pointer; transition:.3s var(--ease-spring);
+  width:34px; height:34px; border-radius:50%;
+  border:1px solid rgba(255,255,255,.2);
+  cursor:pointer;
+  transition:.3s var(--ease-out);
+  position:relative;
 }
-.pd-color-swatch:hover { transform:scale(1.12); }
+.pd-color-swatch:hover { transform:scale(1.06); }
 .pd-color-swatch.active {
-  border-color:var(--text);
-  box-shadow:0 0 0 3px var(--bg), 0 0 0 5px var(--text);
+  border-color:#fff;
+  box-shadow:0 0 0 2px var(--bg), 0 0 0 3px rgba(255,255,255,.85);
 }
-.pd-sizes { display:flex; gap:7px; flex-wrap:wrap; margin-bottom:22px; }
+.pd-sizes { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:30px; }
 .pd-size-pill {
-  font-family:'Cormorant Garamond',serif;
-  font-size:12px; font-weight:600; letter-spacing:.12em;
-  padding:8px 20px; border-radius:20px;
-  border:1px solid var(--border); background:transparent;
-  color:var(--text); cursor:pointer; transition:.25s;
+  font-family:var(--font-sans);
+  font-size:11px; font-weight:600; letter-spacing:.2em;
+  padding:11px 20px; border-radius:2px;
+  border:1px solid rgba(255,255,255,.25); background:transparent;
+  color:rgba(255,255,255,.85); cursor:pointer;
+  text-transform:uppercase;
+  transition:.25s var(--ease-out);
+  min-width:54px;
 }
-.pd-size-pill.active { background:var(--text); color:#d8e4ec; border-color:var(--text); }
-.pd-size-pill:hover:not(.active) { border-color:rgba(26,42,58,.3); }
-.pd-stock { font-size:11px; color:#fff; opacity:.7; margin-bottom:16px; }
+.pd-size-pill.active { background:#fff; color:#1a2a3a; border-color:#fff; }
+.pd-size-pill:hover:not(.active) { border-color:rgba(255,255,255,.55); color:#fff; }
+.pd-stock {
+  font-family:var(--font-sans);
+  font-size:11px; color:var(--accent); font-weight:600; letter-spacing:.06em;
+  margin-bottom:20px;
+}
 .pd-add-btn {
-  width:100%; padding:16px; background:var(--text); color:#d8e4ec;
+  width:100%; padding:20px; background:#fff; color:var(--text);
   border:none; border-radius:0;
-  font-family:'Zen Kaku Gothic New',sans-serif;
-  font-size:12px; font-weight:700; letter-spacing:.15em;
-  cursor:pointer; transition:background .25s, transform .15s; margin-bottom:24px;
+  font-family:var(--font-sans);
+  font-size:11px; font-weight:700; letter-spacing:.3em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:background .3s var(--ease-out), color .3s;
+  margin-bottom:30px;
+  display:inline-flex; align-items:center; justify-content:center; gap:12px;
 }
-.pd-add-btn:hover { background:var(--accent); transform:translateY(-1px); }
-.pd-add-btn:active { transform:scale(.98); }
-.pd-add-btn:disabled { opacity:.35; cursor:not-allowed; }
+.pd-add-btn::after {
+  content:''; width:18px; height:1px; background:currentColor;
+  transition:width .3s var(--ease-out);
+}
+.pd-add-btn:hover { background:var(--accent); color:#fff; }
+.pd-add-btn:hover::after { width:24px; }
+.pd-add-btn:active { transform:scale(.99); }
+.pd-add-btn:disabled { opacity:.4; cursor:not-allowed; background:rgba(255,255,255,.2); color:rgba(255,255,255,.5); }
+.pd-add-btn:disabled::after { display:none; }
+
 .pd-share {
   display:flex; align-items:center; gap:10px;
-  margin-bottom:28px; padding-top:4px;
+  margin-bottom:40px;
 }
 .pd-share__label {
-  font-family:'Zen Kaku Gothic New',sans-serif;
-  font-size:10px; font-weight:700; letter-spacing:.14em;
-  color:rgba(255,255,255,.55); margin-right:4px;
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:700; letter-spacing:.3em;
+  color:rgba(255,255,255,.55);
+  text-transform:uppercase;
+  margin-right:6px;
 }
 .pd-share__btn {
   display:flex; align-items:center; justify-content:center;
-  width:30px; height:30px; border-radius:50%;
-  color:#fff; opacity:.5;
-  border:1px solid rgba(255,255,255,.15);
-  transition:opacity .25s, border-color .25s, transform .2s;
+  width:34px; height:34px; border-radius:0;
+  color:#fff; opacity:.7;
+  border:1px solid rgba(255,255,255,.28);
+  background:transparent;
+  transition:opacity .25s, border-color .25s, background .25s;
 }
-.pd-share__btn:hover { opacity:1; border-color:rgba(255,255,255,.4); transform:translateY(-2px); }
-.pd-detail-label {
-  font-family:'Cormorant Garamond',serif;
-  font-size:10px; font-weight:700; letter-spacing:.14em;
-  color:rgba(255,255,255,.55); margin-bottom:8px;
+.pd-share__btn:hover {
+  opacity:1; border-color:rgba(255,255,255,.6);
+  background:rgba(255,255,255,.08);
 }
-.pd-detail-text { font-size:12px; line-height:2.2; color:rgba(255,255,255,.6); font-weight:300; }
 
-/* ═══ ITEMS FILTER ═══ */
+.pd-detail-label {
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:700; letter-spacing:.3em;
+  color:rgba(255,255,255,.55);
+  text-transform:uppercase;
+  margin-bottom:14px;
+  padding-top:6px;
+  border-top:1px solid rgba(255,255,255,.12);
+  padding-top:30px;
+  margin-top:0;
+}
+.pd-detail-text {
+  font-family:var(--font-jp);
+  font-size:13px; line-height:2.1;
+  color:rgba(255,255,255,.72); font-weight:300;
+}
+
+/* ═══ ITEMS PAGE ═══ */
+.items-head {
+  max-width:var(--max-w); margin:0 auto;
+  padding:24px 40px 10px;
+}
+.items-head__eyebrow {
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:700; letter-spacing:.32em;
+  color:var(--accent);
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+.items-head__title {
+  font-family:var(--font-serif);
+  font-size:clamp(34px, 4.8vw, 60px);
+  font-weight:700; line-height:1.04;
+  letter-spacing:-.02em;
+  color:#fff;
+  margin-bottom:12px;
+}
+.items-head__sub {
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:600; letter-spacing:.3em;
+  color:rgba(255,255,255,.55);
+  text-transform:uppercase;
+}
+
 .items-filter {
   max-width:var(--max-w); margin:0 auto;
-  padding:16px 24px 12px;
+  padding:30px 40px 40px;
   display:flex; gap:8px; flex-wrap:wrap;
 }
 .filter-pill {
-  font-family:'Cormorant Garamond',serif;
-  font-size:11px; font-weight:600; letter-spacing:.15em;
-  padding:8px 20px; border-radius:20px;
-  border:1px solid rgba(255,255,255,.15); background:transparent;
-  color:rgba(255,255,255,.5); cursor:pointer; transition:.25s;
+  font-family:var(--font-sans);
+  font-size:11px; font-weight:600; letter-spacing:.22em;
+  padding:11px 18px; border-radius:2px;
+  border:1px solid rgba(255,255,255,.22); background:transparent;
+  color:rgba(255,255,255,.68); cursor:pointer;
+  text-transform:uppercase;
+  transition:.25s var(--ease-out);
 }
-.filter-pill:hover { border-color:rgba(255,255,255,.3); color:rgba(255,255,255,.7); }
-.filter-pill.active { background:rgba(255,255,255,.15); color:#fff; border-color:rgba(255,255,255,.3); }
+.filter-pill:hover {
+  border-color:rgba(255,255,255,.55); color:#fff;
+}
+.filter-pill.active {
+  background:#fff; color:var(--text);
+  border-color:#fff;
+}
 
 /* ═══ FOOTER ═══ */
+/* ═══ SITE FOOTER ═══ */
 .site-footer {
+  margin-top:60px;
+  padding:80px 40px 32px;
+  border-top:1px solid rgba(255,255,255,.12);
+  background:linear-gradient(to bottom, transparent 0%, rgba(10,20,35,.25) 100%);
+  position:relative;
+}
+.site-footer__inner {
   max-width:var(--max-w); margin:0 auto;
-  padding:40px 24px 32px; text-align:center;
-  border-top:1px solid rgba(200,48,80,.1);
 }
-.site-footer__links {
-  display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-bottom:12px;
+
+/* Brand block */
+.site-footer__brand {
+  display:flex; justify-content:space-between; align-items:flex-end;
+  padding-bottom:48px;
+  margin-bottom:48px;
+  border-bottom:1px solid rgba(255,255,255,.1);
+  gap:40px;
 }
-.site-footer__links a { font-size:11px; color:#fff; opacity:.38; font-weight:300; transition:.25s; }
-.site-footer__links a:hover { opacity:.55; color:var(--accent); }
-.site-footer__links a:nth-child(2):hover { color:var(--purple); }
-.site-footer__links a:nth-child(3):hover { color:var(--green); }
+.site-footer__logo {
+  font-family:var(--font-serif);
+  font-size:clamp(42px, 6vw, 72px);
+  font-weight:900;
+  color:#fff;
+  letter-spacing:-.01em;
+  line-height:.95;
+}
+.site-footer__logo em {
+  font-style:normal;
+  display:block;
+  opacity:.5;
+}
+.site-footer__tagline {
+  font-family:var(--font-sans);
+  font-size:11px; font-weight:500; letter-spacing:.2em;
+  color:rgba(255,255,255,.55);
+  text-transform:uppercase;
+  text-align:right;
+  max-width:260px;
+  line-height:1.8;
+}
+
+/* 3-column body */
+.site-footer__cols {
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:40px;
+  margin-bottom:64px;
+}
+.site-footer__brand-right {
+  display:flex; flex-direction:column;
+  align-items:flex-end;
+  gap:20px;
+}
+.site-footer__col h4 {
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:700; letter-spacing:.3em;
+  color:rgba(255,255,255,.5);
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+.site-footer__col ul {
+  list-style:none;
+  display:flex; flex-direction:column;
+  gap:10px;
+}
+.site-footer__col a {
+  font-family:var(--font-sans);
+  font-size:13px;
+  color:rgba(255,255,255,.82);
+  transition: color .25s, letter-spacing .3s var(--ease-out);
+  display:inline-block;
+}
+.site-footer__col a:hover {
+  color:#fff;
+  letter-spacing:.01em;
+}
+
+/* Social */
+.site-footer__social {
+  display:flex; gap:10px;
+}
+.site-footer__social a {
+  width:36px; height:36px;
+  display:inline-flex; align-items:center; justify-content:center;
+  border:1px solid rgba(255,255,255,.28);
+  color:#fff;
+  opacity:.7;
+  transition: opacity .25s, background .25s, border-color .25s;
+}
+.site-footer__social a:hover {
+  opacity:1;
+  background:rgba(255,255,255,.08);
+  border-color:rgba(255,255,255,.6);
+}
+.site-footer__social svg {
+  width:15px; height:15px;
+  stroke:currentColor; fill:none; stroke-width:1.6;
+}
+.site-footer__social svg.filled { fill:currentColor; stroke:none; }
+
+/* Bottom bar */
+.site-footer__bottom {
+  display:flex; justify-content:space-between; align-items:center;
+  padding-top:28px;
+  border-top:1px solid rgba(255,255,255,.08);
+  gap:20px;
+}
 .site-footer__copy {
-  font-family:'Cormorant Garamond',serif; font-size:10px; color:#fff; opacity:.22; letter-spacing:.08em;
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:500; letter-spacing:.24em;
+  color:rgba(255,255,255,.45);
+  text-transform:uppercase;
+}
+.site-footer__meta {
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:500; letter-spacing:.24em;
+  color:rgba(255,255,255,.35);
+  text-transform:uppercase;
+}
+
+@media (max-width: 900px) {
+  .site-footer { padding:56px 24px 24px; margin-top:40px; }
+  .site-footer__brand {
+    flex-direction:column; align-items:flex-start;
+    padding-bottom:32px; margin-bottom:32px; gap:18px;
+  }
+  .site-footer__tagline { text-align:left; }
+  .site-footer__brand-right { align-items:flex-start; }
+  .site-footer__tagline { text-align:left; }
+  .site-footer__cols {
+    grid-template-columns: 1fr 1fr;
+    gap:32px 24px;
+    margin-bottom:40px;
+  }
+  .site-footer__bottom { flex-direction:column; align-items:flex-start; gap:10px; }
 }
 
 /* ═══ TOAST ═══ */
 .toast {
   position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(20px);
-  font-family:'Cormorant Garamond',serif;
+  font-family:var(--font-sans);
   font-size:12px; font-weight:600; letter-spacing:.15em;
   padding:10px 28px; border-radius:20px;
   background:var(--text); color:#d8e4ec;
@@ -601,74 +1023,154 @@ button { font-family:inherit; }
 }
 .cart-panel.open { pointer-events:auto; visibility:visible; }
 .cart-panel__backdrop {
-  position:absolute; inset:0; background:rgba(0,0,0,.5);
-  opacity:0; transition:opacity .3s;
+  position:absolute; inset:0;
+  background:rgba(10,18,28,.55);
+  backdrop-filter:blur(2px); -webkit-backdrop-filter:blur(2px);
+  opacity:0; transition:opacity .35s;
 }
 .cart-panel.open .cart-panel__backdrop { opacity:1; }
 .cart-panel__inner {
-  position:absolute; top:0; right:0; bottom:0; width:380px; max-width:90vw;
-  background:#2c3e5a; display:flex; flex-direction:column;
-  transform:translateX(100%); transition:transform .35s var(--ease-out);
-  box-shadow:-10px 0 40px rgba(0,0,0,.3);
+  position:absolute; top:0; right:0; bottom:0; width:440px; max-width:94vw;
+  background:#1e2e42;
+  display:flex; flex-direction:column;
+  transform:translateX(100%); transition:transform .42s var(--ease-out);
+  box-shadow:-20px 0 60px rgba(0,0,0,.5);
 }
 .cart-panel.open .cart-panel__inner { transform:translateX(0); }
 .cart-panel__head {
   display:flex; align-items:center; justify-content:space-between;
-  padding:20px 24px; border-bottom:1px solid rgba(255,255,255,.08);
+  padding:28px 32px 22px;
+  border-bottom:1px solid rgba(255,255,255,.1);
 }
 .cart-panel__title {
-  font-family:'Zen Kaku Gothic New',sans-serif;
-  font-size:13px; font-weight:700; letter-spacing:.18em; color:#fff;
+  font-family:var(--font-serif);
+  font-size:24px; font-weight:700; letter-spacing:-.01em;
+  color:#fff;
+  display:flex; align-items:baseline; gap:10px;
+}
+.cart-panel__title-count {
+  font-family:var(--font-sans);
+  font-size:11px; font-weight:600; letter-spacing:.24em;
+  color:rgba(255,255,255,.5);
+  text-transform:uppercase;
 }
 .cart-panel__close {
-  background:transparent; border:none; color:#fff; font-size:24px;
-  cursor:pointer; padding:0; width:28px; height:28px;
-  opacity:.5; transition:opacity .2s;
+  background:transparent; border:none; color:#fff;
+  font-family:var(--font-sans);
+  font-size:22px; font-weight:300; line-height:1;
+  cursor:pointer; padding:0;
+  width:32px; height:32px;
+  display:flex; align-items:center; justify-content:center;
+  opacity:.55; transition:opacity .2s, transform .3s var(--ease-out);
 }
-.cart-panel__close:hover { opacity:1; }
+.cart-panel__close:hover { opacity:1; transform:rotate(90deg); }
 .cart-panel__body {
-  flex:1; overflow-y:auto; padding:20px 24px;
+  flex:1; overflow-y:auto; padding:14px 32px 20px;
 }
 .cart-panel__empty {
-  text-align:center; padding:60px 0;
-  color:rgba(255,255,255,.4); font-size:12px;
+  text-align:center; padding:80px 20px;
+  color:rgba(255,255,255,.55);
+  font-family:var(--font-jp);
+  font-size:13px; line-height:1.9;
+}
+.cart-panel__empty::before {
+  content:''; display:block;
+  width:48px; height:1px;
+  background:rgba(255,255,255,.25);
+  margin:0 auto 24px;
 }
 .cart-item {
-  display:flex; gap:14px; padding:14px 0;
-  border-bottom:1px solid rgba(255,255,255,.06);
+  display:flex; gap:16px; padding:20px 0;
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
+.cart-item:last-child { border-bottom:none; }
 .cart-item__img {
-  width:70px; height:70px; object-fit:cover;
+  width:84px; height:104px;
+  object-fit:cover;
   flex-shrink:0;
+  background:var(--card-bg);
+  border-radius:6px;
 }
-.cart-item__info { flex:1; display:flex; flex-direction:column; justify-content:space-between; }
-.cart-item__name { font-size:12px; color:#fff; font-weight:500; }
+.cart-item__info {
+  flex:1; display:flex; flex-direction:column; justify-content:space-between;
+  min-width:0;
+}
+.cart-item__name {
+  font-family:var(--font-serif);
+  font-size:14px; font-weight:500; line-height:1.35;
+  letter-spacing:-.005em;
+  color:#fff;
+  margin-bottom:6px;
+}
 .cart-item__meta {
-  font-size:10px; color:rgba(255,255,255,.5); margin-top:2px;
+  font-family:var(--font-sans);
+  font-size:10px; letter-spacing:.16em;
+  color:rgba(255,255,255,.5);
+  text-transform:uppercase;
 }
-.cart-item__price { font-size:12px; color:#fff; font-weight:700; }
+.cart-item__price {
+  font-family:var(--font-sans);
+  font-size:13px; font-weight:500;
+  letter-spacing:.02em;
+  color:rgba(255,255,255,.88);
+  margin-top:6px;
+}
 .cart-item__remove {
-  background:transparent; border:none; color:rgba(255,255,255,.4);
-  cursor:pointer; font-size:11px; text-align:left; padding:0;
-  transition:color .2s;
+  background:transparent; border:none;
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:500; letter-spacing:.2em;
+  color:rgba(255,255,255,.42);
+  text-transform:uppercase;
+  cursor:pointer; text-align:left; padding:0;
+  margin-top:8px;
+  align-self:flex-start;
+  transition:color .25s;
 }
-.cart-item__remove:hover { color:#fff; }
+.cart-item__remove:hover { color:var(--accent); }
 .cart-panel__foot {
-  padding:20px 24px; border-top:1px solid rgba(255,255,255,.08);
+  padding:24px 32px 28px;
+  border-top:1px solid rgba(255,255,255,.12);
+  background:rgba(10,20,35,.2);
 }
 .cart-panel__subtotal {
-  display:flex; justify-content:space-between;
-  font-family:'Zen Kaku Gothic New',sans-serif;
-  font-size:13px; color:#fff; margin-bottom:14px;
+  display:flex; justify-content:space-between; align-items:baseline;
+  margin-bottom:6px;
 }
-.cart-panel__subtotal span:last-child { font-weight:700; font-size:16px; }
+.cart-panel__subtotal > span:first-child {
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:700; letter-spacing:.3em;
+  color:rgba(255,255,255,.6);
+  text-transform:uppercase;
+}
+.cart-panel__subtotal > span:last-child {
+  font-family:var(--font-serif);
+  font-size:22px; font-weight:700;
+  color:#fff; letter-spacing:-.01em;
+}
+.cart-panel__foot-note {
+  font-family:var(--font-sans);
+  font-size:10px; letter-spacing:.14em;
+  color:rgba(255,255,255,.4);
+  text-transform:uppercase;
+  margin-bottom:20px;
+}
 .cart-panel__checkout {
-  width:100%; padding:16px; background:var(--accent); color:#fff;
-  border:none; font-family:'Zen Kaku Gothic New',sans-serif;
-  font-size:12px; font-weight:700; letter-spacing:.15em;
-  cursor:pointer; transition:opacity .2s;
+  width:100%; padding:18px;
+  background:#fff; color:var(--text);
+  border:none; border-radius:0;
+  font-family:var(--font-sans);
+  font-size:11px; font-weight:700; letter-spacing:.3em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:background .3s var(--ease-out), color .3s;
+  display:inline-flex; align-items:center; justify-content:center; gap:12px;
 }
-.cart-panel__checkout:hover { opacity:.85; }
+.cart-panel__checkout::after {
+  content:''; width:18px; height:1px; background:currentColor;
+  transition:width .3s var(--ease-out);
+}
+.cart-panel__checkout:hover { background:var(--accent); color:#fff; }
+.cart-panel__checkout:hover::after { width:24px; }
 
 /* ═══ RESPONSIVE ═══ */
 
@@ -677,7 +1179,7 @@ button { font-family:inherit; }
   :root { --max-w:100%; }
   .site-header__inner, .collection-info, .sec-head,
   .product-scroll, .product-grid, .pd-grid, .pd-breadcrumb,
-  .collection-banners, .site-footer { padding-left:20px; padding-right:20px; }
+  .collection-banners { padding-left:20px; padding-right:20px; }
   .product-grid { grid-template-columns:repeat(3, 1fr); }
 }
 
@@ -687,12 +1189,9 @@ button { font-family:inherit; }
   .site-header__top { padding:12px 0 8px; }
   .site-header__brand-name { font-size:15px; }
   .site-header__logo-img { height:20px; }
-  .site-header__util a { font-size:8px; }
-  .site-header__nav { gap:18px; padding:8px 0 10px; overflow-x:auto; scrollbar-width:none; justify-content:flex-start; }
-  .site-header__nav::-webkit-scrollbar { display:none; }
-  .site-header__nav a { flex-shrink:0; font-size:9px; letter-spacing:.14em; }
-  .site-header__logo-img { height:26px; }
-  .site-header__brand-name { font-size:13px; }
+  .site-header__util a { font-size:9px; letter-spacing:.18em; }
+  .site-header__logo-img { height:22px; }
+  .site-header__brand-name { font-size:14px; }
 
   .hero-slider__slide { flex:0 0 90%; max-width:90%; }
   .hero-slider__track { gap:10px; }
@@ -710,16 +1209,559 @@ button { font-family:inherit; }
   .p-card--featured .p-card__img { aspect-ratio:3/4; }
   .product-grid { padding:0 20px 10px; grid-template-columns:repeat(2,1fr); gap:10px; }
 
-  .pd-grid { grid-template-columns:1fr; gap:22px; padding:14px 20px 100px; }
+  /* Product detail — stack & sticky release */
+  .pd-grid { grid-template-columns:1fr; gap:28px; padding:16px 20px 110px; }
+  .pd-info { position:static; padding-top:0; }
+  .pd-info__divider { margin:22px 0 20px; }
+  .pd-thumb { width:56px; height:56px; }
   .pd-add-btn {
     position:fixed; bottom:0; left:0; right:0; z-index:400;
     border-radius:0; margin:0; padding:18px;
-    box-shadow:0 -2px 20px rgba(0,0,0,.15);
+    letter-spacing:.26em;
+    box-shadow:0 -10px 30px rgba(10,20,35,.35);
   }
-  .pd-breadcrumb { padding:10px 20px 0; }
-  .site-footer { padding:24px 20px 22px; }
+  .pd-breadcrumb { padding:12px 20px 0; }
+
+  /* Items page */
+  .items-head { padding:20px 20px 6px; }
+  .items-filter { padding:20px 20px 24px; gap:6px; }
+  .filter-pill { padding:9px 14px; font-size:10px; letter-spacing:.2em; }
+
+  /* Footer — compact */
+  .site-footer { padding:48px 20px 20px; margin-top:32px; }
+  .site-footer__logo { font-size:36px; }
+  .site-footer__brand { padding-bottom:26px; margin-bottom:26px; gap:14px; }
+  .site-footer__cols { grid-template-columns: 1fr 1fr; gap:24px; margin-bottom:28px; }
+  .site-footer__col h4 { margin-bottom:12px; }
+  .site-footer__col a { font-size:12px; }
+
+  /* Cart drawer — compact padding */
+  .cart-panel__inner { width:100%; max-width:100%; }
+  .cart-panel__head { padding:20px 20px 16px; }
+  .cart-panel__title { font-size:20px; }
+  .cart-panel__body { padding:10px 20px 16px; }
+  .cart-panel__foot { padding:18px 20px 22px; }
+  .cart-item__img { width:72px; height:90px; }
+
+  /* Section heads — compact */
+  .sec-head { padding:28px 20px 14px; gap:16px; }
+  .sec-head__title { font-size:26px; }
+  .sec-head__sub { margin-top:10px; font-size:9px; letter-spacing:.26em; }
+
+  /* Section dividers — reduced spacing */
+  .section-divider { margin:56px auto 0; padding:0 20px; gap:10px; }
+
+  /* Collage, insta-feed, season */
+  .collage { margin:28px auto 60px; padding:0 20px; }
+  .collage__head { flex-direction:column; align-items:flex-start; gap:14px; }
+  .insta-feed { margin:28px 0 60px; }
+  .insta-feed__head { padding:0 20px; margin-bottom:16px; }
+  .season-archive { padding:0 20px; margin-bottom:48px; }
+
+  /* Gallery */
+  .gallery-hero { padding:20px 20px 36px; margin:20px auto 32px; }
+  .gallery-sns { padding:0 20px; margin-bottom:60px; }
+
   .dev { top:auto; bottom:12px; right:12px; background:rgba(26,42,58,.18); }
-  .items-filter { padding:12px 20px 8px; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   SECTION DIVIDER — エディトリアル風区切り
+   ═══════════════════════════════════════════════════════ */
+.section-divider {
+  max-width:var(--max-w);
+  margin:120px auto 0;
+  padding:0 40px;
+  display:flex; align-items:center; gap:16px;
+}
+.section-divider__num {
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:700; letter-spacing:.32em;
+  color:rgba(255,255,255,.7);
+}
+.section-divider__label {
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:600; letter-spacing:.3em;
+  color:rgba(255,255,255,.55);
+  text-transform:uppercase;
+}
+.section-divider__dot {
+  width:22px; height:1px;
+  background:var(--accent);
+}
+.section-divider__line {
+  flex:1; height:1px;
+  background:linear-gradient(to right, rgba(255,255,255,.2) 0%, rgba(255,255,255,.04) 100%);
+}
+@media (max-width:900px) {
+  .section-divider { margin:80px auto 0; padding:0 24px; gap:12px; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   FEATURE SPREAD — 1商品を雑誌見開き風に大きく扱う
+   ═══════════════════════════════════════════════════════ */
+.feature {
+  max-width:var(--max-w);
+  margin:80px auto;
+  padding:0 40px;
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap:48px;
+  align-items:center;
+}
+.feature--reverse { grid-template-columns: .9fr 1.1fr; }
+.feature--reverse .feature__media { order:2; }
+.feature--reverse .feature__body { order:1; }
+.feature__media {
+  position:relative;
+  aspect-ratio: 4/5;
+  overflow:hidden;
+  border-radius:6px;
+  box-shadow:0 30px 60px -20px rgba(10,20,35,.45);
+}
+.feature__media img {
+  width:100%; height:100%; object-fit:cover;
+  transition: transform 1.2s var(--ease-out);
+}
+.feature:hover .feature__media img { transform:scale(1.04); }
+.feature__tag {
+  position:absolute; top:18px; left:18px;
+  font-family:var(--font-sans);
+  font-size:9px; font-weight:700; letter-spacing:.22em;
+  color:#fff;
+  background:var(--accent);
+  padding:6px 12px;
+}
+.feature__eyebrow {
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:700; letter-spacing:.3em;
+  color:var(--accent);
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+.feature__title {
+  font-family:var(--font-serif);
+  font-size:clamp(32px, 4.2vw, 56px);
+  font-weight:700;
+  line-height:1.05;
+  letter-spacing:-.01em;
+  color:#fff;
+  margin-bottom:20px;
+}
+.feature__title em {
+  font-style:inherit; font-weight:inherit;
+  color:inherit;
+}
+.feature__desc {
+  font-family:var(--font-sans);
+  font-size:14px; line-height:1.8;
+  color:rgba(255,255,255,.78);
+  margin-bottom:28px;
+  max-width:420px;
+}
+.feature__meta {
+  display:flex; align-items:center; gap:20px;
+  margin-bottom:28px;
+}
+.feature__price {
+  font-family:var(--font-sans);
+  font-size:22px; font-weight:600;
+  color:#fff;
+}
+.feature__cta {
+  display:inline-flex; align-items:center; gap:10px;
+  padding:14px 28px;
+  background:var(--accent);
+  color:#fff;
+  font-family:var(--font-sans);
+  font-size:11px; font-weight:700; letter-spacing:.2em;
+  text-transform:uppercase;
+  border:none; cursor:pointer;
+  transition:.3s var(--ease-out);
+}
+.feature__cta:hover { filter:brightness(.92); transform:translateX(3px); }
+.feature__cta::after { content:'→'; }
+
+/* ═══════════════════════════════════════════════════════
+   MINI COLLAGE — 使われてるシーンをエディトリアル風に
+   ═══════════════════════════════════════════════════════ */
+.collage {
+  max-width:var(--max-w);
+  margin:48px auto 120px;
+  padding:0 40px;
+}
+.collage__head {
+  display:flex; justify-content:space-between; align-items:flex-end;
+  margin-bottom:32px;
+}
+.collage__eyebrow {
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:700; letter-spacing:.3em;
+  color:var(--accent);
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.collage__title {
+  font-family:var(--font-serif);
+  font-size:clamp(34px, 4.5vw, 56px);
+  font-weight:700;
+  color:#fff;
+  line-height:1.08;
+  letter-spacing:-.015em;
+}
+.collage__title em { font-style:inherit; font-weight:inherit; opacity:1; }
+.collage__sub {
+  margin-top:10px;
+  font-family:var(--font-jp);
+  font-size:12px; line-height:1.7;
+  color:rgba(255,255,255,.62);
+  max-width:380px;
+}
+.collage__more {
+  font-family:var(--font-sans);
+  font-size:11px; font-weight:600; letter-spacing:.18em;
+  color:rgba(255,255,255,.7);
+  padding-bottom:4px;
+  border-bottom:1px solid rgba(255,255,255,.3);
+  transition:.25s;
+}
+.collage__more:hover { color:#fff; border-color:#fff; }
+.collage__grid {
+  display:grid;
+  grid-template-columns: 1.3fr 1fr 1.1fr;
+  grid-template-rows: 240px 180px;
+  gap:14px;
+}
+.collage__item {
+  position:relative;
+  overflow:hidden;
+  border-radius:6px;
+  cursor:pointer;
+}
+.collage__item img {
+  width:100%; height:100%; object-fit:cover;
+  transition: transform 1.2s var(--ease-out), filter .6s;
+  filter:saturate(.95);
+}
+.collage__item:hover img { transform:scale(1.05); filter:saturate(1.1); }
+.collage__item:nth-child(1) { grid-row: 1 / 3; }
+.collage__item:nth-child(4) { grid-row: 2 / 3; grid-column: 2 / 4; }
+.collage__caption {
+  position:absolute; bottom:0; left:0; right:0;
+  padding:14px;
+  background:linear-gradient(to top, rgba(10,20,35,.7), transparent);
+  color:#fff;
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:500; letter-spacing:.12em;
+  text-transform:uppercase;
+  opacity:0; transform:translateY(6px);
+  transition:.3s var(--ease-out);
+}
+.collage__item:hover .collage__caption { opacity:1; transform:translateY(0); }
+
+/* ═══════════════════════════════════════════════════════
+   INSTAGRAM FEED — Horizontal scroller of latest posts
+   ═══════════════════════════════════════════════════════ */
+.insta-feed {
+  margin:48px 0 100px;
+  padding:0 0 10px;
+}
+.insta-feed__head {
+  max-width:var(--max-w);
+  margin:0 auto 24px;
+  padding:0 40px;
+  display:flex; align-items:flex-end; justify-content:space-between;
+  gap:16px;
+}
+.insta-feed__eyebrow {
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:700; letter-spacing:.32em;
+  color:var(--accent);
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.insta-feed__title {
+  font-family:var(--font-serif);
+  font-size:clamp(34px, 4.5vw, 56px);
+  font-weight:700; line-height:1.08;
+  letter-spacing:-.015em;
+  color:#fff;
+}
+.insta-feed__title em { font-style:inherit; font-weight:inherit; opacity:1; }
+.insta-feed__handle {
+  font-family:var(--font-sans);
+  font-size:11px; font-weight:600; letter-spacing:.16em;
+  color:rgba(255,255,255,.72);
+  padding-bottom:4px;
+  border-bottom:1px solid rgba(255,255,255,.3);
+  white-space:nowrap;
+  transition:.25s;
+}
+.insta-feed__handle:hover { color:#fff; border-color:#fff; }
+
+.insta-feed__scroller {
+  overflow:hidden;
+  padding-bottom:12px;
+}
+
+.insta-feed__row {
+  display:inline-flex;
+  gap:10px;
+  padding:0;
+  animation: insta-scroll 60s linear infinite;
+  will-change: transform;
+}
+.insta-feed:hover .insta-feed__row {
+  animation-play-state: paused;
+}
+@keyframes insta-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-50% - 5px)); }
+}
+
+.insta-post {
+  position:relative;
+  flex:0 0 auto;
+  width:clamp(200px, 22vw, 280px);
+  aspect-ratio:1;
+  overflow:hidden;
+  border-radius:6px;
+  cursor:pointer;
+  background:#1a2a3a;
+}
+.insta-post img {
+  width:100%; height:100%;
+  object-fit:cover;
+  transition: transform 1.1s var(--ease-out), filter .6s;
+  filter:saturate(.95);
+}
+.insta-post:hover img { transform:scale(1.05); filter:saturate(1.1); }
+
+.insta-post__overlay {
+  position:absolute; inset:0;
+  display:flex; align-items:flex-end;
+  padding:12px 14px;
+  background:linear-gradient(to top, rgba(10,20,35,.55) 0%, transparent 45%);
+  color:#fff;
+  opacity:0;
+  transition: opacity .3s var(--ease-out);
+  pointer-events:none;
+}
+.insta-post:hover .insta-post__overlay { opacity:1; }
+.insta-post__meta {
+  display:flex; align-items:center; gap:10px;
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:500; letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.insta-post__meta svg { width:12px; height:12px; stroke:currentColor; fill:none; stroke-width:1.6; }
+.insta-post__date {
+  margin-left:auto;
+  opacity:.82;
+}
+
+/* subtle carousel edge fade so scroll feels infinite */
+.insta-feed__scroller {
+  mask-image: linear-gradient(to right, transparent 0, black 40px, black calc(100% - 40px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, black 40px, black calc(100% - 40px), transparent 100%);
+}
+
+/* ═══════════════════════════════════════════════════════
+   SEASON ARCHIVE — シーズンごとのフォトギャラリー一覧
+   ═══════════════════════════════════════════════════════ */
+.season-archive {
+  max-width:var(--max-w);
+  margin:0 auto 80px;
+  padding:0 40px;
+}
+.season-archive__head {
+  margin-bottom:32px;
+}
+.season-archive__eyebrow {
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:700; letter-spacing:.32em;
+  color:var(--accent);
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+.season-archive__title {
+  font-family:var(--font-serif);
+  font-size:clamp(30px, 4vw, 48px);
+  font-weight:700; color:#fff; line-height:1.08;
+  letter-spacing:-.015em;
+  margin-bottom:10px;
+}
+.season-archive__desc {
+  font-family:var(--font-sans);
+  font-size:12px; line-height:1.7;
+  color:rgba(255,255,255,.65);
+  max-width:560px;
+}
+.season-archive__grid {
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:14px;
+}
+.season-card {
+  position:relative;
+  aspect-ratio: 3/4;
+  overflow:hidden;
+  border-radius:6px;
+  cursor:pointer;
+  background:#1a2a3a;
+  display:block;
+  text-decoration:none;
+}
+.season-card img {
+  width:100%; height:100%; object-fit:cover;
+  transition: transform 1s var(--ease-out), filter .6s;
+  filter:saturate(.95);
+}
+.season-card:hover img { transform:scale(1.05); filter:saturate(1.15); }
+.season-card__overlay {
+  position:absolute; inset:0;
+  padding:22px;
+  display:flex; flex-direction:column; justify-content:flex-end;
+  background: linear-gradient(to top, rgba(10,20,35,.78) 0%, rgba(10,20,35,.15) 45%, transparent 75%);
+  color:#fff;
+}
+.season-card__season {
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:700; letter-spacing:.3em;
+  color:rgba(255,255,255,.72);
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.season-card__title {
+  font-family:var(--font-serif);
+  font-size:22px; font-weight:700; letter-spacing:-.01em;
+  line-height:1.15;
+  color:#fff;
+}
+.season-card__meta {
+  margin-top:10px;
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:500; letter-spacing:.18em;
+  color:rgba(255,255,255,.72);
+  text-transform:uppercase;
+}
+.season-card__meta::before {
+  content:'';
+  width:14px; height:1px;
+  background:rgba(255,255,255,.5);
+}
+
+@media (max-width: 900px) {
+  .season-archive { padding:0 24px; margin-bottom:56px; }
+  .season-archive__grid { grid-template-columns: repeat(2, 1fr); gap:10px; }
+  .season-card__title { font-size:18px; }
+  .season-card__overlay { padding:16px; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   GALLERY PAGE — フルコラージュ + SNSグリッド
+   ═══════════════════════════════════════════════════════ */
+.gallery-hero {
+  max-width:var(--max-w);
+  margin:48px auto 64px;
+  padding:0 40px;
+  text-align:center;
+}
+.gallery-hero__eyebrow {
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:700; letter-spacing:.32em;
+  color:var(--accent);
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+.gallery-hero__title {
+  font-family:var(--font-serif);
+  font-size:clamp(48px, 7vw, 96px);
+  font-weight:700; line-height:1.02;
+  letter-spacing:-.025em;
+  color:#fff;
+  margin-bottom:20px;
+}
+.gallery-hero__title em { font-style:inherit; font-weight:inherit; opacity:1; }
+.gallery-hero__desc {
+  font-family:var(--font-sans);
+  font-size:14px; line-height:1.8;
+  color:rgba(255,255,255,.72);
+  max-width:560px;
+  margin:0 auto;
+}
+
+.gallery-sns {
+  max-width:var(--max-w);
+  margin:0 auto 80px;
+  padding:0 40px;
+}
+.gallery-sns__head {
+  text-align:center;
+  margin-bottom:32px;
+}
+.gallery-sns__eyebrow {
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:700; letter-spacing:.32em;
+  color:var(--accent);
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+.gallery-sns__title {
+  font-family:var(--font-serif);
+  font-size:clamp(34px, 4.5vw, 56px);
+  font-weight:700; letter-spacing:-.015em; line-height:1.08;
+  color:#fff; margin-bottom:10px;
+}
+.gallery-sns__title em { font-style:inherit; font-weight:inherit; opacity:1; }
+.gallery-sns__handle {
+  font-family:var(--font-sans);
+  font-size:12px; letter-spacing:.1em;
+  color:rgba(255,255,255,.7);
+}
+.gallery-sns__grid {
+  display:grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap:8px;
+}
+.gallery-sns__grid img {
+  aspect-ratio:1; width:100%; object-fit:cover;
+  border-radius:6px;
+  transition: transform .6s var(--ease-out), filter .6s;
+  filter:saturate(.95);
+}
+.gallery-sns__grid img:hover { transform:scale(1.04); filter:saturate(1.1); }
+
+/* ═══════════════════════════════════════════════════════
+   Responsive for new sections
+   ═══════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .feature { grid-template-columns: 1fr; gap:28px; margin:60px auto; padding:0 24px; }
+  .feature--reverse .feature__media { order:1; }
+  .feature--reverse .feature__body { order:2; }
+  .collage { margin:60px auto; padding:0 24px; }
+  .collage__grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 180px 180px 180px;
+  }
+  .collage__item:nth-child(1) { grid-row: 1 / 2; grid-column: 1 / 3; }
+  .collage__item:nth-child(4) { grid-row: 3 / 4; grid-column: 1 / 3; }
+  .insta-feed { margin:60px 0 40px; }
+  .insta-feed__head { padding:0 24px; margin-bottom:18px; }
+  .insta-feed__row { gap:8px; animation-duration: 40s; }
+  .insta-post { width:clamp(160px, 60vw, 220px); }
+  .insta-feed__scroller {
+    mask-image: linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
+  }
+  @keyframes insta-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(calc(-50% - 4px)); }
+  }
+  .gallery-hero { margin:32px auto 40px; padding:0 24px; }
+  .gallery-sns { padding:0 24px; }
+  .gallery-sns__grid { grid-template-columns: repeat(3, 1fr); }
 }
 </style>
 </head>
@@ -736,34 +1778,37 @@ button { font-family:inherit; }
   <header class="site-header">
     <div class="site-header__inner">
       <div class="site-header__top">
-        <div></div>
+        <span></span>
         <a href="#" class="site-header__brand" onclick="go('top');return false">
           <img class="site-header__logo-img" src="assets/logo.jpg" alt="HONEY ROSIE HOUSE">
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
         </a>
         <div class="site-header__util">
-          <a href="#" onclick="openCart();return false">MY BAG <span class="cart-count" style="display:none">0</span></a>
+          <a href="#" onclick="openCart();return false">カート <span class="cart-count" style="display:none">0</span></a>
         </div>
       </div>
-      <nav class="site-header__nav">
-        <a href="#" onclick="goItemsFilter('tops');return false">TOPS</a>
-        <a href="#" onclick="goItemsFilter('bottoms');return false">BOTTOMS</a>
-        <a href="#" onclick="goItemsFilter('bag');return false">BAG</a>
-        <a href="#" onclick="goItemsFilter('cap');return false">CAP</a>
-        <a href="#" onclick="goItemsFilter('goods');return false">GOODS</a>
-              </nav>
     </div>
   </header>
 
   <!-- HERO — Featured Product Slider -->
   <div class="hero-wrap">
+    <nav class="hero-side-nav">
+      <a href="#" onclick="goItemsFilter('tops');return false">TOPS</a>
+      <a href="#" onclick="goItemsFilter('bottoms');return false">BOTTOMS</a>
+      <a href="#" onclick="goItemsFilter('bag');return false">BAG</a>
+      <a href="#" onclick="goItemsFilter('cap');return false">CAP</a>
+      <a href="#" onclick="goItemsFilter('goods');return false">GOODS</a>
+      <a href="#" onclick="go('gallery');return false">GALLERY</a>
+    </nav>
     <div class="hero-main" id="heroMain">
       <div class="hero-main__sizer"></div>
       <img class="hero-main__img behind" id="heroImgBehind" src="assets/product-cap.jpg" alt="CAP">
       <img class="hero-main__img front" id="heroImgFront" src="assets/product-cap.jpg" alt="CAP">
       <div class="hero-main__info">
-        <span class="hero-main__name" id="heroMainName">CAP</span>
+        <div class="hero-main__eyebrow">Spotlight</div>
+        <h2 class="hero-main__name" id="heroMainName">CAP</h2>
         <span class="hero-main__price" id="heroMainPrice">¥8,800</span>
+        <a class="hero-main__cta" href="#" onclick="event.stopPropagation();var t=document.querySelector('#heroThumbs .hero-thumb.active');if(t)goDetail(t.dataset.product);return false">商品を見る</a>
       </div>
     </div>
     <div class="hero-thumbs" id="heroThumbs">
@@ -774,53 +1819,428 @@ button { font-family:inherit; }
     </div>
   </div>
 
-  <!-- CATEGORY NAV -->
+  <!-- SECTION DIVIDER 01 -->
+  <div class="section-divider">
+    <span class="section-divider__num">01</span>
+    <span class="section-divider__dot"></span>
+    <span class="section-divider__label">New Arrival</span>
+    <span class="section-divider__line"></span>
+  </div>
+
   <!-- NEW ARRIVAL -->
   <div class="sec-head">
     <div>
-      <span class="sec-head__title">New Arrival</span>
-      <span class="sec-head__sub">新着アイテム</span>
+      <span class="sec-head__title">新着アイテム</span>
+      <span class="sec-head__sub">New Arrival</span>
     </div>
     <a href="#" class="sec-head__viewall" onclick="goItems();return false">すべて見る &rarr;</a>
   </div>
   <div class="product-scroll">
     <div class="product-row">
-      <div class="p-card p-card--featured" onclick="goDetail('cap')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-cap.jpg" alt="CAP"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">CAP</div><div class="p-card__price">&yen;8,800 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('original-sweatshirt')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-sweatshirt.jpg" alt="Original Sweatshirt"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Original Sweatshirt</div><div class="p-card__price">&yen;6,800 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('wide-pants')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-sweatshirt.jpg" alt="Wide Pants"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Wide Pants</div><div class="p-card__price">&yen;7,800 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('logo-tote-bag')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-totebag.jpg" alt="Logo Tote Bag"><span class="p-card__badge p-card__badge--new">NEW</span><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Logo Tote Bag</div><div class="p-card__price">&yen;3,200 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('ribbon-hair-clip')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-hairclip.jpg" alt="Ribbon Hair Clip Set"><span class="p-card__badge p-card__badge--limited">LIMITED</span><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card p-card--featured" onclick="goDetail('cap')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-cap.jpg" alt="CAP"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">CAP</div><div class="p-card__price">&yen;8,800 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="goDetail('original-sweatshirt')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-sweatshirt.jpg" alt="Original Sweatshirt"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Original Sweatshirt</div><div class="p-card__price">&yen;6,800 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="goDetail('wide-pants')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-sweatshirt.jpg" alt="Wide Pants"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Wide Pants</div><div class="p-card__price">&yen;7,800 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="goDetail('logo-tote-bag')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-totebag.jpg" alt="Logo Tote Bag"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Logo Tote Bag</div><div class="p-card__price">&yen;3,200 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card" onclick="goDetail('ribbon-hair-clip')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-hairclip.jpg" alt="Ribbon Hair Clip Set"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
       <div class="p-card" onclick="goDetail('mini-pouch')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-pouch.jpg" alt="Mini Pouch"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Mini Pouch</div><div class="p-card__price">&yen;2,400 <span class="p-card__tax">税込</span></div></div></div>
       <div class="p-card" onclick="goDetail('sticker-pack')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-sticker.jpg" alt="Sticker Pack"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Sticker Pack</div><div class="p-card__price">&yen;800 <span class="p-card__tax">税込</span></div></div></div>
       <div class="p-card" onclick="goDetail('charm-keychain')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-keychain.jpg" alt="Charm Keychain"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Charm Keychain</div><div class="p-card__price">&yen;1,500 <span class="p-card__tax">税込</span></div></div></div>
     </div>
+  </div>
+
+  <!-- SECTION DIVIDER 02 -->
+  <div class="section-divider">
+    <span class="section-divider__num">02</span>
+    <span class="section-divider__dot"></span>
+    <span class="section-divider__label">Pick Up</span>
+    <span class="section-divider__line"></span>
   </div>
 
   <!-- PICK UP -->
   <div class="sec-head">
     <div>
-      <span class="sec-head__title">Pick Up</span>
-      <span class="sec-head__sub">おすすめアイテム</span>
+      <span class="sec-head__title">おすすめアイテム</span>
+      <span class="sec-head__sub">Pick Up</span>
     </div>
     <a href="#" class="sec-head__viewall" onclick="goItems();return false">すべて見る &rarr;</a>
   </div>
   <div class="product-scroll">
     <div class="product-row">
-      <div class="p-card p-card--featured" onclick="goDetail('ribbon-hair-clip')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-hairclip.jpg" alt="Ribbon Hair Clip Set"><span class="p-card__badge p-card__badge--limited">LIMITED</span><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
+      <div class="p-card p-card--featured" onclick="goDetail('ribbon-hair-clip')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-hairclip.jpg" alt="Ribbon Hair Clip Set"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
       <div class="p-card" onclick="goDetail('mini-pouch')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-pouch.jpg" alt="Mini Pouch"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Mini Pouch</div><div class="p-card__price">&yen;2,400 <span class="p-card__tax">税込</span></div></div></div>
       <div class="p-card" onclick="goDetail('sticker-pack')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-sticker.jpg" alt="Sticker Pack"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Sticker Pack</div><div class="p-card__price">&yen;800 <span class="p-card__tax">税込</span></div></div></div>
       <div class="p-card" onclick="goDetail('charm-keychain')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-keychain.jpg" alt="Charm Keychain"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Charm Keychain</div><div class="p-card__price">&yen;1,500 <span class="p-card__tax">税込</span></div></div></div>
     </div>
   </div>
 
-  <footer class="site-footer">
-    <div class="site-footer__links">
-      <a href="#" onclick="showToast();return false">特定商取引法に基づく表記</a>
-      <a href="#" onclick="showToast();return false">プライバシーポリシー</a>
-      <a href="#" onclick="showToast();return false">お問い合わせ</a>
-      <a href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">Instagram</a>
+  <!-- SECTION DIVIDER 03 -->
+  <div class="section-divider">
+    <span class="section-divider__num">03</span>
+    <span class="section-divider__dot"></span>
+    <span class="section-divider__label">Styling</span>
+    <span class="section-divider__line"></span>
+  </div>
+
+  <!-- MINI COLLAGE -->
+  <section class="collage">
+    <div class="collage__head">
+      <div>
+        <div class="collage__eyebrow">Styling</div>
+        <h2 class="collage__title">スタイリング集</h2>
+      </div>
+      <a href="#" class="collage__more" onclick="go('gallery');return false">すべて見る →</a>
     </div>
-    <div class="site-footer__copy">&copy; 2026 HONEY ROSIE HOUSE</div>
+    <div class="collage__grid">
+      <div class="collage__item">
+        <img src="assets/hero-slide2.jpg" alt="">
+        <div class="collage__caption">街で</div>
+      </div>
+      <div class="collage__item">
+        <img src="assets/product-totebag.jpg" alt="">
+        <div class="collage__caption">今日のバッグ</div>
+      </div>
+      <div class="collage__item">
+        <img src="assets/product-pouch.jpg" alt="">
+        <div class="collage__caption">デスクの上で</div>
+      </div>
+      <div class="collage__item">
+        <img src="assets/hero-slide3.jpg" alt="">
+        <div class="collage__caption">重ねて、さらりと</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION DIVIDER 04 -->
+  <div class="section-divider">
+    <span class="section-divider__num">04</span>
+    <span class="section-divider__dot"></span>
+    <span class="section-divider__label">Instagram</span>
+    <span class="section-divider__line"></span>
+  </div>
+
+  <!-- INSTAGRAM FEED (horizontal scroller) -->
+  <section class="insta-feed">
+    <div class="insta-feed__head">
+      <div>
+        <div class="insta-feed__eyebrow">Instagram</div>
+        <h2 class="insta-feed__title">最新の投稿</h2>
+      </div>
+    </div>
+    <div class="insta-feed__scroller">
+      <div class="insta-feed__row">
+        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">
+          <img src="assets/product-sweatshirt.jpg" alt="" loading="lazy">
+          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 22</span></div></div>
+        </a>
+        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">
+          <img src="assets/hero-slide2.jpg" alt="" loading="lazy">
+          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 20</span></div></div>
+        </a>
+        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">
+          <img src="assets/product-totebag.jpg" alt="" loading="lazy">
+          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 17</span></div></div>
+        </a>
+        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">
+          <img src="assets/product-cap.jpg" alt="" loading="lazy">
+          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 14</span></div></div>
+        </a>
+        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">
+          <img src="assets/product-pouch.jpg" alt="" loading="lazy">
+          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 11</span></div></div>
+        </a>
+        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">
+          <img src="assets/hero-slide3.jpg" alt="" loading="lazy">
+          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 08</span></div></div>
+        </a>
+        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">
+          <img src="assets/product-sticker.jpg" alt="" loading="lazy">
+          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 05</span></div></div>
+        </a>
+        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">
+          <img src="assets/product-hairclip.jpg" alt="" loading="lazy">
+          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 02</span></div></div>
+        </a>
+        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">
+          <img src="assets/hero-slide4.jpg" alt="" loading="lazy">
+          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">MAR 30</span></div></div>
+        </a>
+        <!-- DUPLICATED SET for seamless infinite scroll (aria-hidden) -->
+        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
+          <img src="assets/product-sweatshirt.jpg" alt="" loading="lazy">
+          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 22</span></div></div>
+        </a>
+        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
+          <img src="assets/hero-slide2.jpg" alt="" loading="lazy">
+          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 20</span></div></div>
+        </a>
+        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
+          <img src="assets/product-totebag.jpg" alt="" loading="lazy">
+          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 17</span></div></div>
+        </a>
+        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
+          <img src="assets/product-cap.jpg" alt="" loading="lazy">
+          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 14</span></div></div>
+        </a>
+        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
+          <img src="assets/product-pouch.jpg" alt="" loading="lazy">
+          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 11</span></div></div>
+        </a>
+        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
+          <img src="assets/hero-slide3.jpg" alt="" loading="lazy">
+          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 08</span></div></div>
+        </a>
+        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
+          <img src="assets/product-sticker.jpg" alt="" loading="lazy">
+          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 05</span></div></div>
+        </a>
+        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
+          <img src="assets/product-hairclip.jpg" alt="" loading="lazy">
+          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 02</span></div></div>
+        </a>
+        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
+          <img src="assets/hero-slide4.jpg" alt="" loading="lazy">
+          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">MAR 30</span></div></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+
+      <div class="site-footer__brand">
+        <div class="site-footer__logo">
+          HONEY<em>ROSIE HOUSE</em>
+        </div>
+        <div class="site-footer__brand-right">
+          <div class="site-footer__social">
+            <a href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle class="filled" cx="17.5" cy="6.5" r=".9"/></svg>
+            </a>
+            <a href="#" onclick="showToast();return false" aria-label="X">
+              <svg viewBox="0 0 24 24" class="filled"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          </div>
+          <div class="site-footer__tagline">
+            Online &amp; Pop-up<br>
+            from Tokyo, 2020 —
+          </div>
+        </div>
+      </div>
+
+      <div class="site-footer__cols">
+
+        <div class="site-footer__col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="#" onclick="goItemsFilter('tops');return false">TOPS</a></li>
+            <li><a href="#" onclick="goItemsFilter('bottoms');return false">BOTTOMS</a></li>
+            <li><a href="#" onclick="goItemsFilter('bag');return false">BAG</a></li>
+            <li><a href="#" onclick="goItemsFilter('cap');return false">CAP</a></li>
+            <li><a href="#" onclick="goItemsFilter('goods');return false">GOODS</a></li>
+            <li><a href="#" onclick="go('gallery');return false">GALLERY</a></li>
+          </ul>
+        </div>
+
+        <div class="site-footer__col">
+          <h4>Information</h4>
+          <ul>
+            <li><a href="#" onclick="showToast();return false">特定商取引法に基づく表記</a></li>
+            <li><a href="#" onclick="showToast();return false">プライバシーポリシー</a></li>
+            <li><a href="#" onclick="showToast();return false">配送について</a></li>
+            <li><a href="#" onclick="showToast();return false">返品・交換</a></li>
+          </ul>
+        </div>
+
+        <div class="site-footer__col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="#" onclick="showToast();return false">お問い合わせ</a></li>
+            <li><a href="#" onclick="showToast();return false">よくある質問</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="site-footer__bottom">
+        <div class="site-footer__copy">© 2026 HONEY ROSIE HOUSE</div>
+        <div class="site-footer__meta">Made in Tokyo</div>
+      </div>
+
+    </div>
+  </footer>
+</div>
+
+<!-- ═══ PAGE: GALLERY ═══ -->
+<div class="page" id="p-gallery">
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <div class="site-header__top">
+        <span></span>
+        <a href="#" class="site-header__brand" onclick="go('top');return false">
+          <img class="site-header__logo-img" src="assets/logo.jpg" alt="HONEY ROSIE HOUSE">
+          <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
+        </a>
+        <div class="site-header__util">
+          <a href="#" onclick="openCart();return false">カート <span class="cart-count" style="display:none">0</span></a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="gallery-hero">
+    <div class="gallery-hero__eyebrow">Gallery</div>
+    <h1 class="gallery-hero__title">スタイリングと投稿</h1>
+    <p class="gallery-hero__desc">モデル撮影のスタイリング写真と、Instagramの最新投稿をまとめています。</p>
+  </section>
+
+  <!-- SEASON ARCHIVE -->
+  <section class="season-archive">
+    <div class="season-archive__head">
+      <div class="season-archive__eyebrow">Season Archive</div>
+      <h2 class="season-archive__title">シーズンのフォトギャラリー</h2>
+      <p class="season-archive__desc">季節ごとのモデル撮影アーカイブ。気になるシーズンを選ぶと、そのシーズンの写真だけをまとめて見られます。</p>
+    </div>
+    <div class="season-archive__grid">
+      <a class="season-card" href="#" onclick="showToast();return false">
+        <img src="assets/collection-spring.png" alt="2026 Spring" loading="lazy">
+        <div class="season-card__overlay">
+          <div class="season-card__season">SS · 2026</div>
+          <h3 class="season-card__title">2026 Spring</h3>
+          <div class="season-card__meta">14 photos</div>
+        </div>
+      </a>
+      <a class="season-card" href="#" onclick="showToast();return false">
+        <img src="assets/collection-winter.png" alt="2025 Winter" loading="lazy">
+        <div class="season-card__overlay">
+          <div class="season-card__season">AW · 2025</div>
+          <h3 class="season-card__title">2025 Winter</h3>
+          <div class="season-card__meta">12 photos</div>
+        </div>
+      </a>
+      <a class="season-card" href="#" onclick="showToast();return false">
+        <img src="assets/hero-slide3.jpg" alt="2025 Autumn" loading="lazy">
+        <div class="season-card__overlay">
+          <div class="season-card__season">AW · 2025</div>
+          <h3 class="season-card__title">2025 Autumn</h3>
+          <div class="season-card__meta">11 photos</div>
+        </div>
+      </a>
+      <a class="season-card" href="#" onclick="showToast();return false">
+        <img src="assets/collection-summer.png" alt="2025 Summer" loading="lazy">
+        <div class="season-card__overlay">
+          <div class="season-card__season">SS · 2025</div>
+          <h3 class="season-card__title">2025 Summer</h3>
+          <div class="season-card__meta">13 photos</div>
+        </div>
+      </a>
+      <a class="season-card" href="#" onclick="showToast();return false">
+        <img src="assets/hero-kv.jpg" alt="2025 Spring" loading="lazy">
+        <div class="season-card__overlay">
+          <div class="season-card__season">SS · 2025</div>
+          <h3 class="season-card__title">2025 Spring</h3>
+          <div class="season-card__meta">10 photos</div>
+        </div>
+      </a>
+      <a class="season-card" href="#" onclick="showToast();return false">
+        <img src="assets/hero-slide2.jpg" alt="2024 Winter" loading="lazy">
+        <div class="season-card__overlay">
+          <div class="season-card__season">AW · 2024</div>
+          <h3 class="season-card__title">2024 Winter</h3>
+          <div class="season-card__meta">9 photos</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="gallery-sns">
+    <div class="gallery-sns__head">
+      <div class="gallery-sns__eyebrow">Instagram</div>
+      <h2 class="gallery-sns__title">最新のフィード</h2>
+    </div>
+    <div class="gallery-sns__grid">
+      <img src="assets/product-cap.jpg" alt="" loading="lazy">
+      <img src="assets/product-totebag.jpg" alt="" loading="lazy">
+      <img src="assets/product-sweatshirt.jpg" alt="" loading="lazy">
+      <img src="assets/product-pouch.jpg" alt="" loading="lazy">
+      <img src="assets/product-tee.jpg" alt="" loading="lazy">
+      <img src="assets/product-sticker.jpg" alt="" loading="lazy">
+      <img src="assets/product-hairclip.jpg" alt="" loading="lazy">
+      <img src="assets/product-keychain.jpg" alt="" loading="lazy">
+      <img src="assets/product-mirror.jpg" alt="" loading="lazy">
+      <img src="assets/hero-slide2.jpg" alt="" loading="lazy">
+      <img src="assets/hero-slide3.jpg" alt="" loading="lazy">
+      <img src="assets/hero-slide4.jpg" alt="" loading="lazy">
+      <img src="assets/hero-kv.jpg" alt="" loading="lazy">
+      <img src="assets/collection-spring.png" alt="" loading="lazy">
+      <img src="assets/collection-summer.png" alt="" loading="lazy">
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+
+      <div class="site-footer__brand">
+        <div class="site-footer__logo">
+          HONEY<em>ROSIE HOUSE</em>
+        </div>
+        <div class="site-footer__brand-right">
+          <div class="site-footer__social">
+            <a href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle class="filled" cx="17.5" cy="6.5" r=".9"/></svg>
+            </a>
+            <a href="#" onclick="showToast();return false" aria-label="X">
+              <svg viewBox="0 0 24 24" class="filled"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          </div>
+          <div class="site-footer__tagline">
+            Online &amp; Pop-up<br>
+            from Tokyo, 2020 —
+          </div>
+        </div>
+      </div>
+
+      <div class="site-footer__cols">
+
+        <div class="site-footer__col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="#" onclick="goItemsFilter('tops');return false">TOPS</a></li>
+            <li><a href="#" onclick="goItemsFilter('bottoms');return false">BOTTOMS</a></li>
+            <li><a href="#" onclick="goItemsFilter('bag');return false">BAG</a></li>
+            <li><a href="#" onclick="goItemsFilter('cap');return false">CAP</a></li>
+            <li><a href="#" onclick="goItemsFilter('goods');return false">GOODS</a></li>
+            <li><a href="#" onclick="go('gallery');return false">GALLERY</a></li>
+          </ul>
+        </div>
+
+        <div class="site-footer__col">
+          <h4>Information</h4>
+          <ul>
+            <li><a href="#" onclick="showToast();return false">特定商取引法に基づく表記</a></li>
+            <li><a href="#" onclick="showToast();return false">プライバシーポリシー</a></li>
+            <li><a href="#" onclick="showToast();return false">配送について</a></li>
+            <li><a href="#" onclick="showToast();return false">返品・交換</a></li>
+          </ul>
+        </div>
+
+        <div class="site-footer__col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="#" onclick="showToast();return false">お問い合わせ</a></li>
+            <li><a href="#" onclick="showToast();return false">よくある質問</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="site-footer__bottom">
+        <div class="site-footer__copy">© 2026 HONEY ROSIE HOUSE</div>
+        <div class="site-footer__meta">Made in Tokyo</div>
+      </div>
+
+    </div>
   </footer>
 </div>
 
@@ -830,28 +2250,27 @@ button { font-family:inherit; }
   <header class="site-header">
     <div class="site-header__inner">
       <div class="site-header__top">
-        <div></div>
+        <span></span>
         <a href="#" class="site-header__brand" onclick="go('top');return false">
           <img class="site-header__logo-img" src="assets/logo.jpg" alt="HONEY ROSIE HOUSE">
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
         </a>
         <div class="site-header__util">
-          <a href="#" onclick="openCart();return false">MY BAG <span class="cart-count" style="display:none">0</span></a>
+          <a href="#" onclick="openCart();return false">カート <span class="cart-count" style="display:none">0</span></a>
         </div>
       </div>
-      <nav class="site-header__nav">
-        <a href="#" onclick="goItemsFilter('tops');return false">TOPS</a>
-        <a href="#" onclick="goItemsFilter('bottoms');return false">BOTTOMS</a>
-        <a href="#" onclick="goItemsFilter('bag');return false">BAG</a>
-        <a href="#" onclick="goItemsFilter('cap');return false">CAP</a>
-        <a href="#" onclick="goItemsFilter('goods');return false">GOODS</a>
-              </nav>
     </div>
   </header>
 
   <div class="pd-breadcrumb">
     <a href="#" onclick="go('top');return false">HOME</a>&ensp;/&ensp;
     ITEMS
+  </div>
+
+  <div class="items-head">
+    <div class="items-head__eyebrow">Catalog</div>
+    <h1 class="items-head__title" id="items-title">すべてのアイテム</h1>
+    <p class="items-head__sub" id="items-count">All Items</p>
   </div>
 
   <div class="items-filter" id="items-filter">
@@ -867,13 +2286,68 @@ button { font-family:inherit; }
   </div>
 
   <footer class="site-footer">
-    <div class="site-footer__links">
-      <a href="#" onclick="showToast();return false">特定商取引法に基づく表記</a>
-      <a href="#" onclick="showToast();return false">プライバシーポリシー</a>
-      <a href="#" onclick="showToast();return false">お問い合わせ</a>
-      <a href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">Instagram</a>
+    <div class="site-footer__inner">
+
+      <div class="site-footer__brand">
+        <div class="site-footer__logo">
+          HONEY<em>ROSIE HOUSE</em>
+        </div>
+        <div class="site-footer__brand-right">
+          <div class="site-footer__social">
+            <a href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle class="filled" cx="17.5" cy="6.5" r=".9"/></svg>
+            </a>
+            <a href="#" onclick="showToast();return false" aria-label="X">
+              <svg viewBox="0 0 24 24" class="filled"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          </div>
+          <div class="site-footer__tagline">
+            Online &amp; Pop-up<br>
+            from Tokyo, 2020 —
+          </div>
+        </div>
+      </div>
+
+      <div class="site-footer__cols">
+
+        <div class="site-footer__col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="#" onclick="goItemsFilter('tops');return false">TOPS</a></li>
+            <li><a href="#" onclick="goItemsFilter('bottoms');return false">BOTTOMS</a></li>
+            <li><a href="#" onclick="goItemsFilter('bag');return false">BAG</a></li>
+            <li><a href="#" onclick="goItemsFilter('cap');return false">CAP</a></li>
+            <li><a href="#" onclick="goItemsFilter('goods');return false">GOODS</a></li>
+            <li><a href="#" onclick="go('gallery');return false">GALLERY</a></li>
+          </ul>
+        </div>
+
+        <div class="site-footer__col">
+          <h4>Information</h4>
+          <ul>
+            <li><a href="#" onclick="showToast();return false">特定商取引法に基づく表記</a></li>
+            <li><a href="#" onclick="showToast();return false">プライバシーポリシー</a></li>
+            <li><a href="#" onclick="showToast();return false">配送について</a></li>
+            <li><a href="#" onclick="showToast();return false">返品・交換</a></li>
+          </ul>
+        </div>
+
+        <div class="site-footer__col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="#" onclick="showToast();return false">お問い合わせ</a></li>
+            <li><a href="#" onclick="showToast();return false">よくある質問</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="site-footer__bottom">
+        <div class="site-footer__copy">© 2026 HONEY ROSIE HOUSE</div>
+        <div class="site-footer__meta">Made in Tokyo</div>
+      </div>
+
     </div>
-    <div class="site-footer__copy">&copy; 2026 HONEY ROSIE HOUSE</div>
   </footer>
 </div>
 
@@ -883,22 +2357,15 @@ button { font-family:inherit; }
   <header class="site-header">
     <div class="site-header__inner">
       <div class="site-header__top">
-        <div></div>
+        <span></span>
         <a href="#" class="site-header__brand" onclick="go('top');return false">
           <img class="site-header__logo-img" src="assets/logo.jpg" alt="HONEY ROSIE HOUSE">
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
         </a>
         <div class="site-header__util">
-          <a href="#" onclick="openCart();return false">MY BAG <span class="cart-count" style="display:none">0</span></a>
+          <a href="#" onclick="openCart();return false">カート <span class="cart-count" style="display:none">0</span></a>
         </div>
       </div>
-      <nav class="site-header__nav">
-        <a href="#" onclick="goItemsFilter('tops');return false">TOPS</a>
-        <a href="#" onclick="goItemsFilter('bottoms');return false">BOTTOMS</a>
-        <a href="#" onclick="goItemsFilter('bag');return false">BAG</a>
-        <a href="#" onclick="goItemsFilter('cap');return false">CAP</a>
-        <a href="#" onclick="goItemsFilter('goods');return false">GOODS</a>
-              </nav>
     </div>
   </header>
 
@@ -919,13 +2386,68 @@ button { font-family:inherit; }
   </div>
 
   <footer class="site-footer">
-    <div class="site-footer__links">
-      <a href="#" onclick="showToast();return false">特定商取引法に基づく表記</a>
-      <a href="#" onclick="showToast();return false">プライバシーポリシー</a>
-      <a href="#" onclick="showToast();return false">お問い合わせ</a>
-      <a href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">Instagram</a>
+    <div class="site-footer__inner">
+
+      <div class="site-footer__brand">
+        <div class="site-footer__logo">
+          HONEY<em>ROSIE HOUSE</em>
+        </div>
+        <div class="site-footer__brand-right">
+          <div class="site-footer__social">
+            <a href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle class="filled" cx="17.5" cy="6.5" r=".9"/></svg>
+            </a>
+            <a href="#" onclick="showToast();return false" aria-label="X">
+              <svg viewBox="0 0 24 24" class="filled"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          </div>
+          <div class="site-footer__tagline">
+            Online &amp; Pop-up<br>
+            from Tokyo, 2020 —
+          </div>
+        </div>
+      </div>
+
+      <div class="site-footer__cols">
+
+        <div class="site-footer__col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="#" onclick="goItemsFilter('tops');return false">TOPS</a></li>
+            <li><a href="#" onclick="goItemsFilter('bottoms');return false">BOTTOMS</a></li>
+            <li><a href="#" onclick="goItemsFilter('bag');return false">BAG</a></li>
+            <li><a href="#" onclick="goItemsFilter('cap');return false">CAP</a></li>
+            <li><a href="#" onclick="goItemsFilter('goods');return false">GOODS</a></li>
+            <li><a href="#" onclick="go('gallery');return false">GALLERY</a></li>
+          </ul>
+        </div>
+
+        <div class="site-footer__col">
+          <h4>Information</h4>
+          <ul>
+            <li><a href="#" onclick="showToast();return false">特定商取引法に基づく表記</a></li>
+            <li><a href="#" onclick="showToast();return false">プライバシーポリシー</a></li>
+            <li><a href="#" onclick="showToast();return false">配送について</a></li>
+            <li><a href="#" onclick="showToast();return false">返品・交換</a></li>
+          </ul>
+        </div>
+
+        <div class="site-footer__col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="#" onclick="showToast();return false">お問い合わせ</a></li>
+            <li><a href="#" onclick="showToast();return false">よくある質問</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="site-footer__bottom">
+        <div class="site-footer__copy">© 2026 HONEY ROSIE HOUSE</div>
+        <div class="site-footer__meta">Made in Tokyo</div>
+      </div>
+
     </div>
-    <div class="site-footer__copy">&copy; 2026 HONEY ROSIE HOUSE</div>
   </footer>
 </div>
 
@@ -935,22 +2457,15 @@ button { font-family:inherit; }
   <header class="site-header">
     <div class="site-header__inner">
       <div class="site-header__top">
-        <div></div>
+        <span></span>
         <a href="#" class="site-header__brand" onclick="go('top');return false">
           <img class="site-header__logo-img" src="assets/logo.jpg" alt="HONEY ROSIE HOUSE">
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
         </a>
         <div class="site-header__util">
-          <a href="#" onclick="openCart();return false">MY BAG <span class="cart-count" style="display:none">0</span></a>
+          <a href="#" onclick="openCart();return false">カート <span class="cart-count" style="display:none">0</span></a>
         </div>
       </div>
-      <nav class="site-header__nav">
-        <a href="#" onclick="goItemsFilter('tops');return false">TOPS</a>
-        <a href="#" onclick="goItemsFilter('bottoms');return false">BOTTOMS</a>
-        <a href="#" onclick="goItemsFilter('bag');return false">BAG</a>
-        <a href="#" onclick="goItemsFilter('cap');return false">CAP</a>
-        <a href="#" onclick="goItemsFilter('goods');return false">GOODS</a>
-              </nav>
     </div>
   </header>
 
@@ -969,14 +2484,20 @@ button { font-family:inherit; }
     </div>
     <div class="pd-info">
       <h1 class="pd-info__name" id="detail-name">Original Sweatshirt</h1>
-      <div class="pd-info__price" id="detail-price">&yen;6,800</div>
-      <div class="pd-info__tax">税込</div>
+      <div class="pd-info__price">
+        <span id="detail-price">&yen;6,800</span>
+        <span class="pd-info__tax">Tax incl.</span>
+      </div>
+
+      <div class="pd-info__divider"></div>
+
       <div class="pd-info__label" id="detail-color-label">カラー</div>
       <div class="pd-colors" id="detail-colors">
         <div class="pd-color-swatch active" style="background:#c8a2a8;" title="Pink"></div>
         <div class="pd-color-swatch" style="background:#4a7c7e;" title="Teal"></div>
         <div class="pd-color-swatch" style="background:#2a1a2e;" title="Dark"></div>
       </div>
+
       <div class="pd-info__label" id="detail-size-label">サイズ</div>
       <div class="pd-sizes" id="detail-sizes">
         <button class="pd-size-pill" type="button">S</button>
@@ -984,13 +2505,13 @@ button { font-family:inherit; }
         <button class="pd-size-pill" type="button">L</button>
         <button class="pd-size-pill" type="button">XL</button>
       </div>
-      <div class="pd-stock" id="detail-stock">残りわずか &mdash; お早めにどうぞ</div>
-      <button class="pd-add-btn" type="button">カートに追加</button>
+
+      <div class="pd-stock" id="detail-stock">残りわずかです</div>
+
+      <button class="pd-add-btn" type="button">Add to Cart</button>
+
       <div class="pd-share">
-        <span class="pd-share__label">SHARE</span>
-        <a href="#" class="pd-share__btn" id="share-instagram" title="Instagram">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
-        </a>
+        <span class="pd-share__label">Share</span>
         <a href="#" class="pd-share__btn" id="share-line" title="LINE">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.58 2 10c0 3.72 3.11 6.85 7.32 7.76.28.06.67.19.77.43.09.22.06.56.03.78l-.12.75c-.04.22-.18.86.76.47.93-.39 5.02-2.96 6.85-5.06C18.94 13.76 20 11.98 20 10c0-4.42-4.48-8-8-8z"/></svg>
         </a>
@@ -1001,7 +2522,8 @@ button { font-family:inherit; }
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
         </a>
       </div>
-      <div class="pd-detail-label">商品について</div>
+
+      <div class="pd-detail-label">About this item</div>
       <div class="pd-detail-text" id="detail-description">
         HONEY ROSIE HOUSEオリジナルのスウェットシャツ。<br>
         ゆったりとしたシルエットに、背面にブランドロゴをプリント。<br>
@@ -1014,7 +2536,8 @@ button { font-family:inherit; }
 
   <div class="sec-head">
     <div>
-      <span class="sec-head__title">You May Also Like</span>
+      <span class="sec-head__title">こちらもおすすめ</span>
+      <span class="sec-head__sub">You May Also Like</span>
     </div>
   </div>
   <div class="product-scroll">
@@ -1022,13 +2545,68 @@ button { font-family:inherit; }
   </div>
 
   <footer class="site-footer">
-    <div class="site-footer__links">
-      <a href="#" onclick="showToast();return false">特定商取引法に基づく表記</a>
-      <a href="#" onclick="showToast();return false">プライバシーポリシー</a>
-      <a href="#" onclick="showToast();return false">お問い合わせ</a>
-      <a href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">Instagram</a>
+    <div class="site-footer__inner">
+
+      <div class="site-footer__brand">
+        <div class="site-footer__logo">
+          HONEY<em>ROSIE HOUSE</em>
+        </div>
+        <div class="site-footer__brand-right">
+          <div class="site-footer__social">
+            <a href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle class="filled" cx="17.5" cy="6.5" r=".9"/></svg>
+            </a>
+            <a href="#" onclick="showToast();return false" aria-label="X">
+              <svg viewBox="0 0 24 24" class="filled"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          </div>
+          <div class="site-footer__tagline">
+            Online &amp; Pop-up<br>
+            from Tokyo, 2020 —
+          </div>
+        </div>
+      </div>
+
+      <div class="site-footer__cols">
+
+        <div class="site-footer__col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="#" onclick="goItemsFilter('tops');return false">TOPS</a></li>
+            <li><a href="#" onclick="goItemsFilter('bottoms');return false">BOTTOMS</a></li>
+            <li><a href="#" onclick="goItemsFilter('bag');return false">BAG</a></li>
+            <li><a href="#" onclick="goItemsFilter('cap');return false">CAP</a></li>
+            <li><a href="#" onclick="goItemsFilter('goods');return false">GOODS</a></li>
+            <li><a href="#" onclick="go('gallery');return false">GALLERY</a></li>
+          </ul>
+        </div>
+
+        <div class="site-footer__col">
+          <h4>Information</h4>
+          <ul>
+            <li><a href="#" onclick="showToast();return false">特定商取引法に基づく表記</a></li>
+            <li><a href="#" onclick="showToast();return false">プライバシーポリシー</a></li>
+            <li><a href="#" onclick="showToast();return false">配送について</a></li>
+            <li><a href="#" onclick="showToast();return false">返品・交換</a></li>
+          </ul>
+        </div>
+
+        <div class="site-footer__col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="#" onclick="showToast();return false">お問い合わせ</a></li>
+            <li><a href="#" onclick="showToast();return false">よくある質問</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="site-footer__bottom">
+        <div class="site-footer__copy">© 2026 HONEY ROSIE HOUSE</div>
+        <div class="site-footer__meta">Made in Tokyo</div>
+      </div>
+
     </div>
-    <div class="site-footer__copy">&copy; 2026 HONEY ROSIE HOUSE</div>
   </footer>
 </div>
 
@@ -1043,7 +2621,7 @@ const products = {
     description: 'HONEY ROSIE HOUSEオリジナルのスウェットシャツ。<br>ゆったりとしたシルエットに、背面にブランドロゴをプリント。<br>裏起毛で秋冬の着回しにぴったりの一枚です。<br><br>素材：コットン100%<br>生産国：日本',
     colors: [{color:'#c8a2a8',name:'Pink'},{color:'#4a7c7e',name:'Teal'},{color:'#2a1a2e',name:'Dark'}],
     sizes: ['S','M','L','XL'],
-    stock: '残りわずか — お早めにどうぞ'
+    stock: '残りわずかです'
   },
   'logo-tote-bag': {
     name: 'Logo Tote Bag',
@@ -1243,6 +2821,8 @@ function go(page, pushState) {
     target = document.getElementById('p-collection');
   } else if (page === 'items') {
     target = document.getElementById('p-items');
+  } else if (page === 'gallery') {
+    target = document.getElementById('p-gallery');
   } else {
     target = document.getElementById('p-detail');
   }
@@ -1340,7 +2920,7 @@ function renderCart() {
   var body = document.getElementById('cartPanelBody');
   var subtotal = document.getElementById('cartSubtotal');
   if (cart.length === 0) {
-    body.innerHTML = '<div class="cart-panel__empty">カートは空です</div>';
+    body.innerHTML = '<div class="cart-panel__empty">カートはまだ空です。<br>気になるアイテムを見つけてみてください。</div>';
     subtotal.textContent = '¥0';
     return;
   }
@@ -1351,12 +2931,16 @@ function renderCart() {
     var meta = [];
     if (item.color) meta.push(item.color);
     if (item.size) meta.push(item.size);
-    var metaHtml = meta.length ? '<div class="cart-item__meta">' + meta.join(' / ') + '</div>' : '';
+    var metaHtml = meta.length ? '<div class="cart-item__meta">' + meta.join(' · ') + '</div>' : '';
     return '<div class="cart-item">' +
       '<img class="cart-item__img" src="' + item.image + '" alt="' + item.name + '">' +
       '<div class="cart-item__info">' +
-        '<div><div class="cart-item__name">' + item.name + '</div>' + metaHtml + '<div class="cart-item__price">' + item.price + '</div></div>' +
-        '<button class="cart-item__remove" onclick="removeFromCart(' + i + ')" type="button">削除</button>' +
+        '<div>' +
+          '<div class="cart-item__name">' + item.name + '</div>' +
+          metaHtml +
+          '<div class="cart-item__price">' + item.price + '</div>' +
+        '</div>' +
+        '<button class="cart-item__remove" onclick="removeFromCart(' + i + ')" type="button">Remove</button>' +
       '</div></div>';
   }).join('');
   subtotal.textContent = '¥' + total.toLocaleString();
@@ -1369,8 +2953,12 @@ function removeFromCart(i) {
 function updateCartCount() {
   document.querySelectorAll('.cart-count').forEach(function(c) {
     c.textContent = cart.length;
-    c.style.display = cart.length > 0 ? 'inline-block' : 'none';
+    c.style.display = cart.length > 0 ? 'inline-flex' : 'none';
   });
+  var titleCount = document.getElementById('cartPanelCount');
+  if (titleCount) {
+    titleCount.textContent = cart.length > 0 ? '— ' + cart.length + ' ITEM' + (cart.length > 1 ? 'S' : '') : '';
+  }
 }
 
 document.querySelectorAll('.pd-add-btn').forEach(btn => {
@@ -1441,6 +3029,17 @@ const cardObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 document.querySelectorAll('.p-card').forEach(c => cardObserver.observe(c));
+
+// Generic reveal for section heads / info blocks
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.sec-head, .collection-info, .collection-grid__text, .sec-intro, .site-footer, .collage__head, .insta-feed__head, .season-archive__head, .gallery-hero, .gallery-sns__head, .section-divider').forEach(el => {
+  el.classList.add('reveal');
+  revealObserver.observe(el);
+});
 
 // Force any still-hidden cards in `root` visible. Used as a safety net
 // when IntersectionObserver fails to fire (scroll restore, horizontally
@@ -1529,10 +3128,32 @@ const productIdMap = {
 
 let currentFilter = 'all';
 
+var CATEGORY_LABELS = {
+  all:     { jp: 'すべてのアイテム', en: 'All Items' },
+  tops:    { jp: 'トップス',        en: 'Tops' },
+  bottoms: { jp: 'ボトムス',        en: 'Bottoms' },
+  bag:     { jp: 'バッグ',          en: 'Bag' },
+  cap:     { jp: 'キャップ',        en: 'Cap' },
+  goods:   { jp: 'グッズ',          en: 'Goods' }
+};
+
+function updateItemsHead(cat) {
+  var label = CATEGORY_LABELS[cat] || CATEGORY_LABELS.all;
+  var t = document.getElementById('items-title');
+  var s = document.getElementById('items-count');
+  if (t) t.textContent = label.jp;
+  if (s) {
+    var filtered = cat === 'all' ? allItems : allItems.filter(function(i){ return i.category === cat; });
+    var count = filtered ? filtered.length : 0;
+    s.textContent = label.en + ' · ' + count + ' item' + (count === 1 ? '' : 's');
+  }
+}
+
 function filterItems(cat, e) {
   currentFilter = cat;
   document.querySelectorAll('#items-filter .filter-pill').forEach(b => b.classList.remove('active'));
   if (e && e.target) e.target.classList.add('active');
+  updateItemsHead(cat);
   renderItems();
 }
 
@@ -1542,9 +3163,9 @@ function renderItems() {
 
   grid.innerHTML = filtered.map(item => {
     const isSoldout = item.badge === 'soldout';
-    const badgeHtml = item.badge === 'new' ? '<span class="p-card__badge p-card__badge--new">NEW</span>' :
-                      item.badge === 'limited' ? '<span class="p-card__badge p-card__badge--limited">LIMITED</span>' :
-                      item.badge === 'soldout' ? '<span class="p-card__badge p-card__badge--soldout">SOLD OUT</span>' : '';
+    const badgeHtml = item.badge === 'new' ? '' :
+                      item.badge === 'limited' ? '' :
+                      item.badge === 'soldout' ? '' : '';
     const overlayHtml = isSoldout ? '<div class="p-card__notify"><span>再入荷通知</span></div>' : '<div class="p-card__quick"><span>詳しく見る</span></div>';
     const clickAttr = (isSoldout || !item.id) ? '' : " onclick=\"goDetail('" + item.id + "')\"";
     const soldoutClass = isSoldout ? ' p-card--soldout' : '';
@@ -1569,6 +3190,7 @@ function goItems() {
   currentFilter = 'all';
   document.querySelectorAll('#items-filter .filter-pill').forEach(b => b.classList.remove('active'));
   document.querySelector('#items-filter .filter-pill').classList.add('active');
+  updateItemsHead('all');
   renderItems();
   go('items', false);
   history.pushState({page: 'items'}, '', '');
@@ -1580,6 +3202,7 @@ function goItemsFilter(cat, skipPush) {
     b.classList.remove('active');
     if (b.textContent === cat.toUpperCase() || (cat === 'all' && b.textContent === 'ALL')) b.classList.add('active');
   });
+  updateItemsHead(cat);
   renderItems();
   go('items', false);
   if (!skipPush) {
@@ -1598,9 +3221,9 @@ function goCollection(key, skipPush) {
   grid.innerHTML = col.items.map(item => {
     const img = itemImages[item.name] || '';
     const isSoldout = item.badge === 'soldout';
-    const badgeHtml = item.badge === 'new' ? '<span class="p-card__badge p-card__badge--new">NEW</span>' :
-                      item.badge === 'limited' ? '<span class="p-card__badge p-card__badge--limited">LIMITED</span>' :
-                      item.badge === 'soldout' ? '<span class="p-card__badge p-card__badge--soldout">SOLD OUT</span>' : '';
+    const badgeHtml = item.badge === 'new' ? '' :
+                      item.badge === 'limited' ? '' :
+                      item.badge === 'soldout' ? '' : '';
     const overlayHtml = isSoldout ? '<div class="p-card__notify"><span>再入荷通知</span></div>' : '<div class="p-card__quick"><span>詳しく見る</span></div>';
     const pid = productIdMap[item.name];
     const clickAttr = (isSoldout || !pid) ? '' : ' onclick="goDetail(\'' + pid + '\')"';
@@ -1649,15 +3272,21 @@ history.replaceState({page: 'top'}, '', '');
   <div class="cart-panel__backdrop" onclick="closeCart()"></div>
   <div class="cart-panel__inner">
     <div class="cart-panel__head">
-      <span class="cart-panel__title">MY BAG</span>
-      <button class="cart-panel__close" onclick="closeCart()" type="button">×</button>
+      <div class="cart-panel__title">
+        カート<span class="cart-panel__title-count" id="cartPanelCount"></span>
+      </div>
+      <button class="cart-panel__close" onclick="closeCart()" type="button" aria-label="閉じる">×</button>
     </div>
     <div class="cart-panel__body" id="cartPanelBody">
-      <div class="cart-panel__empty">カートは空です</div>
+      <div class="cart-panel__empty">
+        カートはまだ空です。<br>
+        気になるアイテムを見つけてみてください。
+      </div>
     </div>
     <div class="cart-panel__foot">
-      <div class="cart-panel__subtotal"><span>小計</span><span id="cartSubtotal">¥0</span></div>
-      <button class="cart-panel__checkout" onclick="showToast('レジ機能は準備中')" type="button">レジに進む</button>
+      <div class="cart-panel__subtotal"><span>Subtotal</span><span id="cartSubtotal">¥0</span></div>
+      <div class="cart-panel__foot-note">税込 · 送料は次の画面でご案内</div>
+      <button class="cart-panel__checkout" onclick="showToast('レジ機能は準備中')" type="button">Checkout</button>
     </div>
   </div>
 </div>
@@ -1686,6 +3315,28 @@ document.querySelectorAll('.product-scroll').forEach(el => {
     if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; }
   }, true);
 });
+</script>
+<script>
+(function(){
+  var pool = ['assets/product-sweatshirt.jpg','assets/product-totebag.jpg','assets/product-hairclip.jpg','assets/product-pouch.jpg','assets/product-sticker.jpg','assets/product-keychain.jpg','assets/product-cap.jpg','assets/product-tee.jpg','assets/product-mirror.jpg'];
+  function inject(){
+    document.querySelectorAll('.p-card__img').forEach(function(box){
+      if(box.querySelector('.p-card-img-fill--secondary')) return;
+      var primary = box.querySelector('.p-card-img-fill');
+      if(!primary) return;
+      var current = primary.getAttribute('src') || '';
+      var idx = 0; for (var i=0;i<current.length;i++) idx = (idx + current.charCodeAt(i))>>>0;
+      var alt = pool[0];
+      for (var k=1;k<=pool.length;k++){ var c = pool[(idx+k) % pool.length]; if (c !== current){ alt = c; break; } }
+      var s = document.createElement('img');
+      s.className = 'p-card-img-fill p-card-img-fill--secondary';
+      s.src = alt; s.alt=''; s.setAttribute('aria-hidden','true'); s.loading='lazy';
+      primary.insertAdjacentElement('afterend', s);
+    });
+  }
+  inject();
+  new MutationObserver(inject).observe(document.body, {childList:true, subtree:true});
+})();
 </script>
 </body>
 </html>
