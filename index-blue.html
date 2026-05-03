@@ -123,6 +123,146 @@ button { font-family:inherit; }
 }
 .dev button.on { background:var(--text); color:#d8e4ec; }
 
+/* ═══ MENU DRAWER ═══ */
+.menu-drawer {
+  position:fixed; inset:0; z-index:9001;
+  pointer-events:none; visibility:hidden;
+}
+.menu-drawer.open { pointer-events:auto; visibility:visible; }
+.menu-drawer__backdrop {
+  position:absolute; inset:0;
+  background:rgba(10,18,28,.55);
+  backdrop-filter:blur(2px); -webkit-backdrop-filter:blur(2px);
+  opacity:0; transition:opacity .35s;
+}
+.menu-drawer.open .menu-drawer__backdrop { opacity:1; }
+.menu-drawer__inner {
+  position:absolute; top:0; left:0; bottom:0;
+  width:360px; max-width:88vw;
+  background:#1e2e42;
+  display:flex; flex-direction:column;
+  transform:translateX(-100%);
+  transition:transform .42s var(--ease-out);
+  box-shadow:20px 0 60px rgba(0,0,0,.5);
+}
+.menu-drawer.open .menu-drawer__inner { transform:translateX(0); }
+.menu-drawer__head {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:24px 28px 18px;
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+.menu-drawer__title {
+  font-family:var(--font-serif);
+  font-size:22px; font-weight:700;
+  color:#fff;
+  letter-spacing:-.005em;
+}
+.menu-drawer__close {
+  background:transparent; border:none; color:#fff;
+  font-family:var(--font-sans);
+  font-size:22px; font-weight:300; line-height:1;
+  cursor:pointer; padding:0;
+  width:32px; height:32px;
+  display:flex; align-items:center; justify-content:center;
+  opacity:.6; transition: opacity .2s, transform .3s var(--ease-out);
+}
+.menu-drawer__close:hover { opacity:1; transform:rotate(90deg); }
+.menu-drawer__body {
+  flex:1; padding:8px 0;
+  overflow-y:auto;
+}
+.menu-drawer__item {
+  display:block;
+  padding:18px 28px;
+  font-family:var(--font-sans);
+  font-size:14px; font-weight:500; letter-spacing:.22em;
+  color:#fff;
+  text-transform:uppercase;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  transition: background .25s, padding-left .3s var(--ease-out), color .25s;
+  cursor:pointer;
+  text-decoration:none;
+}
+.menu-drawer__item:hover {
+  background:rgba(255,255,255,.04);
+  padding-left:38px;
+}
+.menu-drawer__foot {
+  padding:18px 28px 24px;
+  border-top:1px solid rgba(255,255,255,.1);
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:600; letter-spacing:.26em;
+  color:rgba(255,255,255,.5);
+  text-transform:uppercase;
+}
+
+/* ═══ PROMO BAR — marquee ═══ */
+.promo-bar {
+  background:#2a4254;
+  color:rgba(255,255,255,.92);
+  padding:9px 0;
+  font-family:var(--font-sans);
+  font-size:11px; font-weight:500; letter-spacing:.18em;
+  overflow:hidden;
+  position:relative;
+  white-space:nowrap;
+}
+.promo-bar__track {
+  display:inline-flex;
+  gap:60px;
+  animation: hrh-marquee 36s linear infinite;
+  padding-left:60px;
+  will-change: transform;
+}
+.promo-bar__item { display:inline-block; white-space:nowrap; }
+
+@keyframes hrh-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ═══ SNS MARQUEE ═══ */
+.sns-marquee {
+  background:var(--bg);
+  border-top:1px solid rgba(255,255,255,.12);
+  border-bottom:1px solid rgba(255,255,255,.12);
+  padding:22px 0;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  text-decoration:none;
+  display:block;
+  color:#fff;
+}
+.sns-marquee:hover .sns-marquee__track { animation-play-state:paused; }
+.sns-marquee__track {
+  display:inline-flex;
+  gap:42px;
+  align-items:center;
+  animation: hrh-marquee 50s linear infinite;
+  padding-left:42px;
+  will-change: transform;
+}
+.sns-marquee__item {
+  font-family:var(--font-serif);
+  font-size:clamp(22px, 2.8vw, 32px);
+  font-weight:700;
+  letter-spacing:.005em;
+  color:#fff;
+  display:inline-block;
+}
+.sns-marquee__sep {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:18px; height:18px;
+  color:var(--accent);
+  flex-shrink:0;
+}
+.sns-marquee__sep svg { width:18px; height:18px; }
+@media (max-width: 900px) {
+  .sns-marquee { padding:16px 0; }
+  .sns-marquee__track { gap:24px; padding-left:24px; }
+}
+
 /* ═══ HEADER ═══ */
 .site-header {
   position:sticky; top:0; z-index:500;
@@ -138,66 +278,91 @@ button { font-family:inherit; }
   background-size:80px; opacity:0; mix-blend-mode:multiply; transition:opacity .3s;
 }
 .site-header__inner {
-  max-width:var(--max-w); margin:0 auto;
-  padding:0 40px;
+  max-width:1280px; margin:0 auto;
+  padding:0 32px;
 }
-/* Row 1: 3-col grid — lang / brand / my bag */
 .site-header__top {
   display:grid;
   grid-template-columns: 1fr auto 1fr;
   align-items:center;
-  padding:22px 0 18px;
+  padding:18px 0;
   gap:20px;
 }
-.site-header__lang {
+.site-header__menu {
   justify-self:start;
+  display:flex; align-items:center; gap:10px;
+  background:transparent; border:none;
   font-family:var(--font-sans);
-  font-size:10px; font-weight:600; letter-spacing:.26em;
-  color:rgba(255,255,255,.62);
+  font-size:11px; font-weight:600; letter-spacing:.22em;
+  color:#fff;
   text-transform:uppercase;
+  cursor:pointer;
+  opacity:.88;
+  transition:opacity .25s;
 }
+.site-header__menu:hover { opacity:1; }
+.site-header__menu-icon {
+  width:22px; height:14px;
+  display:flex; flex-direction:column; justify-content:space-between;
+}
+.site-header__menu-icon::before,
+.site-header__menu-icon::after,
+.site-header__menu-icon span {
+  content:''; display:block;
+  height:1px; background:#fff;
+}
+.site-header__menu-icon::before { width:100%; }
+.site-header__menu-icon span { width:100%; }
+.site-header__menu-icon::after { width:75%; }
 .site-header__brand {
   justify-self:center;
-  display:flex; align-items:center; gap:10px;
-  text-decoration:none; color:#fff;
+  text-decoration:none;
+  text-align:center;
+  display:block;
 }
-.site-header__brand:hover { opacity:.85; }
-.site-header__logo-img {
-  height:26px; width:auto; border-radius:4px;
-}
+.site-header__brand:hover { opacity:.92; }
 .site-header__brand-name {
   font-family:var(--font-serif);
-  font-weight:900; font-size:22px; letter-spacing:.03em;
+  font-weight:900;
+  font-size:clamp(22px, 2.6vw, 28px);
+  letter-spacing:.04em;
   color:#fff;
+  display:block;
+  line-height:1;
+  margin-bottom:6px;
+}
+.site-header__sub {
+  font-family:var(--font-sans);
+  font-size:9px; font-weight:500; letter-spacing:.28em;
+  color:rgba(255,255,255,.65);
+  text-transform:uppercase;
+  display:block;
 }
 .site-header__util {
   justify-self:end;
-  display:flex; align-items:center; gap:18px;
+  display:flex; align-items:center; gap:28px;
 }
 .site-header__util a {
-  text-decoration:none; color:#fff;
+  text-decoration:none;
+  color:#fff;
+  display:flex; flex-direction:column; align-items:center;
+  gap:5px;
   font-family:var(--font-sans);
-  font-size:11px; font-weight:600; letter-spacing:.22em;
+  font-size:9px; font-weight:600; letter-spacing:.22em;
   text-transform:uppercase;
-  opacity:.78; transition:opacity .25s;
-  display:inline-flex; align-items:center; gap:6px;
+  opacity:.85;
+  transition:opacity .25s;
 }
 .site-header__util a:hover { opacity:1; }
-.cart-count {
-  display:inline-flex; align-items:center; justify-content:center;
-  min-width:18px; height:18px;
-  padding:0 5px;
-  margin-left:2px;
-  font-size:10px; font-weight:700; letter-spacing:0;
-  color:#fff;
-  background:var(--accent);
-  border-radius:9px;
+.site-header__util-icon {
+  width:18px; height:18px;
+  stroke:currentColor; fill:none; stroke-width:1.5;
 }
-/* Row 2: Category nav centered with subtle top divider */
-.site-header__nav {
-  display:flex; gap:36px; align-items:center; justify-content:center;
-  padding:14px 0 16px;
-  border-top:1px solid rgba(255,255,255,.1);
+.cart-count {
+  display:inline;
+  font-size:9px; font-weight:600;
+  color:#fff;
+  margin-left:1px;
 }
 .site-header__nav a {
   text-decoration:none; color:#fff;
@@ -235,12 +400,12 @@ button { font-family:inherit; }
 
 /* ═══ HERO — Featured Product ═══ */
 .hero-wrap {
-  max-width:1160px; margin:0 auto;
-  padding:70px 40px 0;
-  display:grid;
-  grid-template-columns: 150px 1fr 120px;
-  gap:16px;
-  align-items:start;
+  width:100%; max-width:none; margin:0;
+  padding:0;
+  display:block;
+}
+@media (max-width:900px) {
+  .hero-wrap { padding:0; }
 }
 .hero-side-nav {
   display:flex; flex-direction:column;
@@ -264,10 +429,12 @@ button { font-family:inherit; }
   padding-left:10px;
 }
 .hero-main {
-  flex:1; position:relative; cursor:pointer; overflow:hidden;
-  border:1px solid rgba(255,255,255,.08);
-  box-shadow:0 40px 80px -30px rgba(10,20,35,.55);
-  display:flex;
+  position:relative; cursor:pointer; overflow:hidden;
+  width:100%;
+  border:none;
+  border-radius:0;
+  box-shadow:none;
+  display:block;
 }
 .hero-main__img {
   position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;
@@ -301,65 +468,142 @@ button { font-family:inherit; }
 .hero-main__img.behind { z-index:0; }
 .hero-main__img.front { z-index:1; }
 .hero-main__img.fading { opacity:0; }
-.hero-main__sizer { width:100%; aspect-ratio:16/10; }
+.hero-main__sizer { width:100%; aspect-ratio:24/8; max-height:60vh; }
 .hero-main__info {
-  position:absolute; bottom:24px; left:24px; z-index:3;
-  background:rgba(238,243,246,.94);
-  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-  padding:22px 26px 22px;
-  max-width:300px;
-  border-radius:6px;
-  box-shadow:0 24px 48px -20px rgba(10,20,35,.45);
+  position:absolute; bottom:36px; left:36px; z-index:3;
+  max-width:340px;
   display:block;
 }
-.hero-main__eyebrow {
-  font-family:var(--font-sans);
-  font-size:9px; font-weight:700; letter-spacing:.32em;
-  color:var(--accent);
-  text-transform:uppercase;
-  margin-bottom:10px;
+.hero-main__title {
+  font-family:var(--font-serif);
+  font-size:clamp(40px, 5.4vw, 64px);
+  font-weight:900;
+  color:#fff;
+  letter-spacing:-.005em;
+  line-height:1;
+  margin-bottom:16px;
+  text-shadow:0 2px 14px rgba(10,20,35,.35);
 }
 .hero-main__name {
-  font-family:var(--font-serif);
-  font-size:24px; font-weight:700;
-  color:var(--text);
-  letter-spacing:-.01em;
-  line-height:1.1;
-  margin-bottom:8px;
+  display:none;
+}
+.hero-main__desc {
+  font-family:var(--font-jp);
+  font-size:13px; line-height:1.85;
+  color:#fff;
+  margin-bottom:22px;
+  text-shadow:0 1px 8px rgba(10,20,35,.5);
+  font-weight:500;
 }
 .hero-main__price {
-  font-family:var(--font-sans);
-  font-size:13px; font-weight:500;
-  color:var(--text-mid);
-  letter-spacing:.02em;
-  margin-bottom:16px;
-  display:block;
+  display:none;
 }
 .hero-main__cta {
-  display:inline-flex; align-items:center; gap:10px;
-  padding:11px 18px;
-  background:var(--text);
-  color:#fff;
+  display:inline-flex; align-items:center; gap:14px;
   font-family:var(--font-sans);
-  font-size:10px; font-weight:700; letter-spacing:.26em;
+  font-size:11px; font-weight:600; letter-spacing:.24em;
+  color:#fff;
   text-transform:uppercase;
-  transition:background .25s;
+  padding-bottom:6px;
+  border-bottom:1px solid var(--accent);
+  transition: gap .3s var(--ease-out);
+  cursor:pointer;
 }
 .hero-main__cta::after {
-  content:''; width:14px; height:1px; background:currentColor;
-  transition:width .3s var(--ease-out);
+  content:'→';
+  font-size:13px;
+  color:var(--accent);
 }
-.hero-main__cta:hover { background:var(--accent); }
-.hero-main__cta:hover::after { width:20px; }
+.hero-main__cta:hover { gap:20px; }
+
+/* Pagination dots under hero */
+.hero-pagination {
+  display:flex; justify-content:center;
+  gap:10px;
+  margin-top:24px;
+  padding-bottom:6px;
+}
+.hero-pagination__dot {
+  width:6px; height:6px; border-radius:50%;
+  background:rgba(255,255,255,.3);
+  cursor:pointer;
+  transition: background .25s, transform .25s;
+}
+.hero-pagination__dot.active {
+  background:#fff;
+  transform:scale(1.3);
+}
+
+/* ═══ INFO BAR ═══ */
+.info-bar {
+  background:rgba(10,20,35,.18);
+  border-top:1px solid rgba(255,255,255,.1);
+  border-bottom:1px solid rgba(255,255,255,.1);
+  margin-top:30px;
+  padding:24px 32px;
+}
+.info-bar__inner {
+  max-width:1200px; margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:24px;
+  align-items:center;
+}
+.info-bar__item {
+  display:flex; align-items:center; gap:16px;
+  text-align:left;
+}
+.info-bar__icon {
+  width:38px; height:38px;
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+  color:rgba(255,255,255,.85);
+}
+.info-bar__icon svg {
+  width:18px; height:18px;
+  stroke:currentColor; fill:none; stroke-width:1.4;
+}
+.info-bar__text { line-height:1.5; }
+.info-bar__label {
+  font-family:var(--font-sans);
+  font-size:11px; font-weight:600; letter-spacing:.06em;
+  color:#fff;
+  margin-bottom:2px;
+}
+.info-bar__sub {
+  font-family:var(--font-jp);
+  font-size:10px; font-weight:400;
+  color:rgba(255,255,255,.6);
+  letter-spacing:.04em;
+}
+
+@media (max-width: 900px) {
+  .info-bar { padding:18px 20px; margin-top:20px; }
+  .info-bar__inner { grid-template-columns:repeat(2, 1fr); gap:16px; }
+  .info-bar__item { gap:10px; }
+  .info-bar__icon { width:32px; height:32px; }
+  .info-bar__icon svg { width:14px; height:14px; }
+  .info-bar__label { font-size:10px; }
+  .info-bar__sub { font-size:9px; }
+  .hero-main__info { bottom:20px; left:20px; max-width:65%; }
+}
 .hero-thumbs {
-  width:120px; display:flex; flex-direction:column; gap:8px;
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap:10px;
   flex-shrink:0;
 }
 .hero-thumb {
-  width:100%; aspect-ratio:1/1; object-fit:cover; display:block;
+  width:100%; aspect-ratio:1/1;
+  object-fit:cover; display:block;
   border:1px solid rgba(255,255,255,.08);
+  border-radius:4px;
+  box-shadow:0 14px 24px -12px rgba(10,20,35,.45), 0 4px 8px -4px rgba(10,20,35,.25);
   cursor:pointer; opacity:.5;
-  transition:opacity .25s;
+  transition:opacity .25s, transform .25s var(--ease-out), box-shadow .25s;
 }
 .hero-thumb:hover { opacity:.8; }
 .hero-thumb.active { opacity:1; border-color:rgba(255,255,255,.3); }
@@ -1763,6 +2007,438 @@ button { font-family:inherit; }
   .gallery-sns { padding:0 24px; }
   .gallery-sns__grid { grid-template-columns: repeat(3, 1fr); }
 }
+
+/* ═══════════════════════════════════════════════════════
+   LIGHT SECTIONS (NEW ARRIVAL / BEST SELLER / INSTAGRAM)
+   ═══════════════════════════════════════════════════════ */
+.section { padding:80px 0; }
+.section--light {
+  background:#f4f6f8;
+  color:var(--text);
+  position:relative;
+}
+.section__inner {
+  max-width:1280px; margin:0 auto;
+  padding:0 32px;
+}
+.section-head {
+  display:flex; align-items:flex-end; justify-content:space-between;
+  margin-bottom:32px;
+  gap:20px;
+}
+.section-head__title {
+  font-family:var(--font-sans);
+  font-size:clamp(20px, 2.2vw, 26px);
+  font-weight:700; letter-spacing:.2em;
+  color:var(--text);
+  margin-bottom:8px;
+  text-transform:uppercase;
+}
+.section-head__sub {
+  font-family:var(--font-jp);
+  font-size:11px; font-weight:500;
+  color:rgba(20,32,46,.55);
+}
+.section-head__viewall {
+  font-family:var(--font-sans);
+  font-size:11px; font-weight:600; letter-spacing:.22em;
+  color:var(--text);
+  text-transform:uppercase;
+  display:inline-flex; align-items:center; gap:10px;
+  white-space:nowrap;
+}
+.section-head__viewall:hover { color:var(--accent); }
+.section-head__arrow {
+  width:28px; height:1px;
+  background:var(--accent);
+  display:inline-block;
+}
+
+/* Product grid (NEW ARRIVAL) */
+.prod-grid {
+  display:grid;
+  grid-template-columns:repeat(6, 1fr);
+  gap:28px 16px;
+}
+.prod-card {
+  display:block;
+  text-decoration:none;
+  color:var(--text);
+  cursor:pointer;
+}
+.prod-card__img {
+  width:100%; aspect-ratio:1/1;
+  background:#fff;
+  border-radius:6px;
+  overflow:hidden;
+  margin-bottom:12px;
+  box-shadow:0 8px 18px -10px rgba(10,20,35,.18);
+  transition:box-shadow .35s var(--ease-out);
+}
+.prod-card:hover .prod-card__img {
+  box-shadow:0 14px 28px -10px rgba(10,20,35,.28);
+}
+.prod-card__img img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .8s var(--ease-out);
+}
+.prod-card:hover .prod-card__img img { transform:scale(1.04); }
+.prod-card__name {
+  font-family:var(--font-sans);
+  font-size:13px; font-weight:500;
+  color:var(--text);
+  margin-bottom:5px;
+  line-height:1.4;
+}
+.prod-card__price {
+  font-family:var(--font-sans);
+  font-size:12px; font-weight:500;
+  color:var(--text);
+}
+.prod-card__tax {
+  font-size:9px;
+  color:rgba(20,32,46,.5);
+  margin-left:3px;
+}
+
+/* BEST SELLER + STYLING SNAP row */
+.bs-styling-row {
+  display:grid;
+  grid-template-columns:1fr 1.4fr;
+  gap:60px;
+}
+.bs-grid {
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:14px;
+}
+.bs-card {
+  position:relative;
+  display:block;
+  cursor:pointer;
+  text-decoration:none;
+  color:var(--text);
+}
+.bs-card__rank {
+  position:absolute; top:10px; left:10px; z-index:2;
+  width:30px; height:30px;
+  background:var(--accent);
+  color:#fff;
+  font-family:var(--font-sans);
+  font-size:11px; font-weight:700;
+  display:flex; align-items:center; justify-content:center;
+  letter-spacing:.04em;
+  border-radius:2px;
+}
+.bs-card__img {
+  width:100%; aspect-ratio:1/1;
+  background:#fff;
+  border-radius:6px;
+  overflow:hidden;
+  margin-bottom:10px;
+  box-shadow:0 8px 18px -10px rgba(10,20,35,.18);
+  transition:box-shadow .35s var(--ease-out);
+}
+.bs-card:hover .bs-card__img { box-shadow:0 14px 28px -10px rgba(10,20,35,.28); }
+.bs-card__img img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .8s var(--ease-out);
+}
+.bs-card:hover .bs-card__img img { transform:scale(1.04); }
+.bs-card__name {
+  font-family:var(--font-sans);
+  font-size:12px; font-weight:500;
+  margin-bottom:4px;
+}
+.bs-card__price {
+  font-family:var(--font-sans);
+  font-size:12px; font-weight:500;
+  color:var(--text);
+}
+
+.snap-grid {
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:10px;
+}
+.snap-card {
+  aspect-ratio:1/1.2;
+  border-radius:6px;
+  overflow:hidden;
+  background:#e0e6eb;
+  display:block;
+  cursor:pointer;
+}
+.snap-card img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .8s var(--ease-out);
+}
+.snap-card:hover img { transform:scale(1.05); }
+
+/* Instagram static grid */
+.section--instagram { padding:60px 0 80px; }
+
+/* ═══ OWNER MESSAGE ═══ */
+.owner-msg {
+  padding:120px 0;
+  position:relative;
+}
+.owner-msg__inner {
+  max-width:1080px; margin:0 auto;
+  padding:0 40px;
+  display:grid;
+  grid-template-columns: 0.85fr 1fr;
+  gap:64px;
+  align-items:center;
+}
+.owner-msg__media {
+  aspect-ratio:3/4;
+  overflow:hidden;
+  border-radius:6px;
+  box-shadow:0 30px 60px -20px rgba(10,20,35,.4);
+}
+.owner-msg__media img {
+  width:100%; height:100%; object-fit:cover;
+  filter:saturate(.95);
+}
+.owner-msg__body { color:#fff; }
+.owner-msg__eyebrow {
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:700; letter-spacing:.32em;
+  color:rgba(255,255,255,.55);
+  text-transform:uppercase;
+  margin-bottom:22px;
+  display:flex; align-items:center; gap:14px;
+}
+.owner-msg__eyebrow::after {
+  content:''; flex:1; height:1px;
+  background:rgba(255,255,255,.18);
+}
+.owner-msg__title {
+  font-family:var(--font-serif);
+  font-size:clamp(26px, 3.4vw, 44px);
+  font-weight:700; line-height:1.25;
+  letter-spacing:-.005em;
+  color:#fff;
+  margin-bottom:24px;
+}
+.owner-msg__title em { font-style:normal; opacity:.6; }
+.owner-msg__quote {
+  font-family:var(--font-jp);
+  font-size:14px; line-height:2.05;
+  color:rgba(255,255,255,.78);
+  margin-bottom:28px;
+}
+.owner-msg__signature {
+  display:flex; align-items:center; gap:16px;
+  font-family:var(--font-sans);
+  font-size:11px; font-weight:600; letter-spacing:.24em;
+  color:rgba(255,255,255,.62);
+  text-transform:uppercase;
+}
+.owner-msg__signature::before {
+  content:''; width:32px; height:1px;
+  background:rgba(255,255,255,.4);
+}
+
+@media (max-width:900px) {
+  .owner-msg { padding:60px 0; }
+  .owner-msg__inner { grid-template-columns:1fr; gap:32px; padding:0 20px; }
+  .owner-msg__media { aspect-ratio:4/3; max-width:480px; margin:0 auto; }
+}
+.instagram-head {
+  display:flex; align-items:center; gap:18px;
+  margin-bottom:24px;
+  flex-wrap:wrap;
+}
+.instagram-head__title {
+  font-family:var(--font-sans);
+  font-size:20px; font-weight:700; letter-spacing:.2em;
+  color:var(--text);
+  text-transform:uppercase;
+}
+.instagram-head__handle {
+  font-family:var(--font-sans);
+  font-size:12px; font-weight:500;
+  color:var(--accent);
+  text-decoration:none;
+}
+.instagram-head__follow {
+  font-family:var(--font-sans);
+  font-size:11px; font-weight:600; letter-spacing:.22em;
+  color:var(--text);
+  margin-left:auto;
+  display:inline-flex; align-items:center; gap:8px;
+  text-decoration:none;
+  text-transform:uppercase;
+}
+.instagram-head__follow:hover { color:var(--accent); }
+.instagram-grid {
+  display:grid;
+  grid-template-columns:repeat(7, 1fr);
+  gap:10px;
+}
+.instagram-cell {
+  aspect-ratio:1/1;
+  border-radius:6px;
+  overflow:hidden;
+  background:#e0e6eb;
+  display:block;
+  cursor:pointer;
+}
+.instagram-cell img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .8s var(--ease-out);
+}
+.instagram-cell:hover img { transform:scale(1.05); }
+
+/* Brand Story (dark) */
+.brand-story {
+  padding:90px 0;
+}
+.brand-story__inner {
+  max-width:1280px; margin:0 auto;
+  padding:0 32px;
+  display:grid;
+  grid-template-columns:1fr 1.3fr 0.85fr;
+  gap:48px;
+  align-items:center;
+}
+.brand-story__media {
+  aspect-ratio:1/1.15;
+  overflow:hidden;
+  border-radius:6px;
+  box-shadow:0 30px 60px -20px rgba(10,20,35,.4);
+}
+.brand-story__media img { width:100%; height:100%; object-fit:cover; }
+.brand-story__body { color:#fff; }
+.brand-story__eyebrow {
+  font-family:var(--font-sans);
+  font-size:10px; font-weight:700; letter-spacing:.32em;
+  color:var(--accent);
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+.brand-story__title {
+  font-family:var(--font-jp);
+  font-size:clamp(20px, 2.2vw, 26px);
+  font-weight:700; line-height:1.55;
+  color:#fff;
+  margin-bottom:22px;
+  letter-spacing:.02em;
+}
+.brand-story__desc {
+  font-family:var(--font-jp);
+  font-size:12.5px; line-height:1.95;
+  color:rgba(255,255,255,.78);
+  margin-bottom:18px;
+  font-weight:400;
+}
+.brand-story__signature {
+  font-family:var(--font-jp);
+  font-size:11px;
+  color:rgba(255,255,255,.55);
+  letter-spacing:.05em;
+}
+.brand-story__services {
+  display:flex; flex-direction:column;
+  gap:24px;
+}
+.brand-story__service {
+  display:flex; align-items:flex-start;
+  gap:14px;
+}
+.brand-story__service-icon {
+  width:34px; height:34px;
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+  color:rgba(255,255,255,.85);
+}
+.brand-story__service-icon svg {
+  width:14px; height:14px;
+  stroke:currentColor; fill:none; stroke-width:1.5;
+}
+.brand-story__service-label {
+  font-family:var(--font-sans);
+  font-size:11px; font-weight:600; letter-spacing:.05em;
+  color:#fff;
+  margin-bottom:3px;
+}
+.brand-story__service-sub {
+  font-family:var(--font-jp);
+  font-size:10px; line-height:1.6;
+  color:rgba(255,255,255,.6);
+}
+
+/* Newsletter */
+.newsletter {
+  padding:36px 0 40px;
+  border-top:1px solid rgba(255,255,255,.1);
+}
+.newsletter__inner {
+  max-width:1280px; margin:0 auto;
+  padding:0 32px;
+  display:grid;
+  grid-template-columns:auto 1fr 1.2fr;
+  align-items:center;
+  gap:28px;
+}
+.newsletter__title {
+  font-family:var(--font-sans);
+  font-size:18px; font-weight:700; letter-spacing:.22em;
+  color:#fff;
+}
+.newsletter__sub {
+  font-family:var(--font-jp);
+  font-size:12px;
+  color:rgba(255,255,255,.65);
+}
+.newsletter__form {
+  display:flex; align-items:center;
+  border:1px solid rgba(255,255,255,.32);
+  background:rgba(255,255,255,.04);
+}
+.newsletter__form input {
+  flex:1;
+  padding:13px 16px;
+  background:transparent;
+  border:none; outline:none;
+  color:#fff;
+  font-family:var(--font-sans);
+  font-size:13px;
+}
+.newsletter__form input::placeholder { color:rgba(255,255,255,.4); }
+.newsletter__form button {
+  width:48px; height:46px;
+  background:transparent; border:none;
+  border-left:1px solid rgba(255,255,255,.2);
+  color:#fff;
+  cursor:pointer;
+  font-size:18px; line-height:1;
+  transition:background .25s, color .25s;
+}
+.newsletter__form button:hover { background:var(--accent); }
+
+/* Responsive — light sections */
+@media (max-width:900px) {
+  .section { padding:48px 0; }
+  .section__inner { padding:0 20px; }
+  .prod-grid { grid-template-columns:repeat(2, 1fr); gap:22px 12px; }
+  .bs-styling-row { grid-template-columns:1fr; gap:40px; }
+  .bs-grid { grid-template-columns:repeat(3, 1fr); gap:8px; }
+  .bs-card__rank { width:24px; height:24px; font-size:10px; top:8px; left:8px; }
+  .snap-grid { grid-template-columns:repeat(2, 1fr); }
+  .instagram-grid { grid-template-columns:repeat(3, 1fr); }
+  .instagram-head__follow { margin-left:0; flex-basis:100%; order:3; }
+  .brand-story { padding:48px 0; }
+  .brand-story__inner { grid-template-columns:1fr; gap:28px; padding:0 20px; }
+  .brand-story__services { flex-direction:row; gap:14px; flex-wrap:wrap; }
+  .brand-story__service { flex:1; min-width:140px; }
+  .newsletter__inner { grid-template-columns:1fr; gap:14px; padding:0 20px; }
+}
+
 </style>
 </head>
 <body>
@@ -1775,235 +2451,182 @@ button { font-family:inherit; }
 <!-- ═══ PAGE: TOP ═══ -->
 <div class="page active entering" id="p-top">
 
+  <div class="promo-bar"><div class="promo-bar__track"><span class="promo-bar__item">5,000円以上のご購入で送料無料</span><span class="promo-bar__item">·</span><span class="promo-bar__item">返品・交換は到着後7日以内</span><span class="promo-bar__item">·</span><span class="promo-bar__item">ギフトラッピング承ります</span><span class="promo-bar__item">·</span><span class="promo-bar__item">5,000円以上のご購入で送料無料</span><span class="promo-bar__item">·</span><span class="promo-bar__item">返品・交換は到着後7日以内</span><span class="promo-bar__item">·</span><span class="promo-bar__item">ギフトラッピング承ります</span><span class="promo-bar__item">·</span></div></div>
   <header class="site-header">
     <div class="site-header__inner">
       <div class="site-header__top">
-        <span></span>
+        <button class="site-header__menu" type="button" aria-label="Menu" onclick="openMenu()">
+          <span class="site-header__menu-icon"><span></span></span>
+          <span>MENU</span>
+        </button>
         <a href="#" class="site-header__brand" onclick="go('top');return false">
-          <img class="site-header__logo-img" src="assets/logo.jpg" alt="HONEY ROSIE HOUSE">
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
+          <span class="site-header__sub">Online &amp; Pop-up from Tokyo, 2020 —</span>
         </a>
         <div class="site-header__util">
-          <a href="#" onclick="openCart();return false">カート <span class="cart-count" style="display:none">0</span></a>
+          <a href="#" aria-label="Search" onclick="showToast();return false">
+            <svg class="site-header__util-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+            <span>SEARCH</span>
+          </a>
+          <a href="#" aria-label="Account" onclick="showToast();return false">
+            <svg class="site-header__util-icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+            <span>ACCOUNT</span>
+          </a>
+          <a href="#" aria-label="Cart" onclick="openCart();return false">
+            <svg class="site-header__util-icon" viewBox="0 0 24 24"><path d="M5 8h14l-1.5 11h-11z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+            <span>CART (<span class="cart-count">0</span>)</span>
+          </a>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- HERO — Featured Product Slider -->
+  <!-- HERO — Full-bleed key visual -->
   <div class="hero-wrap">
-    <nav class="hero-side-nav">
-      <a href="#" onclick="goItemsFilter('tops');return false">TOPS</a>
-      <a href="#" onclick="goItemsFilter('bottoms');return false">BOTTOMS</a>
-      <a href="#" onclick="goItemsFilter('bag');return false">BAG</a>
-      <a href="#" onclick="goItemsFilter('cap');return false">CAP</a>
-      <a href="#" onclick="goItemsFilter('goods');return false">GOODS</a>
-      <a href="#" onclick="go('gallery');return false">GALLERY</a>
-    </nav>
     <div class="hero-main" id="heroMain">
       <div class="hero-main__sizer"></div>
-      <img class="hero-main__img behind" id="heroImgBehind" src="assets/product-cap.jpg" alt="CAP">
-      <img class="hero-main__img front" id="heroImgFront" src="assets/product-cap.jpg" alt="CAP">
-      <div class="hero-main__info">
-        <div class="hero-main__eyebrow">Spotlight</div>
-        <h2 class="hero-main__name" id="heroMainName">CAP</h2>
-        <span class="hero-main__price" id="heroMainPrice">¥8,800</span>
-        <a class="hero-main__cta" href="#" onclick="event.stopPropagation();var t=document.querySelector('#heroThumbs .hero-thumb.active');if(t)goDetail(t.dataset.product);return false">商品を見る</a>
-      </div>
+      <img class="hero-main__img behind" id="heroImgBehind" src="assets/hero-collage.png" alt="HONEY ROSIE HOUSE">
+      <img class="hero-main__img front" id="heroImgFront" src="assets/hero-collage.png" alt="HONEY ROSIE HOUSE">
+      <span id="heroMainName" aria-hidden="true" style="display:none;"></span>
+      <span id="heroMainPrice" aria-hidden="true" style="display:none;"></span>
     </div>
-    <div class="hero-thumbs" id="heroThumbs">
-      <img class="hero-thumb active" loading="lazy" src="assets/product-cap.jpg" alt="CAP" data-product="cap" data-name="CAP" data-price="¥8,800">
-      <img class="hero-thumb" loading="lazy" src="assets/product-sweatshirt.jpg" alt="Original Sweatshirt" data-product="original-sweatshirt" data-name="Original Sweatshirt" data-price="¥6,800">
-      <img class="hero-thumb" loading="lazy" src="assets/product-totebag.jpg" alt="Logo Tote Bag" data-product="logo-tote-bag" data-name="Logo Tote Bag" data-price="¥3,200">
-      <img class="hero-thumb" loading="lazy" src="assets/product-pouch.jpg" alt="Mini Pouch" data-product="mini-pouch" data-name="Mini Pouch" data-price="¥2,400">
-    </div>
-  </div>
-
-  <!-- SECTION DIVIDER 01 -->
-  <div class="section-divider">
-    <span class="section-divider__num">01</span>
-    <span class="section-divider__dot"></span>
-    <span class="section-divider__label">New Arrival</span>
-    <span class="section-divider__line"></span>
+    <div id="heroThumbs" style="display:none;"></div>
   </div>
 
   <!-- NEW ARRIVAL -->
-  <div class="sec-head">
-    <div>
-      <span class="sec-head__title">新着アイテム</span>
-      <span class="sec-head__sub">New Arrival</span>
-    </div>
-    <a href="#" class="sec-head__viewall" onclick="goItems();return false">すべて見る &rarr;</a>
-  </div>
-  <div class="product-scroll">
-    <div class="product-row">
-      <div class="p-card p-card--featured" onclick="goDetail('cap')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-cap.jpg" alt="CAP"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">CAP</div><div class="p-card__price">&yen;8,800 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('original-sweatshirt')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-sweatshirt.jpg" alt="Original Sweatshirt"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Original Sweatshirt</div><div class="p-card__price">&yen;6,800 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('wide-pants')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-sweatshirt.jpg" alt="Wide Pants"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Wide Pants</div><div class="p-card__price">&yen;7,800 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('logo-tote-bag')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-totebag.jpg" alt="Logo Tote Bag"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Logo Tote Bag</div><div class="p-card__price">&yen;3,200 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('ribbon-hair-clip')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-hairclip.jpg" alt="Ribbon Hair Clip Set"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('mini-pouch')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-pouch.jpg" alt="Mini Pouch"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Mini Pouch</div><div class="p-card__price">&yen;2,400 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('sticker-pack')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-sticker.jpg" alt="Sticker Pack"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Sticker Pack</div><div class="p-card__price">&yen;800 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('charm-keychain')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-keychain.jpg" alt="Charm Keychain"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Charm Keychain</div><div class="p-card__price">&yen;1,500 <span class="p-card__tax">税込</span></div></div></div>
-    </div>
-  </div>
-
-  <!-- SECTION DIVIDER 02 -->
-  <div class="section-divider">
-    <span class="section-divider__num">02</span>
-    <span class="section-divider__dot"></span>
-    <span class="section-divider__label">Pick Up</span>
-    <span class="section-divider__line"></span>
-  </div>
-
-  <!-- PICK UP -->
-  <div class="sec-head">
-    <div>
-      <span class="sec-head__title">おすすめアイテム</span>
-      <span class="sec-head__sub">Pick Up</span>
-    </div>
-    <a href="#" class="sec-head__viewall" onclick="goItems();return false">すべて見る &rarr;</a>
-  </div>
-  <div class="product-scroll">
-    <div class="product-row">
-      <div class="p-card p-card--featured" onclick="goDetail('ribbon-hair-clip')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-hairclip.jpg" alt="Ribbon Hair Clip Set"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Ribbon Hair Clip Set</div><div class="p-card__price">&yen;1,980 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('mini-pouch')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-pouch.jpg" alt="Mini Pouch"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Mini Pouch</div><div class="p-card__price">&yen;2,400 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('sticker-pack')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-sticker.jpg" alt="Sticker Pack"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Sticker Pack</div><div class="p-card__price">&yen;800 <span class="p-card__tax">税込</span></div></div></div>
-      <div class="p-card" onclick="goDetail('charm-keychain')"><div class="p-card__img"><img class="p-card-img-fill" loading="lazy" src="assets/product-keychain.jpg" alt="Charm Keychain"><div class="p-card__quick"><span>詳しく見る</span></div></div><div class="p-card__body"><div class="p-card__name">Charm Keychain</div><div class="p-card__price">&yen;1,500 <span class="p-card__tax">税込</span></div></div></div>
-    </div>
-  </div>
-
-  <!-- SECTION DIVIDER 03 -->
-  <div class="section-divider">
-    <span class="section-divider__num">03</span>
-    <span class="section-divider__dot"></span>
-    <span class="section-divider__label">Styling</span>
-    <span class="section-divider__line"></span>
-  </div>
-
-  <!-- MINI COLLAGE -->
-  <section class="collage">
-    <div class="collage__head">
-      <div>
-        <div class="collage__eyebrow">Styling</div>
-        <h2 class="collage__title">スタイリング集</h2>
+  <section class="section section--light">
+    <div class="section__inner">
+      <div class="section-head">
+        <div>
+          <h2 class="section-head__title">NEW ARRIVAL</h2>
+          <span class="section-head__sub">新着アイテム</span>
+        </div>
+        <a href="#" class="section-head__viewall" onclick="goItems();return false">VIEW ALL <span class="section-head__arrow"></span></a>
       </div>
-      <a href="#" class="collage__more" onclick="go('gallery');return false">すべて見る →</a>
-    </div>
-    <div class="collage__grid">
-      <div class="collage__item">
-        <img src="assets/hero-slide2.jpg" alt="">
-        <div class="collage__caption">街で</div>
-      </div>
-      <div class="collage__item">
-        <img src="assets/product-totebag.jpg" alt="">
-        <div class="collage__caption">今日のバッグ</div>
-      </div>
-      <div class="collage__item">
-        <img src="assets/product-pouch.jpg" alt="">
-        <div class="collage__caption">デスクの上で</div>
-      </div>
-      <div class="collage__item">
-        <img src="assets/hero-slide3.jpg" alt="">
-        <div class="collage__caption">重ねて、さらりと</div>
+      <div class="prod-grid">
+        <a class="prod-card" onclick="goDetail('original-sweatshirt')"><div class="prod-card__img"><img loading="lazy" src="assets/product-sweatshirt.jpg" alt="Original Sweatshirt"></div><div class="prod-card__name">Original Sweatshirt</div><div class="prod-card__price">¥6,800 <span class="prod-card__tax">税込</span></div></a>
+        <a class="prod-card" onclick="goDetail('ribbon-hair-clip')"><div class="prod-card__img"><img loading="lazy" src="assets/product-hairclip.jpg" alt="Ribbon Hair Clip Set"></div><div class="prod-card__name">Ribbon Hair Clip Set</div><div class="prod-card__price">¥1,980 <span class="prod-card__tax">税込</span></div></a>
+        <a class="prod-card" onclick="goDetail('mini-pouch')"><div class="prod-card__img"><img loading="lazy" src="assets/product-pouch.jpg" alt="Mini Pouch"></div><div class="prod-card__name">Mini Pouch</div><div class="prod-card__price">¥2,400 <span class="prod-card__tax">税込</span></div></a>
+        <a class="prod-card" onclick="goDetail('sticker-pack')"><div class="prod-card__img"><img loading="lazy" src="assets/product-sticker.jpg" alt="Sticker Pack"></div><div class="prod-card__name">Sticker Pack</div><div class="prod-card__price">¥900 <span class="prod-card__tax">税込</span></div></a>
+        <a class="prod-card" onclick="goDetail('cap')"><div class="prod-card__img"><img loading="lazy" src="assets/product-cap.jpg" alt="Logo Cap"></div><div class="prod-card__name">Logo Cap</div><div class="prod-card__price">¥4,200 <span class="prod-card__tax">税込</span></div></a>
+        <a class="prod-card" onclick="goDetail('logo-tote-bag')"><div class="prod-card__img"><img loading="lazy" src="assets/product-totebag.jpg" alt="Canvas Tote Bag"></div><div class="prod-card__name">Canvas Tote Bag</div><div class="prod-card__price">¥4,300 <span class="prod-card__tax">税込</span></div></a>
+        <a class="prod-card" onclick="goDetail('charm-keychain')"><div class="prod-card__img"><img loading="lazy" src="assets/product-keychain.jpg" alt="Charm Keychain"></div><div class="prod-card__name">Charm Keychain</div><div class="prod-card__price">¥1,800 <span class="prod-card__tax">税込</span></div></a>
+        <a class="prod-card" onclick="goDetail('logo-tote-bag')"><div class="prod-card__img"><img loading="lazy" src="assets/product-totebag.jpg" alt="Canvas Tote Bag"></div><div class="prod-card__name">Canvas Tote Bag</div><div class="prod-card__price">¥4,300 <span class="prod-card__tax">税込</span></div></a>
+        <a class="prod-card" onclick="showToast();return false"><div class="prod-card__img"><img loading="lazy" src="assets/product-mirror.jpg" alt="Gold Necklace"></div><div class="prod-card__name">Gold Necklace</div><div class="prod-card__price">¥2,900 <span class="prod-card__tax">税込</span></div></a>
+        <a class="prod-card" onclick="goDetail('charm-keychain')"><div class="prod-card__img"><img loading="lazy" src="assets/product-keychain.jpg" alt="Charm Keychain"></div><div class="prod-card__name">Charm Keychain</div><div class="prod-card__price">¥1,800 <span class="prod-card__tax">税込</span></div></a>
+        <a class="prod-card" onclick="goDetail('wide-pants')"><div class="prod-card__img"><img loading="lazy" src="assets/product-sweatshirt.jpg" alt="Wide Pants"></div><div class="prod-card__name">Wide Pants</div><div class="prod-card__price">¥7,800 <span class="prod-card__tax">税込</span></div></a>
+        <a class="prod-card" onclick="showToast();return false"><div class="prod-card__img"><img loading="lazy" src="assets/product-tee.jpg" alt="Pop-up Tee"></div><div class="prod-card__name">Pop-up Tee</div><div class="prod-card__price">¥4,500 <span class="prod-card__tax">税込</span></div></a>
       </div>
     </div>
   </section>
 
-  <!-- SECTION DIVIDER 04 -->
-  <div class="section-divider">
-    <span class="section-divider__num">04</span>
-    <span class="section-divider__dot"></span>
-    <span class="section-divider__label">Instagram</span>
-    <span class="section-divider__line"></span>
-  </div>
+  <!-- BEST SELLER + STYLING SNAP -->
+  <section class="section section--light">
+    <div class="section__inner">
+      <div class="bs-styling-row">
+        <!-- BEST SELLER -->
+        <div class="bs-block">
+          <div class="section-head">
+            <div>
+              <h2 class="section-head__title">BEST SELLER</h2>
+              <span class="section-head__sub">人気アイテム</span>
+            </div>
+            <a href="#" class="section-head__viewall" onclick="goItems();return false">VIEW RANKING <span class="section-head__arrow"></span></a>
+          </div>
+          <div class="bs-grid">
+            <a class="bs-card" onclick="goDetail('original-sweatshirt')">
+              <div class="bs-card__rank">01</div>
+              <div class="bs-card__img"><img loading="lazy" src="assets/product-sweatshirt.jpg" alt="Logo Sweatshirt"></div>
+              <div class="bs-card__name">Logo Sweatshirt</div>
+              <div class="bs-card__price">¥6,800 <span class="prod-card__tax">税込</span></div>
+            </a>
+            <a class="bs-card" onclick="goDetail('logo-tote-bag')">
+              <div class="bs-card__rank">02</div>
+              <div class="bs-card__img"><img loading="lazy" src="assets/product-totebag.jpg" alt="Canvas Tote Bag"></div>
+              <div class="bs-card__name">Canvas Tote Bag</div>
+              <div class="bs-card__price">¥4,500 <span class="prod-card__tax">税込</span></div>
+            </a>
+            <a class="bs-card" onclick="goDetail('cap')">
+              <div class="bs-card__rank">03</div>
+              <div class="bs-card__img"><img loading="lazy" src="assets/product-cap.jpg" alt="Logo Cap"></div>
+              <div class="bs-card__name">Logo Cap</div>
+              <div class="bs-card__price">¥4,200 <span class="prod-card__tax">税込</span></div>
+            </a>
+          </div>
+        </div>
 
-  <!-- INSTAGRAM FEED (horizontal scroller) -->
-  <section class="insta-feed">
-    <div class="insta-feed__head">
-      <div>
-        <div class="insta-feed__eyebrow">Instagram</div>
-        <h2 class="insta-feed__title">最新の投稿</h2>
-      </div>
-    </div>
-    <div class="insta-feed__scroller">
-      <div class="insta-feed__row">
-        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">
-          <img src="assets/product-sweatshirt.jpg" alt="" loading="lazy">
-          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 22</span></div></div>
-        </a>
-        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">
-          <img src="assets/hero-slide2.jpg" alt="" loading="lazy">
-          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 20</span></div></div>
-        </a>
-        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">
-          <img src="assets/product-totebag.jpg" alt="" loading="lazy">
-          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 17</span></div></div>
-        </a>
-        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">
-          <img src="assets/product-cap.jpg" alt="" loading="lazy">
-          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 14</span></div></div>
-        </a>
-        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">
-          <img src="assets/product-pouch.jpg" alt="" loading="lazy">
-          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 11</span></div></div>
-        </a>
-        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">
-          <img src="assets/hero-slide3.jpg" alt="" loading="lazy">
-          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 08</span></div></div>
-        </a>
-        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">
-          <img src="assets/product-sticker.jpg" alt="" loading="lazy">
-          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 05</span></div></div>
-        </a>
-        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">
-          <img src="assets/product-hairclip.jpg" alt="" loading="lazy">
-          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 02</span></div></div>
-        </a>
-        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">
-          <img src="assets/hero-slide4.jpg" alt="" loading="lazy">
-          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">MAR 30</span></div></div>
-        </a>
-        <!-- DUPLICATED SET for seamless infinite scroll (aria-hidden) -->
-        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
-          <img src="assets/product-sweatshirt.jpg" alt="" loading="lazy">
-          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 22</span></div></div>
-        </a>
-        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
-          <img src="assets/hero-slide2.jpg" alt="" loading="lazy">
-          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 20</span></div></div>
-        </a>
-        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
-          <img src="assets/product-totebag.jpg" alt="" loading="lazy">
-          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 17</span></div></div>
-        </a>
-        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
-          <img src="assets/product-cap.jpg" alt="" loading="lazy">
-          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 14</span></div></div>
-        </a>
-        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
-          <img src="assets/product-pouch.jpg" alt="" loading="lazy">
-          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 11</span></div></div>
-        </a>
-        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
-          <img src="assets/hero-slide3.jpg" alt="" loading="lazy">
-          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 08</span></div></div>
-        </a>
-        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
-          <img src="assets/product-sticker.jpg" alt="" loading="lazy">
-          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 05</span></div></div>
-        </a>
-        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
-          <img src="assets/product-hairclip.jpg" alt="" loading="lazy">
-          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">APR 02</span></div></div>
-        </a>
-        <a class="insta-post" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
-          <img src="assets/hero-slide4.jpg" alt="" loading="lazy">
-          <div class="insta-post__overlay"><div class="insta-post__meta"><svg viewBox="0 0 24 24"><path d="M16.5 4a5.5 5.5 0 0 0-4.5 2.3A5.5 5.5 0 0 0 7.5 4 5.5 5.5 0 0 0 2 9.5c0 4 4.5 7.6 10 12.5 5.5-4.9 10-8.5 10-12.5A5.5 5.5 0 0 0 16.5 4z"/></svg><span class="insta-post__date">MAR 30</span></div></div>
-        </a>
+        <!-- STYLING SNAP -->
+        <div class="snap-block">
+          <div class="section-head">
+            <div>
+              <h2 class="section-head__title">STYLING SNAP</h2>
+              <span class="section-head__sub">スタイリングスナップ</span>
+            </div>
+            <a href="#" class="section-head__viewall" onclick="go('gallery');return false">VIEW ALL <span class="section-head__arrow"></span></a>
+          </div>
+          <div class="snap-grid">
+            <a class="snap-card" onclick="go('gallery');return false"><img loading="lazy" src="assets/hero-slide2.jpg" alt=""></a>
+            <a class="snap-card" onclick="go('gallery');return false"><img loading="lazy" src="assets/hero-slide3.jpg" alt=""></a>
+            <a class="snap-card" onclick="go('gallery');return false"><img loading="lazy" src="assets/hero-slide4.jpg" alt=""></a>
+            <a class="snap-card" onclick="go('gallery');return false"><img loading="lazy" src="assets/hero-kv.jpg" alt=""></a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- INSTAGRAM (static row) -->
+  <section class="section section--light section--instagram">
+    <div class="section__inner">
+      <div class="instagram-head">
+        <div class="instagram-head__title">INSTAGRAM</div>
+        <a class="instagram-head__handle" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">@honeyrosie.house</a>
+        <a class="instagram-head__follow" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener">FOLLOW US <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+      </div>
+      <div class="instagram-grid">
+        <a class="instagram-cell" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener"><img loading="lazy" src="assets/product-sweatshirt.jpg" alt=""></a>
+        <a class="instagram-cell" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener"><img loading="lazy" src="assets/product-sticker.jpg" alt=""></a>
+        <a class="instagram-cell" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener"><img loading="lazy" src="assets/product-mirror.jpg" alt=""></a>
+        <a class="instagram-cell" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener"><img loading="lazy" src="assets/product-cap.jpg" alt=""></a>
+        <a class="instagram-cell" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener"><img loading="lazy" src="assets/product-tee.jpg" alt=""></a>
+        <a class="instagram-cell" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener"><img loading="lazy" src="assets/product-pouch.jpg" alt=""></a>
+        <a class="instagram-cell" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener"><img loading="lazy" src="assets/product-hairclip.jpg" alt=""></a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- OWNER MESSAGE (placeholder copy — replace with owner's words) -->
+  <section class="owner-msg">
+    <div class="owner-msg__inner">
+      <div class="owner-msg__media">
+        <img loading="lazy" src="assets/hero-slide2.jpg" alt="">
+      </div>
+      <div class="owner-msg__body">
+        <div class="owner-msg__eyebrow">A Note from Us</div>
+        <h2 class="owner-msg__title">日々を、<br>少しだけ自分らしく。</h2>
+        <p class="owner-msg__quote">
+          〔ここにオーナーからのメッセージが入ります〕<br>
+          ブランドへの想い、ものづくりで大切にしていること、お客様へのメッセージなど、3〜5行ほどの言葉が入ると、サイト全体に「人の気配」が生まれます。<br><br>
+          このセクションは、後ほど実際の言葉をいただいた段階で差し替えてください。
+        </p>
+        <div class="owner-msg__signature">HONEY ROSIE HOUSE — Owner</div>
+      </div>
+    </div>
+  </section>
+
+  <a class="sns-marquee" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-label="Follow us on Instagram">
+    <div class="sns-marquee__track">
+      <span class="sns-marquee__item">HAVE WE MET? FOLLOW US ON INSTAGRAM</span>
+      <span class="sns-marquee__sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+      <span class="sns-marquee__item">@HONEY.ROSIE.HOUSE</span>
+      <span class="sns-marquee__sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+      <span class="sns-marquee__item">HAVE WE MET? FOLLOW US ON INSTAGRAM</span>
+      <span class="sns-marquee__sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+      <span class="sns-marquee__item">@HONEY.ROSIE.HOUSE</span>
+      <span class="sns-marquee__sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+    </div>
+  </a>
 
   <footer class="site-footer">
     <div class="site-footer__inner">
@@ -2074,16 +2697,31 @@ button { font-family:inherit; }
 <!-- ═══ PAGE: GALLERY ═══ -->
 <div class="page" id="p-gallery">
 
+  <div class="promo-bar"><div class="promo-bar__track"><span class="promo-bar__item">5,000円以上のご購入で送料無料</span><span class="promo-bar__item">·</span><span class="promo-bar__item">返品・交換は到着後7日以内</span><span class="promo-bar__item">·</span><span class="promo-bar__item">ギフトラッピング承ります</span><span class="promo-bar__item">·</span><span class="promo-bar__item">5,000円以上のご購入で送料無料</span><span class="promo-bar__item">·</span><span class="promo-bar__item">返品・交換は到着後7日以内</span><span class="promo-bar__item">·</span><span class="promo-bar__item">ギフトラッピング承ります</span><span class="promo-bar__item">·</span></div></div>
   <header class="site-header">
     <div class="site-header__inner">
       <div class="site-header__top">
-        <span></span>
+        <button class="site-header__menu" type="button" aria-label="Menu" onclick="openMenu()">
+          <span class="site-header__menu-icon"><span></span></span>
+          <span>MENU</span>
+        </button>
         <a href="#" class="site-header__brand" onclick="go('top');return false">
-          <img class="site-header__logo-img" src="assets/logo.jpg" alt="HONEY ROSIE HOUSE">
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
+          <span class="site-header__sub">Online &amp; Pop-up from Tokyo, 2020 —</span>
         </a>
         <div class="site-header__util">
-          <a href="#" onclick="openCart();return false">カート <span class="cart-count" style="display:none">0</span></a>
+          <a href="#" aria-label="Search" onclick="showToast();return false">
+            <svg class="site-header__util-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+            <span>SEARCH</span>
+          </a>
+          <a href="#" aria-label="Account" onclick="showToast();return false">
+            <svg class="site-header__util-icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+            <span>ACCOUNT</span>
+          </a>
+          <a href="#" aria-label="Cart" onclick="openCart();return false">
+            <svg class="site-header__util-icon" viewBox="0 0 24 24"><path d="M5 8h14l-1.5 11h-11z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+            <span>CART (<span class="cart-count">0</span>)</span>
+          </a>
         </div>
       </div>
     </div>
@@ -2178,6 +2816,38 @@ button { font-family:inherit; }
     </div>
   </section>
 
+  <!-- OWNER MESSAGE (placeholder copy — replace with owner's words) -->
+  <section class="owner-msg">
+    <div class="owner-msg__inner">
+      <div class="owner-msg__media">
+        <img loading="lazy" src="assets/hero-slide2.jpg" alt="">
+      </div>
+      <div class="owner-msg__body">
+        <div class="owner-msg__eyebrow">A Note from Us</div>
+        <h2 class="owner-msg__title">日々を、<br>少しだけ自分らしく。</h2>
+        <p class="owner-msg__quote">
+          〔ここにオーナーからのメッセージが入ります〕<br>
+          ブランドへの想い、ものづくりで大切にしていること、お客様へのメッセージなど、3〜5行ほどの言葉が入ると、サイト全体に「人の気配」が生まれます。<br><br>
+          このセクションは、後ほど実際の言葉をいただいた段階で差し替えてください。
+        </p>
+        <div class="owner-msg__signature">HONEY ROSIE HOUSE — Owner</div>
+      </div>
+    </div>
+  </section>
+
+  <a class="sns-marquee" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-label="Follow us on Instagram">
+    <div class="sns-marquee__track">
+      <span class="sns-marquee__item">HAVE WE MET? FOLLOW US ON INSTAGRAM</span>
+      <span class="sns-marquee__sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+      <span class="sns-marquee__item">@HONEY.ROSIE.HOUSE</span>
+      <span class="sns-marquee__sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+      <span class="sns-marquee__item">HAVE WE MET? FOLLOW US ON INSTAGRAM</span>
+      <span class="sns-marquee__sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+      <span class="sns-marquee__item">@HONEY.ROSIE.HOUSE</span>
+      <span class="sns-marquee__sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+    </div>
+  </a>
+
   <footer class="site-footer">
     <div class="site-footer__inner">
 
@@ -2247,16 +2917,31 @@ button { font-family:inherit; }
 <!-- ═══ PAGE: ITEMS ═══ -->
 <div class="page" id="p-items">
 
+  <div class="promo-bar"><div class="promo-bar__track"><span class="promo-bar__item">5,000円以上のご購入で送料無料</span><span class="promo-bar__item">·</span><span class="promo-bar__item">返品・交換は到着後7日以内</span><span class="promo-bar__item">·</span><span class="promo-bar__item">ギフトラッピング承ります</span><span class="promo-bar__item">·</span><span class="promo-bar__item">5,000円以上のご購入で送料無料</span><span class="promo-bar__item">·</span><span class="promo-bar__item">返品・交換は到着後7日以内</span><span class="promo-bar__item">·</span><span class="promo-bar__item">ギフトラッピング承ります</span><span class="promo-bar__item">·</span></div></div>
   <header class="site-header">
     <div class="site-header__inner">
       <div class="site-header__top">
-        <span></span>
+        <button class="site-header__menu" type="button" aria-label="Menu" onclick="openMenu()">
+          <span class="site-header__menu-icon"><span></span></span>
+          <span>MENU</span>
+        </button>
         <a href="#" class="site-header__brand" onclick="go('top');return false">
-          <img class="site-header__logo-img" src="assets/logo.jpg" alt="HONEY ROSIE HOUSE">
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
+          <span class="site-header__sub">Online &amp; Pop-up from Tokyo, 2020 —</span>
         </a>
         <div class="site-header__util">
-          <a href="#" onclick="openCart();return false">カート <span class="cart-count" style="display:none">0</span></a>
+          <a href="#" aria-label="Search" onclick="showToast();return false">
+            <svg class="site-header__util-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+            <span>SEARCH</span>
+          </a>
+          <a href="#" aria-label="Account" onclick="showToast();return false">
+            <svg class="site-header__util-icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+            <span>ACCOUNT</span>
+          </a>
+          <a href="#" aria-label="Cart" onclick="openCart();return false">
+            <svg class="site-header__util-icon" viewBox="0 0 24 24"><path d="M5 8h14l-1.5 11h-11z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+            <span>CART (<span class="cart-count">0</span>)</span>
+          </a>
         </div>
       </div>
     </div>
@@ -2284,6 +2969,38 @@ button { font-family:inherit; }
 
   <div class="product-grid" id="items-grid">
   </div>
+
+  <!-- OWNER MESSAGE (placeholder copy — replace with owner's words) -->
+  <section class="owner-msg">
+    <div class="owner-msg__inner">
+      <div class="owner-msg__media">
+        <img loading="lazy" src="assets/hero-slide2.jpg" alt="">
+      </div>
+      <div class="owner-msg__body">
+        <div class="owner-msg__eyebrow">A Note from Us</div>
+        <h2 class="owner-msg__title">日々を、<br>少しだけ自分らしく。</h2>
+        <p class="owner-msg__quote">
+          〔ここにオーナーからのメッセージが入ります〕<br>
+          ブランドへの想い、ものづくりで大切にしていること、お客様へのメッセージなど、3〜5行ほどの言葉が入ると、サイト全体に「人の気配」が生まれます。<br><br>
+          このセクションは、後ほど実際の言葉をいただいた段階で差し替えてください。
+        </p>
+        <div class="owner-msg__signature">HONEY ROSIE HOUSE — Owner</div>
+      </div>
+    </div>
+  </section>
+
+  <a class="sns-marquee" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-label="Follow us on Instagram">
+    <div class="sns-marquee__track">
+      <span class="sns-marquee__item">HAVE WE MET? FOLLOW US ON INSTAGRAM</span>
+      <span class="sns-marquee__sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+      <span class="sns-marquee__item">@HONEY.ROSIE.HOUSE</span>
+      <span class="sns-marquee__sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+      <span class="sns-marquee__item">HAVE WE MET? FOLLOW US ON INSTAGRAM</span>
+      <span class="sns-marquee__sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+      <span class="sns-marquee__item">@HONEY.ROSIE.HOUSE</span>
+      <span class="sns-marquee__sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+    </div>
+  </a>
 
   <footer class="site-footer">
     <div class="site-footer__inner">
@@ -2354,16 +3071,31 @@ button { font-family:inherit; }
 <!-- ═══ PAGE: COLLECTION ═══ -->
 <div class="page" id="p-collection">
 
+  <div class="promo-bar"><div class="promo-bar__track"><span class="promo-bar__item">5,000円以上のご購入で送料無料</span><span class="promo-bar__item">·</span><span class="promo-bar__item">返品・交換は到着後7日以内</span><span class="promo-bar__item">·</span><span class="promo-bar__item">ギフトラッピング承ります</span><span class="promo-bar__item">·</span><span class="promo-bar__item">5,000円以上のご購入で送料無料</span><span class="promo-bar__item">·</span><span class="promo-bar__item">返品・交換は到着後7日以内</span><span class="promo-bar__item">·</span><span class="promo-bar__item">ギフトラッピング承ります</span><span class="promo-bar__item">·</span></div></div>
   <header class="site-header">
     <div class="site-header__inner">
       <div class="site-header__top">
-        <span></span>
+        <button class="site-header__menu" type="button" aria-label="Menu" onclick="openMenu()">
+          <span class="site-header__menu-icon"><span></span></span>
+          <span>MENU</span>
+        </button>
         <a href="#" class="site-header__brand" onclick="go('top');return false">
-          <img class="site-header__logo-img" src="assets/logo.jpg" alt="HONEY ROSIE HOUSE">
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
+          <span class="site-header__sub">Online &amp; Pop-up from Tokyo, 2020 —</span>
         </a>
         <div class="site-header__util">
-          <a href="#" onclick="openCart();return false">カート <span class="cart-count" style="display:none">0</span></a>
+          <a href="#" aria-label="Search" onclick="showToast();return false">
+            <svg class="site-header__util-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+            <span>SEARCH</span>
+          </a>
+          <a href="#" aria-label="Account" onclick="showToast();return false">
+            <svg class="site-header__util-icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+            <span>ACCOUNT</span>
+          </a>
+          <a href="#" aria-label="Cart" onclick="openCart();return false">
+            <svg class="site-header__util-icon" viewBox="0 0 24 24"><path d="M5 8h14l-1.5 11h-11z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+            <span>CART (<span class="cart-count">0</span>)</span>
+          </a>
         </div>
       </div>
     </div>
@@ -2384,6 +3116,38 @@ button { font-family:inherit; }
 
   <div class="product-grid" id="collection-grid">
   </div>
+
+  <!-- OWNER MESSAGE (placeholder copy — replace with owner's words) -->
+  <section class="owner-msg">
+    <div class="owner-msg__inner">
+      <div class="owner-msg__media">
+        <img loading="lazy" src="assets/hero-slide2.jpg" alt="">
+      </div>
+      <div class="owner-msg__body">
+        <div class="owner-msg__eyebrow">A Note from Us</div>
+        <h2 class="owner-msg__title">日々を、<br>少しだけ自分らしく。</h2>
+        <p class="owner-msg__quote">
+          〔ここにオーナーからのメッセージが入ります〕<br>
+          ブランドへの想い、ものづくりで大切にしていること、お客様へのメッセージなど、3〜5行ほどの言葉が入ると、サイト全体に「人の気配」が生まれます。<br><br>
+          このセクションは、後ほど実際の言葉をいただいた段階で差し替えてください。
+        </p>
+        <div class="owner-msg__signature">HONEY ROSIE HOUSE — Owner</div>
+      </div>
+    </div>
+  </section>
+
+  <a class="sns-marquee" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-label="Follow us on Instagram">
+    <div class="sns-marquee__track">
+      <span class="sns-marquee__item">HAVE WE MET? FOLLOW US ON INSTAGRAM</span>
+      <span class="sns-marquee__sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+      <span class="sns-marquee__item">@HONEY.ROSIE.HOUSE</span>
+      <span class="sns-marquee__sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+      <span class="sns-marquee__item">HAVE WE MET? FOLLOW US ON INSTAGRAM</span>
+      <span class="sns-marquee__sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+      <span class="sns-marquee__item">@HONEY.ROSIE.HOUSE</span>
+      <span class="sns-marquee__sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+    </div>
+  </a>
 
   <footer class="site-footer">
     <div class="site-footer__inner">
@@ -2454,16 +3218,31 @@ button { font-family:inherit; }
 <!-- ═══ PAGE: DETAIL ═══ -->
 <div class="page" id="p-detail">
 
+  <div class="promo-bar"><div class="promo-bar__track"><span class="promo-bar__item">5,000円以上のご購入で送料無料</span><span class="promo-bar__item">·</span><span class="promo-bar__item">返品・交換は到着後7日以内</span><span class="promo-bar__item">·</span><span class="promo-bar__item">ギフトラッピング承ります</span><span class="promo-bar__item">·</span><span class="promo-bar__item">5,000円以上のご購入で送料無料</span><span class="promo-bar__item">·</span><span class="promo-bar__item">返品・交換は到着後7日以内</span><span class="promo-bar__item">·</span><span class="promo-bar__item">ギフトラッピング承ります</span><span class="promo-bar__item">·</span></div></div>
   <header class="site-header">
     <div class="site-header__inner">
       <div class="site-header__top">
-        <span></span>
+        <button class="site-header__menu" type="button" aria-label="Menu" onclick="openMenu()">
+          <span class="site-header__menu-icon"><span></span></span>
+          <span>MENU</span>
+        </button>
         <a href="#" class="site-header__brand" onclick="go('top');return false">
-          <img class="site-header__logo-img" src="assets/logo.jpg" alt="HONEY ROSIE HOUSE">
           <span class="site-header__brand-name">HONEY ROSIE HOUSE</span>
+          <span class="site-header__sub">Online &amp; Pop-up from Tokyo, 2020 —</span>
         </a>
         <div class="site-header__util">
-          <a href="#" onclick="openCart();return false">カート <span class="cart-count" style="display:none">0</span></a>
+          <a href="#" aria-label="Search" onclick="showToast();return false">
+            <svg class="site-header__util-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+            <span>SEARCH</span>
+          </a>
+          <a href="#" aria-label="Account" onclick="showToast();return false">
+            <svg class="site-header__util-icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+            <span>ACCOUNT</span>
+          </a>
+          <a href="#" aria-label="Cart" onclick="openCart();return false">
+            <svg class="site-header__util-icon" viewBox="0 0 24 24"><path d="M5 8h14l-1.5 11h-11z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+            <span>CART (<span class="cart-count">0</span>)</span>
+          </a>
         </div>
       </div>
     </div>
@@ -2543,6 +3322,38 @@ button { font-family:inherit; }
   <div class="product-scroll">
     <div class="product-row" id="related-products"></div>
   </div>
+
+  <!-- OWNER MESSAGE (placeholder copy — replace with owner's words) -->
+  <section class="owner-msg">
+    <div class="owner-msg__inner">
+      <div class="owner-msg__media">
+        <img loading="lazy" src="assets/hero-slide2.jpg" alt="">
+      </div>
+      <div class="owner-msg__body">
+        <div class="owner-msg__eyebrow">A Note from Us</div>
+        <h2 class="owner-msg__title">日々を、<br>少しだけ自分らしく。</h2>
+        <p class="owner-msg__quote">
+          〔ここにオーナーからのメッセージが入ります〕<br>
+          ブランドへの想い、ものづくりで大切にしていること、お客様へのメッセージなど、3〜5行ほどの言葉が入ると、サイト全体に「人の気配」が生まれます。<br><br>
+          このセクションは、後ほど実際の言葉をいただいた段階で差し替えてください。
+        </p>
+        <div class="owner-msg__signature">HONEY ROSIE HOUSE — Owner</div>
+      </div>
+    </div>
+  </section>
+
+  <a class="sns-marquee" href="https://www.instagram.com/honey.rosie.house" target="_blank" rel="noopener" aria-label="Follow us on Instagram">
+    <div class="sns-marquee__track">
+      <span class="sns-marquee__item">HAVE WE MET? FOLLOW US ON INSTAGRAM</span>
+      <span class="sns-marquee__sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+      <span class="sns-marquee__item">@HONEY.ROSIE.HOUSE</span>
+      <span class="sns-marquee__sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+      <span class="sns-marquee__item">HAVE WE MET? FOLLOW US ON INSTAGRAM</span>
+      <span class="sns-marquee__sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+      <span class="sns-marquee__item">@HONEY.ROSIE.HOUSE</span>
+      <span class="sns-marquee__sep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+    </div>
+  </a>
 
   <footer class="site-footer">
     <div class="site-footer__inner">
@@ -2916,6 +3727,12 @@ function openCart() {
 function closeCart() {
   document.getElementById('cartPanel').classList.remove('open');
 }
+function openMenu() {
+  document.getElementById('menuDrawer').classList.add('open');
+}
+function closeMenu() {
+  document.getElementById('menuDrawer').classList.remove('open');
+}
 function renderCart() {
   var body = document.getElementById('cartPanelBody');
   var subtotal = document.getElementById('cartSubtotal');
@@ -3267,6 +4084,26 @@ window.addEventListener('popstate', function(e) {
 });
 history.replaceState({page: 'top'}, '', '');
 </script>
+
+<!-- Menu drawer -->
+<div class="menu-drawer" id="menuDrawer">
+  <div class="menu-drawer__backdrop" onclick="closeMenu()"></div>
+  <div class="menu-drawer__inner">
+    <div class="menu-drawer__head">
+      <span class="menu-drawer__title">Menu</span>
+      <button class="menu-drawer__close" onclick="closeMenu()" type="button" aria-label="閉じる">×</button>
+    </div>
+    <nav class="menu-drawer__body">
+      <a class="menu-drawer__item" onclick="goItemsFilter('tops');closeMenu();return false">TOPS</a>
+      <a class="menu-drawer__item" onclick="goItemsFilter('bottoms');closeMenu();return false">BOTTOMS</a>
+      <a class="menu-drawer__item" onclick="goItemsFilter('bag');closeMenu();return false">BAG</a>
+      <a class="menu-drawer__item" onclick="goItemsFilter('cap');closeMenu();return false">CAP</a>
+      <a class="menu-drawer__item" onclick="goItemsFilter('goods');closeMenu();return false">GOODS</a>
+      <a class="menu-drawer__item" onclick="go('gallery');closeMenu();return false">GALLERY</a>
+    </nav>
+    <div class="menu-drawer__foot">© HONEY ROSIE HOUSE</div>
+  </div>
+</div>
 
 <div class="cart-panel" id="cartPanel">
   <div class="cart-panel__backdrop" onclick="closeCart()"></div>

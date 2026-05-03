@@ -376,6 +376,12 @@ button { font-family:inherit; }
   width:100%; height:100%;
   object-fit:cover;
 }
+.p-card-img-fill--secondary {
+  position:absolute; inset:0;
+  opacity:0;
+  transition:opacity .5s ease;
+}
+.p-card:hover .p-card-img-fill--secondary { opacity:1; }
 .p-card__badge {
   position:absolute; top:8px; left:8px;
   font-family:'Cormorant Garamond',serif;
@@ -1402,5 +1408,27 @@ document.querySelectorAll('.product-scroll').forEach(el => {
 });
 </script>
 <div class="toast" id="toast">COMING SOON</div>
+<script>
+(function(){
+  var pool = ['assets/product-sweatshirt.jpg','assets/product-totebag.jpg','assets/product-hairclip.jpg','assets/product-pouch.jpg','assets/product-sticker.jpg','assets/product-keychain.jpg','assets/product-cap.jpg','assets/product-tee.jpg','assets/product-mirror.jpg'];
+  function inject(){
+    document.querySelectorAll('.p-card__img').forEach(function(box){
+      if(box.querySelector('.p-card-img-fill--secondary')) return;
+      var primary = box.querySelector('.p-card-img-fill');
+      if(!primary) return;
+      var current = primary.getAttribute('src') || '';
+      var idx = 0; for (var i=0;i<current.length;i++) idx = (idx + current.charCodeAt(i))>>>0;
+      var alt = pool[0];
+      for (var k=1;k<=pool.length;k++){ var c = pool[(idx+k) % pool.length]; if (c !== current){ alt = c; break; } }
+      var s = document.createElement('img');
+      s.className = 'p-card-img-fill p-card-img-fill--secondary';
+      s.src = alt; s.alt=''; s.setAttribute('aria-hidden','true'); s.loading='lazy';
+      primary.insertAdjacentElement('afterend', s);
+    });
+  }
+  inject();
+  new MutationObserver(inject).observe(document.body, {childList:true, subtree:true});
+})();
+</script>
 </body>
 </html>

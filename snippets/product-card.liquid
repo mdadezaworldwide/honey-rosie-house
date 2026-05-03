@@ -12,13 +12,25 @@
   <div class="p-card__img">
     {%- if product.featured_image -%}
       <img
-        class="p-card-img-fill"
+        class="p-card-img-fill p-card-img-fill--primary"
         src="{{ product.featured_image | image_url: width: 500 }}"
         alt="{{ product.featured_image.alt | default: product.title }}"
         loading="lazy"
         width="250"
         height="330"
       >
+      {%- assign second_image = product.images[1] -%}
+      {%- if second_image -%}
+        <img
+          class="p-card-img-fill p-card-img-fill--secondary"
+          src="{{ second_image | image_url: width: 500 }}"
+          alt=""
+          loading="lazy"
+          width="250"
+          height="330"
+          aria-hidden="true"
+        >
+      {%- endif -%}
     {%- endif -%}
 
     {%- unless product.available -%}
